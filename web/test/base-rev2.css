@@ -1,0 +1,61 @@
+
+.darkmuted {
+    /* Background and foreground */
+    --b0: hsl(215, 25%, 8%);
+    --b1: hsl(215, 25%, 12%);
+    --b2: hsl(215, 25%, 16%);
+    --b3: hsl(215, 25%, 20%);
+    --b4: hsl(215, 25%, 30%);
+    --b5: hsl(215, 25%, 40%);
+    --f4: hsl(215, 25%, 55%);
+    --f3: hsl(215, 25%, 70%);
+    --f2: hsl(215, 25%, 85%);
+    --f1: white;
+}
+.btn, .textbox {
+    border-radius: 8px;
+}
+.btn.iconOnly .icon {
+    margin: 0px;
+}
+.btn:focus-visible {
+    outline: 2px solid var(--f2);
+}
+.textbox,
+.textbox.textarea > textarea {
+    padding: 0px 12px;
+    padding-top: 2px;
+}
+.textbox.textarea {
+    padding: 8px 0px;
+}
+.popup {
+    border-radius: 16px;
+}
+.context {
+    border-radius: 12px;
+    padding: 4px;
+    gap: 4px;
+}
+.context > .item {
+    border-radius: 8px;
+}
+label.selectOption input[type="radio"],
+label.selectOption input[type="checkbox"] {
+    margin-top: -0.05em;
+}
+.tooltip {
+    /* padding: 6px 12px; */
+    padding: 8px 12px 5px 12px;
+    border-radius: 8px;
+}
+.toastOverlay > .toast > .body {
+    /* padding: 15px 5px; */
+    padding-top: 18px;
+}
+.popup > .body {
+    padding-top: 5px;
+}
+body {
+    --fontDefault: 'Comfortaa';
+}

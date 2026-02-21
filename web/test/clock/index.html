@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0..1,0');
+        @font-face {
+            font-family: "7segment";
+            src: url('7segment.ttf');
+        }
+        body {
+            box-sizing: border-box;
+            --clock-hue: 0;
+            --clock-saturation: 100%;
+            --clock-size: 400px;
+        }
+        #main {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            cursor: none;
+        }
+        #timeCont {
+            position: relative;
+            font-family: '7segment';
+            font-size: var(--clock-size);
+            margin-top: 50px;
+        }
+        #timeCont::before {
+            content: '88:88';
+            color: hsl(var(--clock-hue), var(--clock-saturation), 5%);
+        }
+        #time {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            color: hsl(var(--clock-hue), var(--clock-saturation), 50%);
+        }
+        .btn {
+            padding: 16px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 32px;
+            font-family: 'Material Symbols Rounded';
+            line-height: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipse;
+            text-decoration: none;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.1s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+        }
+        #fullscreen {
+            position: absolute;
+            bottom: 32px;
+            left: 32px;
+        }
+        #wakelock {
+            position: absolute;
+            bottom: 32px;
+            left: calc(32px + 64px + 16px);
+        }
+    </style>
+    <div id="main">
+        <div id="timeCont">
+            <div id="time"></div>
+        </div>
+        <button id="fullscreen" class="btn">fullscreen</button>
+        <button id="wakelock" class="btn" style="display: none">bedtime_off</button>
+    </div>
+    <script>
+        function updateTime() {
+            let date = new Date();
+            let hours = date.getHours();
+            if (true) { // 12-hour time condition
+                if (hours > 12) hours -= 12;
+                if (hours === 0) hours = 12;
+            }
+            hours = `${hours < 10 ? "&nbsp;" : ""}${hours}`;
+            let minutes = date.getMinutes();
+            minutes = `${minutes < 10 ? "0" : ""}${minutes}`;
+            let seconds = date.getSeconds();
+            let time = `${hours}:${minutes}`;
+            document.getElementById("time").innerHTML = time;
+            setTimeout(() => {
+                time = `${hours}<span style="opacity: 0">:</span>${minutes}`;
+                document.getElementById("time").innerHTML = time;
+            }, 500);
+        }
+        setInterval(updateTime, 1000);
+        // Handle wake lock
+        let wakeLock = null;
+        const requestWakeLock = async () => {
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                wakeLock.addEventListener('release', () => {
+                    document.querySelector('#wakelock').style.display = 'none';
+                    console.log('Wake Lock was released');
+                });
+                document.querySelector('#wakelock').style.display = '';
+                console.log('Wake Lock is active');
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLock !== null && document.visibilityState === 'visible') {
+                await requestWakeLock();
+            }
+        });
+        requestWakeLock();
+        // Handle fullscreen toggle
+        document.querySelector('#fullscreen').addEventListener('click', () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                document.documentElement.requestFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

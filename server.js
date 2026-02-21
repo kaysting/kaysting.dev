@@ -1,18 +1,14 @@
 const path = require('path');
 const express = require('express');
 const dayjs = require('dayjs');
+const axios = require('axios');
 const index = require('/home/kayla/projects/express-file-index');
 
 const port = 8255;
 const app = express();
 
 app.use((req, res, next) => {
-    const forwardHosts = [
-        'simplecyber.org',
-        'www.simplecyber.org',
-        'cybah.me',
-        'www.cybah.me'
-    ];
+    const forwardHosts = ['simplecyber.org', 'www.simplecyber.org', 'cybah.me', 'www.cybah.me'];
     if (forwardHosts.includes(req.headers.host)) {
         return res.redirect('https://kaysting.dev' + req.originalUrl);
     }
@@ -21,8 +17,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(index({
-    rootDir: path.join(__dirname, 'web')
-}));
+app.get('/ip', async (req, res) => {
+    const ip = req.headers['cf-connecting-ip'];
+    const ipApiRes = await axios.get(`http://ip-api.com/json/${ip}`);
+    res.json(ipApiRes.data);
+});
+
+app.use(
+    index({
+        rootDir: path.join(__dirname, 'web')
+    })
+);
 
 app.listen(port, () => console.log(`Listening on ${port}`));

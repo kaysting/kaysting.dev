@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUD</title>
+    <link rel="stylesheet" href="ui.css">
+    <meta property="og:site_name" content="LuckyDie Studios UI Concepts">
+    <meta property="og:title" content="HUD">
+</head>
+
+<body>
+    <div id="window">
+        <div id="hud">
+            <div class="stats">
+
+            </div>
+            <div class="items">
+                <div class="offhand"></div>
+                <div class="separator"></div>
+                <div class="carousel"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const elOffhand = document.querySelector('.offhand');
+        const elCarousel = document.querySelector('.carousel');
+        const inventorySize = 30;
+        const hotbarSize = 10;
+        const itemTypes = ['brick', 'flashlight', 'log', 'red-mushroom', 'rock'];
+        const inventory = [];
+        let offhandItem = null;
+        let selectedIndex = 0;
+        let uiStartIndex = 0;
+        const render = () => {
+            const getItemElement = (item) => {
+                const el = document.createElement('div');
+                el.classList.add('item');
+                if (item?.icon) {
+                    el.innerHTML = /*html*/ `
+                        <img src="item-icons/${item.icon}.png"></img>
+                        <div class="count">${item.count || 1}</div>
+                    `;
+                }
+                return el;
+            };
+            elOffhand.innerHTML = '';
+            elCarousel.innerHTML = '';
+            elOffhand.appendChild(getItemElement(offhandItem));
+            if (offhandItem) elOffhand.querySelector('.item').classList.add('selected');
+            for (let i = uiStartIndex; i < uiStartIndex + hotbarSize; i++) {
+                const item = inventory[i];
+                const el = getItemElement(item);
+                if (i === selectedIndex) {
+                    el.classList.add('selected');
+                }
+                if (i === uiStartIndex && uiStartIndex > 0) {
+                    el.classList.add('end');
+                }
+                const uiEndIndex = uiStartIndex + (hotbarSize - 1);
+                if (i === uiEndIndex && uiEndIndex < (inventorySize - 1)) {
+                    el.classList.add('end');
+                }
+                elCarousel.appendChild(el);
+            }
+        };
+        // Populate inventory with random items
+        for (let i = 0; i < inventorySize; i++) {
+            const itemType = itemTypes[Math.floor(Math.random() * itemTypes.length)];
+            inventory.push({ icon: itemType, count: Math.floor(Math.random() * 10) + 1 });
+        }
+        window.addEventListener('wheel', (e) => {
+            // Update selected index
+            if (e.deltaY > 0) {
+                selectedIndex = selectedIndex + 1;
+            } else {
+                selectedIndex = selectedIndex - 1;
+            }
+            // Ensure selected index is within inventory bounds
+            if (selectedIndex > inventorySize - 1) {
+                selectedIndex = inventorySize - 1;
+            } else if (selectedIndex < 0) {
+                selectedIndex = 0;
+            }
+            // Ensure the UI start index contains the selected index
+            const uiEndIndex = uiStartIndex + (hotbarSize - 1);
+            if (selectedIndex > uiEndIndex) {
+                uiStartIndex += selectedIndex - uiEndIndex;
+            } else if (selectedIndex < uiStartIndex) {
+                uiStartIndex = selectedIndex;
+            }
+            // Ensure the selected UI element isn't an end element
+            if (uiStartIndex > 0 && selectedIndex === uiStartIndex) {
+                uiStartIndex--;
+            }
+            if (uiEndIndex < (inventorySize - 1) && selectedIndex === uiEndIndex) {
+                uiStartIndex++;
+            }
+            console.log({ selectedIndex, uiStartIndex });
+            render();
+        });
+        window.addEventListener('keypress', (e) => {
+            if (e.key.toLowerCase() === 'f') {
+                console.log('swap hands');
+                const temp = offhandItem;
+                offhandItem = inventory[selectedIndex];
+                inventory[selectedIndex] = temp;
+                render();
+            }
+        });
+        render();
+    </script>
+</body>
+
+</html>

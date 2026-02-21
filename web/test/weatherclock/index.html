@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weather Clock</title>
+        <meta property="og:site_name" content="kaysting.dev" />
+        <meta property="og:title" content="Weather Clock" />
+        <meta
+            property="og:description"
+            content="A simple, real-time weather clock that displays time, date, and weather conditions using automatic location scanning with no required weather API key. It even keeps your device awake so you can dedicate a device to it." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@300,0..1&display=swap"
+            rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    </head>
+
+    <body class="theme-darkblue">
+        <div id="main">
+            <div id="top">
+                <div id="timeCont">
+                    <div id="time"></div>
+                    <div id="timeSmall">
+                        <div id="ampm"></div>
+                        <div id="seconds"></div>
+                    </div>
+                </div>
+                <span id="date"></span>
+            </div>
+            <div id="bottom">
+                <div id="weatherIcon" class="symbol">help</div>
+                <div id="weatherCondition">Loading weather...</div>
+                <div class="separator"></div>
+                <div id="weatherTemp">?</div>
+                <div class="separator"></div>
+                <div id="windIcon" class="symbol">arrow_forward</div>
+                <div id="windSpeed"></div>
+            </div>
+        </div>
+        <button id="fullscreen" class="symbol">fullscreen</button>
+    </body>
+
+    <style>
+        body.theme-lightblue {
+            --color1: hsl(230, 50%, 30%);
+            --color2: hsl(230, 50%, 80%);
+        }
+        body.theme-lightgray {
+            --color1: hsl(230, 20%, 30%);
+            --color2: hsl(230, 20%, 80%);
+        }
+        body.theme-lightyellow {
+            --color1: hsl(20, 50%, 20%);
+            --color2: hsl(20, 50%, 80%);
+        }
+        body.theme-darkpurple {
+            --color1: hsl(300, 50%, 80%);
+            --color2: hsl(300, 50%, 10%);
+        }
+        body.theme-darkblue {
+            --color1: hsl(240, 50%, 70%);
+            --color2: black;
+        }
+        body.theme-darkgray {
+            --color1: hsl(220, 30%, 70%);
+            --color2: black;
+        }
+
+        * {
+            transition: 2s ease-in-out;
+        }
+
+        #main {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            padding: 8px;
+            background: var(--color2);
+            font-family: 'Comfortaa', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #top {
+            padding: 16px;
+            padding-top: 64px;
+            background: var(--color2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            color: var(--color1);
+        }
+
+        #timeCont {
+            display: flex;
+            gap: 16px;
+        }
+
+        #time {
+            font-size: 180px;
+            padding-bottom: -8px;
+        }
+        #date {
+            font-size: 42px;
+        }
+
+        #timeSmall {
+            font-size: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-bottom: 32px;
+            padding-top: 16px;
+        }
+
+        #ampm {
+            flex-grow: 1;
+        }
+
+        #bottom {
+            background: var(--color1);
+            color: var(--color2);
+            padding: 16px 32px;
+            display: flex;
+            gap: 16px;
+            font-size: 36px;
+            align-items: center;
+            border-radius: 24px;
+        }
+
+        #bottom .separator {
+            height: 32px;
+            width: 2px;
+            background: var(--color2);
+            border-radius: 1px;
+            margin: 0px 16px;
+        }
+
+        #weatherIcon {
+            font-size: 48px;
+        }
+
+        #weatherCondition,
+        #windSpeed {
+            font-size: 28px;
+        }
+
+        #weatherCondition {
+            font-weight: 600;
+        }
+
+        #weatherCondition,
+        #windSpeed,
+        #weatherTemp {
+            margin-bottom: -4px;
+        }
+
+        #windIcon {
+            font-size: 32px;
+        }
+
+        .symbol {
+            font-family: 'Material Symbols Rounded';
+            line-height: 1;
+            font-size: 24px;
+            font-variation-settings: 'FILL' 1;
+        }
+
+        #fullscreen {
+            position: absolute;
+            top: 32px;
+            left: 32px;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0px;
+            font-size: 32px;
+            color: var(--color1);
+        }
+    </style>
+
+    <script>
+        const $ = (selector, ancestor = document) => ancestor.querySelector(selector);
+
+        const elTime = $('#time');
+        const elSeconds = $('#seconds');
+        const elAmPm = $('#ampm');
+        const elDate = $('#date');
+        const elWeatherIcon = $('#weatherIcon');
+        const elWeatherTemp = $('#weatherTemp');
+        const elWeatherCondition = $('#weatherCondition');
+        const elWindIcon = $('#windIcon');
+        const elWindSpeed = $('#windSpeed');
+        const elFullscreenBtn = $('#fullscreen');
+
+        let globalSunrise = null;
+        let globalSunset = null;
+        let globalIsCloudy = false;
+
+        const symbols = {
+            cloudWithHail: 'weather_hail',
+            cloudWithRainAndSnow: 'weather_mix',
+            cloudWithSnow: 'weather_snowy',
+            airGust: 'air',
+            moonCrescent: 'bedtime',
+            lightningBolt: 'bolt',
+            sun: 'sunny',
+            cloud: 'cloud',
+            thermostat: 'device_thermostat',
+            cloudWithFog: 'foggy',
+            mist: 'mist',
+            moonCrescentWithStars: 'moon_with_stars',
+            cloudWithRain: 'rainy',
+            sunWithCloud: 'partly_cloudy_day',
+            moonCrescentWithCloud: 'partly_cloudy_night',
+            sunWithSnow: 'sunny_snowing',
+            thermometerPlus: 'thermometer_gain',
+            thermometerMinus: 'thermometer_loss',
+            waterDrop: 'water_drop',
+            cloudWithLightning: 'thunderstorm'
+        };
+
+        const updateTime = () => {
+            elTime.innerText = dayjs().format('h:mm');
+            elSeconds.innerText = dayjs().format(':ss');
+            elAmPm.innerText = dayjs().format('A');
+            elDate.innerText = dayjs().format('dddd, MMMM D, YYYY');
+        };
+
+        const getCoordsFromIP = async () => {
+            const res = await axios.get('/ip');
+            return { lat: res.data.lat, lon: res.data.lon };
+        };
+
+        const getCoordsFromDevice = () =>
+            new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        resolve({ lat, lon });
+                    },
+                    error => {
+                        reject(error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 1000 * 5
+                    }
+                );
+            });
+
+        const getCoords = async () => {
+            let coords;
+            try {
+                coords = await getCoordsFromDevice();
+            } catch (error) {}
+            if (!coords) coords = await getCoordsFromIP();
+            const { lat, lon } = coords;
+            return coords;
+        };
+
+        const getWeatherCondition = code => {
+            const mapping = {
+                0: { name: 'Clear sky', day: symbols.sun, night: symbols.moonCrescent },
+                1: { name: 'Mostly clear', day: symbols.sun, night: symbols.moonCrescent },
+                2: { name: 'Partly cloudy', day: symbols.sunWithCloud, night: symbols.moonCrescentWithCloud },
+                3: { name: 'Overcast', day: symbols.cloud, night: symbols.cloud },
+                45: { name: 'Fog', day: symbols.cloudWithFog, night: symbols.cloudWithFog },
+                48: { name: 'Depositing rime fog', day: symbols.cloudWithFog, night: symbols.cloudWithFog },
+                51: { name: 'Light drizzle', day: symbols.mist, night: symbols.mist },
+                53: { name: 'Moderate drizzle', day: symbols.mist, night: symbols.mist },
+                55: { name: 'Dense drizzle', day: symbols.mist, night: symbols.mist },
+                61: { name: 'Slight rain', day: symbols.cloudWithRain, night: symbols.cloudWithRain },
+                63: { name: 'Moderate rain', day: symbols.cloudWithRain, night: symbols.cloudWithRain },
+                65: { name: 'Heavy rain', day: symbols.cloudWithRain, night: symbols.cloudWithRain },
+                71: { name: 'Slight snow', day: symbols.cloudWithSnow, night: symbols.cloudWithSnow },
+                73: { name: 'Moderate snow', day: symbols.cloudWithSnow, night: symbols.cloudWithSnow },
+                75: { name: 'Heavy snow', day: symbols.cloudWithSnow, night: symbols.cloudWithSnow },
+                80: { name: 'Slight showers', day: symbols.cloudWithRain, night: symbols.cloudWithRain },
+                81: { name: 'Moderate showers', day: symbols.cloudWithRain, night: symbols.cloudWithRain },
+                82: { name: 'Violent showers', day: symbols.cloudWithRain, night: symbols.cloudWithRain },
+                95: { name: 'Thunderstorm', day: symbols.cloudWithLightning, night: symbols.cloudWithLightning },
+                96: { name: 'Storm with hail', day: symbols.cloudWithHail, night: symbols.cloudWithHail },
+                99: { name: 'Storm with heavy hail', day: symbols.cloudWithHail, night: symbols.cloudWithHail }
+            };
+
+            const result = mapping[code] || { name: 'Unknown', day: 'help', night: 'help' };
+
+            return {
+                name: result.name,
+                icons: {
+                    day: result.day,
+                    night: result.night
+                }
+            };
+        };
+
+        const updateWeather = async () => {
+            const { lat, lon } = await getCoords();
+            if (!lat && !lon) {
+                elWeatherCondition.innerText = `Failed to get location!`;
+                return;
+            }
+
+            // Request weather data from Open Meteo
+            const res = await axios.get(
+                `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=sunrise,sunset&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=auto`
+            );
+
+            // Extract and parse data
+            const currentWeatherUnits = res.data.current_weather_units;
+            const currentWeather = res.data.current_weather;
+            const condition = getWeatherCondition(currentWeather.weathercode);
+
+            // Save sunrise and sunset to our global variables
+            globalSunrise = new Date(res.data.daily.sunrise[0]).getTime();
+            globalSunset = new Date(res.data.daily.sunset[0]).getTime();
+            globalIsCloudy = ![0, 1, 2].includes(currentWeather.weathercode);
+
+            // Update elements
+            elWeatherIcon.innerText = currentWeather.is_day ? condition.icons.day : condition.icons.night;
+            elWeatherTemp.innerText = `${Math.round(currentWeather.temperature)}°`;
+            elWeatherCondition.innerText = condition.name;
+            elWindSpeed.innerText = `${Math.round(currentWeather.windspeed)} mph`;
+            elWindIcon.style.transform = `rotate(${currentWeather.winddirection - 90}deg)`;
+        };
+
+        const updateColor = () => {
+            const msTillSunrise = globalSunrise - Date.now();
+            const msTillSunset = globalSunset - Date.now();
+            const isBeforeSunrise = msTillSunrise > 0 && msTillSunset > 0; // before sunrise and sunset
+            const isDayTime = msTillSunrise < 0 && msTillSunset > 0; // after sunrise but before sunset
+            const isAfterSunset = msTillSunrise < 0 && msTillSunset < 0; // after sunrise and sunset
+            const dayEndThreshold = 1000 * 60 * 30; // the time during which show start/end of day color
+            const nightEndThreshold = 1000 * 60 * 60; // the time during which to show the start/end of night color
+
+            if (isBeforeSunrise && msTillSunrise < nightEndThreshold) {
+                // Show end of night theme
+                document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkpurple';
+            } else if (isDayTime && Math.abs(msTillSunrise) < dayEndThreshold) {
+                // Show start of day theme
+                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightyellow';
+            } else if (isDayTime && Math.abs(msTillSunrise) > dayEndThreshold) {
+                // Show day theme
+                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightblue';
+            } else if (isDayTime && msTillSunset < dayEndThreshold) {
+                // Show end of day theme
+                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightyellow';
+            } else if (isAfterSunset && Math.abs(msTillSunset) < nightEndThreshold) {
+                // Show start of night theme
+                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-darkpurple';
+            } else {
+                // Show night theme
+                document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkblue';
+            }
+        };
+
+        const toggleFullscreen = async () => {
+            if (!document.fullscreenElement) {
+                try {
+                    await document.documentElement.requestFullscreen();
+                    elFullscreenBtn.style.display = 'none';
+                } catch (error) {
+                    console.error('Failed to enter fullscreen:', error);
+                }
+            } else {
+                try {
+                    await document.exitFullscreen();
+                    elFullscreenBtn.style.display = 'block';
+                } catch (error) {
+                    console.error('Failed to exit fullscreen:', error);
+                }
+            }
+        };
+
+        const keepDeviceAwake = () => {
+            if ('wakeLock' in navigator) {
+                navigator.wakeLock.request('screen').catch(error => console.error('Wake lock request failed:', error));
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Add event listeners
+            elFullscreenBtn.addEventListener('click', toggleFullscreen);
+
+            // Immediately update everything
+            keepDeviceAwake();
+            updateTime();
+            await updateWeather(); // wait for weather to update and populate sunrise/sunset
+            updateColor();
+
+            // Schedule updates
+            setInterval(updateTime, 1000);
+            setInterval(updateWeather, 1000 * 60);
+            setInterval(updateColor, 1000 * 60);
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                elFullscreenBtn.style.display = 'block';
+            }
+        });
+    </script>
+</html>

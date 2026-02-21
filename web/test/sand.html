@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sand</title>
+</head>
+<body>
+    <div class="col">
+        <canvas></canvas>
+        <div class="row">
+            <button id="play" class="btn" disabled>Play</button>
+            <button id="pause" class="btn">Pause</button>
+            <button id="step" class="btn">Step</button>
+            <button id="clear" class="btn">Clear</button>
+            <label>Cell size:</label>
+            <input type="number" value="5" min="1" max="100" step="1" id="gridSize">
+            <label>Step interval ms:</label>
+            <input type="number" value="10" min="1" max="10000" step="1" id="stepInterval">
+        </div>
+    </div>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            color: white;
+            font-family: sans-serif;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 0px 10px;
+            height: 40px;
+        }
+        .col {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script>
+        const canvas = document.querySelector('canvas');
+        const context = canvas.getContext('2d');
+        const btnPlay = document.querySelector('#play');
+        const btnPause = document.querySelector('#pause');
+        const btnStep = document.querySelector('#step');
+        const btnClear = document.querySelector('#clear');
+        const inputGridSize = document.querySelector('#gridSize');
+        const inputStepInterval = document.querySelector('#stepInterval');
+        const startTime = Date.now();
+        let gridSize = parseInt(inputGridSize.value);
+        let stepInterval = parseInt(inputStepInterval.value);
+        let totalFrames = 0;
+        let diagnostic = '';
+        let gridWidth = 0;
+        let gridHeight = 0;
+        let grid = [];
+        let lastStep = Date.now();
+        let isPlaying = true;
+        let hue = 240;
+        const step = () => {
+            const newGrid = JSON.parse(JSON.stringify(grid));
+            // Simulate falling sand
+            for (let x = 0; x < gridWidth; x++) {
+                for (let y = gridHeight - 1; y >= 0; y--) {
+                    const cell = grid[x][y];
+                    if (cell === 0) continue;
+                    if (y === gridHeight - 1) continue;
+                    if (grid[x][y + 1] === 0) {
+                        newGrid[x][y] = 0;
+                        newGrid[x][y + 1] = cell;
+                    }
+                    else if ((x > 0 && x < gridWidth - 1)) {
+                        if (grid[x - 1][y + 1] === 0 && grid[x + 1][y + 1] === 0) {
+                            newGrid[x][y] = 0;
+                            if (Math.random() < 0.5)
+                                newGrid[x + 1][y + 1] = cell;
+                            else
+                                newGrid[x - 1][y + 1] = cell;
+                        } else if (grid[x - 1][y + 1] === 0) {
+                            newGrid[x][y] = 0;
+                            newGrid[x - 1][y + 1] = cell;
+                        } else if (grid[x + 1][y + 1] === 0) {
+                            newGrid[x][y] = 0;
+                            newGrid[x + 1][y + 1] = cell;
+                        }
+                    }
+                }
+            }
+            grid = newGrid;
+        };
+        btnPlay.addEventListener('click', () => {
+            isPlaying = true;
+            btnPlay.disabled = true;
+            btnPause.disabled = false;
+            btnStep.disabled = true;
+        });
+        btnPause.addEventListener('click', () => {
+            isPlaying = false;
+            btnPlay.disabled = false;
+            btnPause.disabled = true;
+            btnStep.disabled = false;
+        });
+        btnStep.addEventListener('click', step);
+        btnClear.addEventListener('click', () => {
+            grid = [];
+            btnPause.dispatchEvent(new Event('click'));
+        });
+        inputGridSize.addEventListener('change', () => {
+            gridSize = Number(inputGridSize.value);
+        });
+        inputStepInterval.addEventListener('change', () => {
+            stepInterval = Number(inputStepInterval.value);
+        });
+        const update = () => {
+            // Resize canvas
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight-40;
+            gridWidth = Math.floor(canvas.width / gridSize);
+            gridHeight = Math.floor(canvas.height / gridSize);
+            // Update cells
+            if (grid.length !== gridWidth || grid[0].length !== gridHeight) {
+                grid = [];
+                for (let x = 0; x < gridWidth; x++) {
+                    grid[x] = [];
+                    for (let y = 0; y < gridHeight; y++) {
+                        grid[x][y] = 0;
+                    }
+                }
+            }
+            // Step if playing
+            if (isPlaying && (Date.now() - lastStep) > stepInterval) {
+                step();
+                lastStep = Date.now();
+            }
+            // Draw background
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            // Draw active cells
+            for (let x = 0; x < gridWidth; x++) {
+                for (let y = 0; y < gridHeight; y++) {
+                    const cell = grid[x][y];
+                    if (cell) {
+                        context.fillStyle = `hsl(${cell}, 100%, 70%)`;
+                        context.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+                    }
+                }
+            }
+            // Draw grid
+            if (gridSize > 20) {
+                context.strokeStyle = '#77777777';
+                context.lineWidth = 1;
+                context.beginPath();
+                for (let x = 0; x <= gridWidth; x++) {
+                    context.moveTo(x * gridSize, 0);
+                    context.lineTo(x * gridSize, gridSize * gridHeight);
+                }
+                for (let y = 0; y <= gridHeight; y++) {
+                    context.moveTo(0, y * gridSize);
+                    context.lineTo(gridSize * gridWidth, y * gridSize);
+                }
+                context.stroke();
+            }
+            // Finish
+            totalFrames++;
+            diagnostic = `Runtime: ${Date.now() - startTime}ms  Frames: ${totalFrames}  FPS: ${Math.round(totalFrames / ((Date.now() - startTime) / 1000))}`;
+            requestAnimationFrame(update);
+        };
+        update();
+        canvas.addEventListener('mousemove', event => {
+            hue += 0.1;
+            if (hue > 360) hue = 1;
+            const x = Math.floor(event.clientX / gridSize);
+            const y = Math.floor(event.clientY / gridSize);
+            if (!event.buttons) return;
+            const brushSize = 5;
+            const newState = event.buttons === 1 ? 1 : 0;
+            for (let i = -brushSize; i <= brushSize; i++) {
+                for (let j = -brushSize; j <= brushSize; j++) {
+                    if (Math.random() < 0.5) continue;
+                    const cx = x + i;
+                    const cy = y + j;
+                    if (cx < 0 || cx >= gridWidth || cy < 0 || cy >= gridHeight)
+                        continue;
+                    if (grid[cx][cy]) continue;
+                    grid[cx][cy] = hue;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,11 @@
-/web/test
-/web/files
-!/web/test/gpt-webdev-guide
 /node_modules
+/web/files
+/web/test/blocks
+/web/test/f1bingo
+/web/test/f1bingov2
+/web/test/movement-test
+/web/test/outfits
+/web/test/p2p
+/web/test/physics-test
+/web/test/planar
+/web/test/primediffs

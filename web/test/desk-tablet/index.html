@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desk Tablet</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="main.js" defer></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="background"></div>
+    <div id="main" class="flex col">
+        <div class="flex grow"></div>
+        <div class="bottom flex row gap-16 align-end">
+            <div class="datetime flex col gap-8 grow">
+                <div class="timeCont flex row gap-8 align-end">
+                    <div id="time"></div>
+                    <div class="small flex col gap-8">
+                        <div id="secs"></div>
+                        <div id="ampm"></div>
+                    </div>
+                </div>
+                <div class="dateCont flex col gap-8">
+                    <div id="weekday"></div>
+                    <div id="date"></div>
+                </div>
+            </div>
+            <div class="widgets flex col gap-16">
+                <div class="music"></div>
+                <div class="weather flex col gap-8">
+                    <div class="flex col gap-8 align-end">
+                        <div class="flex row gap-8 align-center">
+                            <img id="weatherIcon">
+                            <div class="flex col gap-4">
+                                <div id="weatherTemp">?</div>
+                                <div class="weatherHighLow row gap-4">
+                                    <span id="weatherTempHigh">?</span> / <span id="weatherTempLow">?</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="weatherDesc">Loading weather...</div>
+                        <div class="weatherStats flex col gap-4 align-end">
+                            <div class="flex row gap-16">
+                                <div class="flex row gap-4 align-center">
+                                    <img src="basmilius-weather-icons-filled/all/raindrop.svg">
+                                    <div id="weatherHumidity">?</div>
+                                </div>
+                                <div class="flex row gap-4 align-center">
+                                    <img src="basmilius-weather-icons-filled/all/windsock.svg">
+                                    <div id="weatherWind">?</div>
+                                </div>
+                            </div>
+                            <div class="flex row gap-16">
+                                <div class="flex row gap-4 align-center">
+                                    <img src="basmilius-weather-icons-filled/all/sunrise.svg">
+                                    <div><span id="weatherSunrise"></span><spam id="weatherSunriseAmPm"></spam></div>
+                                </div>
+                                <div class="flex row gap-4 align-center">
+                                    <img src="basmilius-weather-icons-filled/all/sunset.svg">
+                                    <div><span id="weatherSunset"></span><spam id="weatherSunsetAmPm"></spam></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="fullscreen" class="btn">fullscreen</button>
+</body>
+</html>
