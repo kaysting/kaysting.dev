@@ -19,7 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     </head>
 
-    <body class="theme-darkblue">
+    <body>
         <div id="main">
             <div id="top">
                 <div id="timeCont">
@@ -45,21 +45,25 @@
     </body>
 
     <style>
+        body {
+            --color1: hsl(0, 0%, 50%);
+            --color2: black;
+        }
         body.theme-lightblue {
-            --color1: hsl(230, 50%, 30%);
-            --color2: hsl(230, 50%, 80%);
+            --color1: hsl(210, 50%, 30%);
+            --color2: hsl(210, 50%, 80%);
         }
         body.theme-lightgray {
-            --color1: hsl(230, 20%, 30%);
-            --color2: hsl(230, 20%, 80%);
+            --color1: hsl(220, 20%, 30%);
+            --color2: hsl(220, 20%, 80%);
         }
         body.theme-lightyellow {
             --color1: hsl(20, 50%, 20%);
             --color2: hsl(20, 50%, 80%);
         }
         body.theme-darkpurple {
-            --color1: hsl(300, 50%, 80%);
-            --color2: hsl(300, 50%, 10%);
+            --color1: hsl(300, 50%, 90%);
+            --color2: hsl(300, 50%, 20%);
         }
         body.theme-darkblue {
             --color1: hsl(240, 50%, 70%);
@@ -71,7 +75,7 @@
         }
 
         * {
-            transition: 2s ease-in-out;
+            transition: 3s ease-in-out;
         }
 
         #main {
@@ -339,27 +343,21 @@
             const isBeforeSunrise = msTillSunrise > 0 && msTillSunset > 0; // before sunrise and sunset
             const isDayTime = msTillSunrise < 0 && msTillSunset > 0; // after sunrise but before sunset
             const isAfterSunset = msTillSunrise < 0 && msTillSunset < 0; // after sunrise and sunset
-            const dayEndThreshold = 1000 * 60 * 30; // the time during which show start/end of day color
+            const dayEndThreshold = 1000 * 60 * 60; // the time during which show start/end of day color
             const nightEndThreshold = 1000 * 60 * 60; // the time during which to show the start/end of night color
 
-            if (isBeforeSunrise && msTillSunrise < nightEndThreshold) {
-                // Show end of night theme
-                document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkpurple';
-            } else if (isDayTime && Math.abs(msTillSunrise) < dayEndThreshold) {
-                // Show start of day theme
-                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightyellow';
-            } else if (isDayTime && Math.abs(msTillSunrise) > dayEndThreshold) {
-                // Show day theme
-                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightblue';
-            } else if (isDayTime && msTillSunset < dayEndThreshold) {
-                // Show end of day theme
-                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightyellow';
-            } else if (isAfterSunset && Math.abs(msTillSunset) < nightEndThreshold) {
-                // Show start of night theme
-                document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-darkpurple';
+            if (isDayTime) {
+                if (Math.abs(msTillSunrise) < dayEndThreshold || msTillSunset < dayEndThreshold) {
+                    document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightyellow';
+                } else {
+                    document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightblue';
+                }
             } else {
-                // Show night theme
-                document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkblue';
+                if (msTillSunrise < nightEndThreshold || Math.abs(msTillSunset) < nightEndThreshold) {
+                    document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkpurple';
+                } else {
+                    document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkblue';
+                }
             }
         };
 
