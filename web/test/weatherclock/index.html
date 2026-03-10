@@ -11,7 +11,7 @@
             content="A simple, real-time weather clock that displays time, date, and weather conditions using automatic location scanning with no required weather API key. It even keeps your device awake so you can dedicate a device to it." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
         <link
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@300,0..1&display=swap"
             rel="stylesheet" />
@@ -91,7 +91,7 @@
             height: calc(100% - 4px);
             padding: 8px;
             background: var(--color2);
-            font-family: 'Comfortaa', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             display: flex;
             flex-direction: column;
             border-radius: 24px;
@@ -115,11 +115,13 @@
         }
 
         #time {
-            font-size: 180px;
+            font-size: 200px;
             padding-bottom: -8px;
+            font-weight: 400;
         }
         #date {
             font-size: 42px;
+            font-weight: 500;
         }
 
         #timeSmall {
@@ -127,8 +129,8 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            padding-bottom: 32px;
-            padding-top: 16px;
+            padding-bottom: 36px;
+            padding-top: 45px;
         }
 
         #ampm {
@@ -166,11 +168,9 @@
         #weatherCondition {
             font-weight: 600;
         }
-
-        #weatherCondition,
-        #windSpeed,
-        #weatherTemp {
-            margin-bottom: -4px;
+        #weatherTemp,
+        #windSpeed {
+            font-weight: 500;
         }
 
         #windIcon {
