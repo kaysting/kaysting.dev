@@ -345,27 +345,32 @@
         };
 
         const updateColor = () => {
-            const msTillSunrise = globalSunrise - Date.now();
-            const msTillSunset = globalSunset - Date.now();
-            const isBeforeSunrise = msTillSunrise > 0 && msTillSunset > 0; // before sunrise and sunset
-            const isDayTime = msTillSunrise < 0 && msTillSunset > 0; // after sunrise but before sunset
-            const isAfterSunset = msTillSunrise < 0 && msTillSunset < 0; // after sunrise and sunset
-            const dayEndThreshold = 1000 * 60 * 60; // the time during which show start/end of day color
-            const nightEndThreshold = 1000 * 60 * 60; // the time during which to show the start/end of night color
+            const now = Date.now();
+            const transitionThreshold = 1000 * 60 * 60; // 1 hour for sunrise/sunset transitions
 
+            // 1. Are we currently in the daytime hours?
+            const isDayTime = now >= globalSunrise && now < globalSunset;
+
+            // 2. Are we close to a sun event? (Absolute distance from the specific timestamps)
+            const msFromSunrise = Math.abs(now - globalSunrise);
+            const msFromSunset = Math.abs(now - globalSunset);
+            const isTransitionPeriod = msFromSunrise < transitionThreshold || msFromSunset < transitionThreshold;
+
+            // 3. Determine the base theme based strictly on time
+            let theme = '';
             if (isDayTime) {
-                if (Math.abs(msTillSunrise) < dayEndThreshold || msTillSunset < dayEndThreshold) {
-                    document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightyellow';
-                } else {
-                    document.body.classList = globalIsCloudy ? 'theme-lightgray' : 'theme-lightblue';
-                }
+                theme = isTransitionPeriod ? 'theme-lightyellow' : 'theme-lightblue';
             } else {
-                if (msTillSunrise < nightEndThreshold || Math.abs(msTillSunset) < nightEndThreshold) {
-                    document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkpurple';
-                } else {
-                    document.body.classList = globalIsCloudy ? 'theme-darkgray' : 'theme-darkblue';
-                }
+                theme = isTransitionPeriod ? 'theme-darkpurple' : 'theme-darkblue';
             }
+
+            // 4. Apply the cloudy weather override if necessary
+            if (globalIsCloudy) {
+                theme = isDayTime ? 'theme-lightgray' : 'theme-darkgray';
+            }
+
+            // 5. Apply the class
+            document.body.className = theme;
         };
 
         const toggleFullscreen = async () => {

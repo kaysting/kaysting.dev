@@ -7,6 +7,8 @@ const index = require('express-file-index');
 const port = 8255;
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.use((req, res, next) => {
     const forwardHosts = ['simplecyber.org', 'www.simplecyber.org', 'cybah.me', 'www.cybah.me'];
     if (forwardHosts.includes(req.headers.host)) {
@@ -21,6 +23,11 @@ app.get('/ip', async (req, res) => {
     const ip = req.headers['cf-connecting-ip'];
     const ipApiRes = await axios.get(`http://ip-api.com/json/${ip}`);
     res.json(ipApiRes.data);
+});
+
+app.get('/new', async (req, res) => {
+    const section = req.query.section;
+    res.render('home-new/index', { section });
 });
 
 app.use(
