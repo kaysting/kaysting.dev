@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Resume</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="/assets/utils.css" />
+        <link rel="stylesheet" href="/assets/material-symbols.css" />
+    </head>
+    <body>
+        <main class="flex col gap-16">
+            <div id="top" class="flex gap-16 align-center">
+                <div class="flex col gap-8 flex-grow">
+                    <div id="title"><%= data.title %></div>
+                    <div id="subtitle"><%= data.subtitle %></div>
+                </div>
+                <div id="chips" class="flex gap-8 flex-wrap justify-end">
+                    <% for (const chips of data.chips) { %>
+                        <% for (const chip of chips) { %>
+                            <div class="chip flex gap-8 align-center">
+                                <% if (chip.symbol) { %>
+                                    <div class="symbol"><%= chip.symbol %></div>
+                                <% } else if (chip.icon) { %>
+                                    <img src="<%= chip.icon %>" class="icon">
+                                <% } %>
+                                <% if (chip.link) { %>
+                                    <a href="<%= chip.link %>" class="label"><%= chip.label || chip.link %></a>
+                                <% } else { %>
+                                    <div class="label"><%= chip.label %></div>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="separator"></div>
+        </main>
+    </body>
+    <style>
+        body {
+            --c-fg-main: hsl(350, 20%, 10%);
+            --c-fg-light: hsl(350, 20%, 50%);
+            --c-separator: hsl(350, 20%, 70%);
+            --c-accent-dark: hsl(350, 50%, 20%);
+            --c-accent-main: hsl(350, 50%, 50%);
+            --c-accent-light: hsl(350, 50%, 92%);
+
+            margin: 0.5in;
+            padding: 0px;
+            font-size: 10pt;
+            font-family: 'Poppins';
+            line-height: 1.2;
+            color: var(--c-fg-main);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        main {
+            margin: 0 auto;
+            max-width: 1000pt;
+        }
+
+        #title {
+            font-weight: bold;
+            font-size: 16pt;
+            color: var(--c-accent-main);
+        }
+
+        #subtitle {
+            font-size: 12pt;
+            color: var(--c-fg-light);
+        }
+
+        #chips .chip {
+            border-radius: 100pt;
+            padding: 0 8pt;
+            height: 24pt;
+            background: var(--c-accent-light);
+        }
+
+        #chips .chip .symbol {
+            font-size: 14pt;
+            color: var(--c-accent-dark);
+        }
+
+        #chips .chip .icon {
+            width: 14pt;
+            height: 14pt;
+        }
+
+        #chips .chip .label {
+            color: var(--c-accent-dark);
+        }
+
+        #chips .chip a.label {
+            text-decoration: none;
+        }
+
+        .separator {
+            height: 4pt;
+            width: 100%;
+            border-radius: 2pt;
+            background: var(--c-separator);
+        }
+
+        .header {
+            color: var(--c-fg-light);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 12pt;
+        }
+
+        @media print {
+            @page {
+                size: letter;
+                margin: 0.5in;
+            }
+            body {
+                margin: 0px;
+            }
+        }
+    </style>
+</html>

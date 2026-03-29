@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@300,0..1&display=swap');
+
+.symbol {
+    --size: 20px;
+    font-family: 'Material Symbols Rounded';
+    font-variation-settings: 'FILL' 0;
+    font-weight: 300;
+    font-size: var(--size);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.symbol.filled {
+    font-variation-settings: 'FILL' 1;
+}
