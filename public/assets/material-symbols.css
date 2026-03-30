@@ -8,6 +8,7 @@
     font-size: var(--size);
     line-height: 1;
     flex-shrink: 0;
+    user-select: none;
 }
 
 .symbol.filled {

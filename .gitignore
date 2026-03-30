@@ -9,3 +9,4 @@
 /web/test/physics-test
 /web/test/planar
 /web/test/primediffs
+.env

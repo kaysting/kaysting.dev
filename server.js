@@ -1,10 +1,13 @@
+require('dotenv').config({ quiet: true });
+
 const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const dayjs = require('dayjs');
-const axios = require('axios');
-const fs = require('fs');
 
-const port = 8255;
+const ROUTES_DIR = path.join(__dirname, 'routes');
+const PORT = process.env.PORT || 8080;
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -17,97 +20,17 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/ip', async (req, res) => {
-    const ip = req.headers['cf-connecting-ip'];
-    const ipApiRes = await axios.get(`http://ip-api.com/json/${ip}`);
-    res.json(ipApiRes.data);
-});
+const routes = [
+    //
+    { path: '/ip', file: 'ip' },
+    { path: '/resume', file: 'resume' },
+    { file: 'static' }
+];
 
-app.get('/resume', (req, res, next) => {
-    req.data = {
-        title: 'Kayla Kersting',
-        subtitle: 'Versatile computer scientist and IT specialist with over 10 years of practical experience.',
-        chips: [
-            [
-                { symbol: 'location_on', label: 'Salem, MA' },
-                {
-                    symbol: 'email',
-                    link: 'mailto:kayla@kaysting.dev',
-                    label: 'kayla@kaysting.dev'
-                },
-                {
-                    symbol: 'call',
-                    link: 'tel:832-231-4068',
-                    label: '832-231-4068'
-                }
-            ],
-            [
-                {
-                    symbol: 'language',
-                    link: 'https://kaysting.dev',
-                    label: 'kaysting.dev'
-                },
-                {
-                    symbol: 'code',
-                    link: 'https://github.com/kaysting',
-                    label: 'github.com/kaysting'
-                }
-            ]
-        ],
-        education: [],
-        employment: [],
-        skills: [],
-        projects: []
-    };
-    next();
-});
+for (const data of routes) {
+    const router = require(path.join(ROUTES_DIR, data.file));
+    if (data.path) app.use(data.path, router);
+    else app.use(router);
+}
 
-const INDEX_ROOT = path.join(__dirname, 'public');
-const INDEX_FILES = ['index.ejs', 'index.html'];
-
-app.use((req, res, next) => {
-    // Normalize request path and get absolute file path
-    let filePath = path.join(INDEX_ROOT, path.normalize(req.path));
-
-    // Make sure target is within the root
-    if (!filePath.startsWith(INDEX_ROOT)) return next();
-
-    // Make sure target exists
-    if (!fs.existsSync(filePath)) return next();
-
-    // If target is a directory, check for index files
-    if (fs.statSync(filePath).isDirectory()) {
-        for (const fileName of INDEX_FILES) {
-            // See if this index file exists
-            const indexFilePath = path.join(filePath, fileName);
-            if (!fs.existsSync(indexFilePath)) continue;
-
-            // Change requested file path to the index file
-            filePath = indexFilePath;
-            break;
-        }
-    }
-
-    // Make sure target exists
-    if (!fs.existsSync(filePath)) return next();
-
-    // Make sure target isn't a directory
-    if (fs.statSync(filePath).isDirectory()) return next();
-
-    // Decide what to do with the file
-    switch (path.extname(filePath.toLowerCase())) {
-        case '.ejs': {
-            // Render EJS files
-            return res.render(filePath, {
-                data: req.data,
-                query: req.query,
-                body: req.body
-            });
-        }
-        default: {
-            return res.sendFile(filePath);
-        }
-    }
-});
-
-app.listen(port, () => console.log(`Listening on ${port}`));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
