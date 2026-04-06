@@ -214,3 +214,9 @@
 .ease-200 {
     transition: 0.2s ease-in-out;
 }
+
+.grid-400 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 8px 16px;
+}
