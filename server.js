@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 const routes = [
-    //
+    { file: 'redirects' },
     { path: '/ip', file: 'ip' },
     { path: '/resume', file: 'resume' },
     { file: 'static' }
