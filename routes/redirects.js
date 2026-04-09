@@ -1,23 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const redirects = {
-    git: 'https://github.com/kaysting',
-    github: 'https://github.com/kaysting',
-
-    yt: 'https://www.youtube.com/@kaystingdev',
-    youtube: 'https://www.youtube.com/@kaystingdev',
-
-    files: 'https://files.kaysting.dev',
-
-    osu: 'https://osu.ppy.sh/users/22737645',
-
-    oc: 'https://osucomplete.org',
-    osucomplete: 'https://osucomplete.org',
-
-    odl: 'https://osudl.org',
-    osudl: 'https://osudl.org'
-};
+const redirects = require('../redirects.json');
 
 for (const [slug, url] of Object.entries(redirects)) {
     router.get(`/${slug}`, async (req, res) => {
