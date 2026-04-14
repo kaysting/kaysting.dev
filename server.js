@@ -1,14 +1,13 @@
 require('dotenv').config({ quiet: true });
 
-const path = require('path');
-const fs = require('fs');
 const express = require('express');
 const dayjs = require('dayjs');
+const layouts = require('express-ejs-layouts');
 
-const ROUTES_DIR = path.join(__dirname, 'routes');
 const PORT = process.env.PORT || 8080;
 
 const app = express();
+app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
     const forwardHosts = ['simplecyber.org', 'www.simplecyber.org', 'cybah.me', 'www.cybah.me'];
@@ -20,17 +19,14 @@ app.use((req, res, next) => {
     next();
 });
 
-const routes = [
-    { file: 'redirects' },
-    { path: '/ip', file: 'ip' },
-    { path: '/resume', file: 'resume' },
-    { file: 'static' }
-];
+app.use(layouts);
 
-for (const data of routes) {
-    const router = require(path.join(ROUTES_DIR, data.file));
-    if (data.path) app.use(data.path, router);
-    else app.use(router);
-}
+app.use('/ip', require('./routes/ip'));
+app.use('/resume', require('./routes/resume'));
+app.use(require('./routes/redirects'));
+app.use(require('./routes/static'));
+app.use(require('./routes/home'));
+
+app.use(require('./routes/errors'));
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

@@ -20,11 +20,9 @@ router.use((req, res, next) => {
     // If target is a directory, check for index files
     if (fs.statSync(filePath).isDirectory()) {
         for (const fileName of INDEX_FILES) {
-            // See if this index file exists
+            // Change requested file path to the index file if it exists
             const indexFilePath = path.join(filePath, fileName);
             if (!fs.existsSync(indexFilePath)) continue;
-
-            // Change requested file path to the index file
             filePath = indexFilePath;
             break;
         }
