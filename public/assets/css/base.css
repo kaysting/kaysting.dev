@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    /* Color category properties */
+    --c-base-hue: 340;
+    --c-base-sat: 10%;
+
+    --c-accent-hue: 340;
+    --c-accent-sat: 60%;
+
+    --c-danger-hue: 0;
+    --c-danger-sat: 60%;
+
+    --c-success-hue: 150;
+    --c-success-sat: 60%;
+
+    /* Color palettes */
+    --c-base-8: hsl(var(--c-base-hue), var(--c-base-sat), 8%);
+    --c-base-10: hsl(var(--c-base-hue), var(--c-base-sat), 10%);
+    --c-base-12: hsl(var(--c-base-hue), var(--c-base-sat), 12%);
+    --c-base-15: hsl(var(--c-base-hue), var(--c-base-sat), 15%);
+    --c-base-18: hsl(var(--c-base-hue), var(--c-base-sat), 18%);
+    --c-base-20: hsl(var(--c-base-hue), var(--c-base-sat), 20%);
+    --c-base-22: hsl(var(--c-base-hue), var(--c-base-sat), 22%);
+    --c-base-25: hsl(var(--c-base-hue), var(--c-base-sat), 25%);
+    --c-base-30: hsl(var(--c-base-hue), var(--c-base-sat), 30%);
+    --c-base-35: hsl(var(--c-base-hue), var(--c-base-sat), 35%);
+    --c-base-40: hsl(var(--c-base-hue), var(--c-base-sat), 40%);
+    --c-base-45: hsl(var(--c-base-hue), var(--c-base-sat), 45%);
+    --c-base-50: hsl(var(--c-base-hue), var(--c-base-sat), 50%);
+    --c-base-55: hsl(var(--c-base-hue), var(--c-base-sat), 55%);
+    --c-base-60: hsl(var(--c-base-hue), var(--c-base-sat), 60%);
+    --c-base-65: hsl(var(--c-base-hue), var(--c-base-sat), 65%);
+    --c-base-70: hsl(var(--c-base-hue), var(--c-base-sat), 70%);
+    --c-base-75: hsl(var(--c-base-hue), var(--c-base-sat), 75%);
+    --c-base-80: hsl(var(--c-base-hue), var(--c-base-sat), 80%);
+    --c-base-90: hsl(var(--c-base-hue), var(--c-base-sat), 90%);
+    --c-base-100: hsl(var(--c-base-hue), var(--c-base-sat), 100%);
+
+    --c-accent-50: hsl(var(--c-accent-hue), var(--c-accent-sat), 50%);
+    --c-accent-60: hsl(var(--c-accent-hue), var(--c-accent-sat), 60%);
+    --c-accent-70: hsl(var(--c-accent-hue), var(--c-accent-sat), 70%);
+    --c-accent-80: hsl(var(--c-accent-hue), var(--c-accent-sat), 80%);
+    --c-accent-90: hsl(var(--c-accent-hue), var(--c-accent-sat), 90%);
+
+    --c-danger-50: hsl(var(--c-danger-hue), var(--c-danger-sat), 50%);
+    --c-danger-60: hsl(var(--c-danger-hue), var(--c-danger-sat), 60%);
+    --c-danger-70: hsl(var(--c-danger-hue), var(--c-danger-sat), 70%);
+    --c-danger-80: hsl(var(--c-danger-hue), var(--c-danger-sat), 80%);
+    --c-danger-90: hsl(var(--c-danger-hue), var(--c-danger-sat), 90%);
+
+    --c-success-50: hsl(var(--c-success-hue), var(--c-success-sat), 50%);
+    --c-success-60: hsl(var(--c-success-hue), var(--c-success-sat), 60%);
+    --c-success-70: hsl(var(--c-success-hue), var(--c-success-sat), 70%);
+    --c-success-80: hsl(var(--c-success-hue), var(--c-success-sat), 80%);
+    --c-success-90: hsl(var(--c-success-hue), var(--c-success-sat), 90%);
+
+    /* Text colors */
+    --c-text-default: var(--c-base-90);
+    --c-text-secondary: var(--c-base-75);
+    --c-text-muted: var(--c-base-60);
+    --c-text-danger: var(--c-danger-80);
+    --c-text-success: var(--c-success-80);
+    --c-text-on-accent: var(--c-base-10);
+
+    /* Background colors */
+    --c-bg-base: var(--c-base-10);
+    --c-bg-surface: var(--c-base-12);
+
+    /* Border colors */
+    --c-border-default: var(--c-base-25);
+
+    /* Action colors (links, buttons) */
+    --c-action-primary: var(--c-accent-80);
+    --c-action-primary-hover: var(--c-accent-90);
+    --c-action-danger: var(--c-danger-80);
+    --c-action-danger-hover: var(--c-danger-90);
+
+    /* Font weights */
+    --weight-heading-light: 200;
+    --weight-heading-heavy: 700;
+}
+
+body {
+    background: var(--c-bg-base);
+    font-size: 16px;
+    font-family: 'Poppins';
+    color: var(--c-text-default);
+    padding: 0;
+    margin: 0;
+}
+
+.btn {
+    --btnBg: var(--c-base-30);
+    --btnBgHover: var(--c-base-40);
+    --btnFg: var(--c-base-85);
+    --btnFgHover: white;
+    height: 32px;
+    padding: 0px 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 16px;
+    background: var(--btnBg);
+    transition: 0.1s ease-in-out;
+    color: var(--btnFg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    user-select: none;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn:hover:not(.disabled):not(:disabled) {
+    color: var(--btnFgHover);
+    background: var(--btnBgHover);
+    transition: none;
+}
+
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

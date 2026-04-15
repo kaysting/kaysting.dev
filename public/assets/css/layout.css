@@ -1,0 +1,8 @@
+#sidebar {
+    position: sticky;
+    top: 0px;
+    height: 100dvh;
+    width: 250px;
+    background: var(--c-bg-surface);
+    border-right: 1px solid var(--c-border-default);
+}
