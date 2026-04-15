@@ -2,10 +2,10 @@
 
 :root {
     /* Color category properties */
-    --c-base-hue: 330;
+    --c-base-hue: 340;
     --c-base-sat: 10%;
 
-    --c-accent-hue: 330;
+    --c-accent-hue: 340;
     --c-accent-sat: 60%;
 
     --c-danger-hue: 0;
@@ -23,6 +23,7 @@
     --c-base-20: hsl(var(--c-base-hue), var(--c-base-sat), 20%);
     --c-base-22: hsl(var(--c-base-hue), var(--c-base-sat), 22%);
     --c-base-25: hsl(var(--c-base-hue), var(--c-base-sat), 25%);
+    --c-base-28: hsl(var(--c-base-hue), var(--c-base-sat), 28%);
     --c-base-30: hsl(var(--c-base-hue), var(--c-base-sat), 30%);
     --c-base-35: hsl(var(--c-base-hue), var(--c-base-sat), 35%);
     --c-base-40: hsl(var(--c-base-hue), var(--c-base-sat), 40%);
@@ -70,14 +71,14 @@
     --c-bg-surface: var(--c-base-12);
 
     /* Border colors */
-    --c-border-default: var(--c-base-25);
+    --c-border-default: var(--c-base-28);
     --c-border-subtle: var(--c-base-20);
 
     /* Action colors (links, buttons) */
     --c-action-primary: var(--c-accent-80);
     --c-action-primary-hover: var(--c-accent-90);
-    --c-action-secondary: var(--c-base-30);
-    --c-action-secondary-hover: var(--c-base-45);
+    --c-action-secondary: var(--c-base-25);
+    --c-action-secondary-hover: var(--c-base-40);
     --c-action-tertiary: var(--c-base-70);
     --c-action-tertiary-hover: var(--c-base-80);
     --c-action-danger: var(--c-danger-80);
@@ -474,8 +475,8 @@ img {
 }
 
 .btn.small {
-    --height: 28px;
-    --textSize: 13px;
+    --height: 26px;
+    --textSize: 14px;
     --padding: 12px;
 }
 
@@ -508,6 +509,11 @@ img {
     --bgHover: var(--c-action-secondary);
     --fg: var(--c-action-primary);
     --fgHover: var(--c-action-primary-hover);
+}
+
+.btn.text.secondary {
+    --fg: var(--c-action-tertiary);
+    --fgHover: var(--c-action-tertiary-hover);
 }
 
 .btn.text.danger {
