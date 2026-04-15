@@ -21,6 +21,13 @@ app.use((req, res, next) => {
 
 app.use(layouts);
 
+app.locals.meta = {
+    pageTitle: '',
+    siteName: 'kaysting.dev',
+    title: `Hi, I'm Kayla!`,
+    description: `The personal portfolio website of Kayla Kersting, a full-stack web developer. This site also features a growing suite of useful tools.`
+};
+
 app.use('/ip', require('./routes/ip'));
 app.use('/resume', require('./routes/resume'));
 app.use(require('./routes/redirects'));
