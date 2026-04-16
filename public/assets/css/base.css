@@ -67,11 +67,11 @@
     --c-text-default-inverted: var(--c-base-10);
 
     /* Background colors */
-    --c-bg-base: var(--c-base-10);
+    --c-bg-base: var(--c-base-8);
     --c-bg-surface: var(--c-base-12);
 
     /* Border colors */
-    --c-border-default: var(--c-base-28);
+    --c-border-default: var(--c-base-25);
     --c-border-subtle: var(--c-base-20);
 
     /* Action colors (links, buttons) */
@@ -79,8 +79,8 @@
     --c-action-primary-hover: var(--c-accent-90);
     --c-action-secondary: var(--c-base-25);
     --c-action-secondary-hover: var(--c-base-40);
-    --c-action-tertiary: var(--c-base-70);
-    --c-action-tertiary-hover: var(--c-base-80);
+    --c-action-tertiary: var(--c-base-75);
+    --c-action-tertiary-hover: var(--c-base-90);
     --c-action-danger: var(--c-danger-80);
     --c-action-danger-hover: var(--c-danger-90);
 
@@ -94,15 +94,11 @@
     --c-syntax-keyword: #ff7b72;
     --c-syntax-string: #a5d6ff;
     --c-syntax-variable: #ffa657;
-
-    /* Font weights */
-    --weight-heading-light: 200;
-    --weight-heading-heavy: 700;
 }
 
 body {
     background: var(--c-bg-base);
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
     color: var(--c-text-default);
     padding: 0;
@@ -175,7 +171,7 @@ h6 {
 
 p,
 li {
-    font-size: 15px;
+    font-size: 1em;
     line-height: 1.5;
     color: var(--c-text-default);
 }
@@ -330,10 +326,11 @@ ol:not(:last-child):not(li > ol) {
 a {
     color: var(--c-action-primary);
     text-decoration: none;
+    font-weight: 600;
 }
 
 a:hover {
-    color: white;
+    color: var(--c-action-primary-hover);
     text-decoration: underline;
     cursor: pointer;
 }
@@ -355,7 +352,7 @@ img {
 }
 
 ::selection {
-    background: var(--c-accent-70);
+    background: var(--c-accent-80);
     color: black;
 }
 
@@ -404,25 +401,13 @@ img {
     color: var(--c-text-accent);
 }
 
-.text-14 {
-    font-size: 14px;
-}
-
-.text-15 {
-    font-size: 15px;
-}
-
-.text-18 {
-    font-size: 18px;
-}
-
 .btn {
     --bg: var(--c-action-primary);
     --bgHover: var(--c-action-primary-hover);
     --fg: var(--c-text-default-inverted);
     --fgHover: var(--c-text-default-inverted);
 
-    --height: 35px;
+    --height: 36px;
     --textSize: 14px;
     --padding: 14px;
 
@@ -545,4 +530,15 @@ img {
 
 .card.sectional>.section:not(:last-child) {
     border-bottom: 1px solid var(--c-border-default);
+}
+
+.card.hoverable:hover,
+.card.hoverable:focus-visible,
+.card.surface {
+    background: var(--c-bg-surface);
+}
+
+a.card {
+    color: inherit;
+    text-decoration: none;
 }

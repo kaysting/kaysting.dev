@@ -22,9 +22,9 @@
 
 main {
     position: relative;
-    width: 1200px;
+    width: 1000px;
     margin: 0px auto;
-    padding: 16px;
+    padding: 24px 16px;
     flex-grow: 1;
     container-type: inline-size;
 }
