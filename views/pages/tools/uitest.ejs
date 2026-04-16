@@ -2,30 +2,37 @@
     <h1>UI Testing</h1>
     <p>This page tests various UI elements.</p>
     <p><b>Here's some bold text</b></p>
-    <p class="text-secondary text-monospace">
+    <p class="text-secondary text-monospace text-15">
         This is another paragraph but a little dimmer and smaller and monospace :3
     </p>
     <p>Oh and this is a paragraph that has <a href="https://google.com">a link to Google</a>!</p>
-    <h2 class="text-accent">Buttons :3</h2>
+    <h2 class="text-accent">Buttons</h2>
     <div class="flex col gap-8">
-        <% for( const size of ['small', '', 'large', 'xl'] ) { %>
+        <%
+            const buttonSizes = ['small', 'default', 'medium', 'large']
+            const buttonTypes = [
+                { class: 'primary', icon: 'add', label: 'Create' },
+                { class: 'secondary', icon: 'pause', label: 'Pause' },
+                { class: 'danger', icon: 'delete', label: 'Delete' },
+                { class: 'tertiary', icon: 'close', label: 'Close' },
+                { class: 'text', icon: 'help', label: 'Need help?' },
+                { class: 'text danger', icon: 'flag', label: 'Report' },
+                { class: 'text secondary', icon: 'close', label: 'Clear' },
+            ]
+        %>
+        <% for( const size of buttonSizes ) { %>
             <div class="flex gap-8 flex-wrap">
-                <button class="btn <%= size %>">
-                    <div class="symbol">settings</div>
-                    <div class="label">Settings</div>
-                </button>
-                <button class="btn secondary <%= size %>">
-                    <div class="symbol">settings</div>
-                    <div class="label">Settings</div>
-                </button>
-                <button class="btn text <%= size %>">
-                    <div class="symbol">settings</div>
-                    <div class="label">Settings</div>
-                </button>
-                <button class="btn text secondary <%= size %>">
-                    <div class="symbol">settings</div>
-                    <div class="label">Settings</div>
-                </button>
+                <% for( const type of buttonTypes ) { %>
+                    <div class="flex col gap-2 align-center text-center">
+                        <div class="flex gap-8">
+                            <button class="btn <%= type.class %> <%= size %>">
+                                <div class="symbol filled"><%= type.icon %></div>
+                                <div class="label"><%= type.label %></div>
+                            </button>
+                        </div>
+                        <small class="text-monospace text-12"><%= type.class %> <%= size %></small>
+                    </div>
+                <% } %>
             </div>
         <% } %>
     </div>
@@ -58,6 +65,14 @@
                 </button>
             </div>
         </div>
+        <div class="card sectional">
+            <div class="section surface">
+                <p><b>Silly title</b></p>
+            </div>
+            <div class="section">
+                <p>This sectioned card has a filled first section!</p>
+            </div>
+        </div>
         <div class="card spacious">
             <h3>This card is spacious</h3>
             <p>So it's suitable for longform content like documentation or a blog post!</p>
@@ -68,4 +83,10 @@
 <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
         </div>
     </div>
+
+    <style>
+        main {
+            width: 1200px
+        }
+    </style>
 </div>

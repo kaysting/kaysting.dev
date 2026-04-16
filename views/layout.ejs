@@ -3,17 +3,42 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>kaysting.dev</title>
+        <title><%= (pageTitle ? `${pageTitle} - ` : '') + metaSiteName %></title>
+
+        <meta name="description" content="<%= metaDescription %>" />
+
+        <meta name="theme-color" content="<%= metaThemeColor %>" />
+
+        <meta property="og:site_name" content="<%= metaSiteName %>" />
+        <meta property="og:title" content="<%= metaTitle %>" />
+        <meta property="og:description" content="<%= metaDescription %>" />
+
         <link rel="stylesheet" href="/assets/css/material-symbols.css" />
-        <link rel="stylesheet" href="/assets/css/utils.css" />
         <link rel="stylesheet" href="/assets/css/base.css" />
         <link rel="stylesheet" href="/assets/css/layout.css" />
+        <link rel="stylesheet" href="/assets/css/utils.css" />
     </head>
     <body>
         <div id="layout">
-            <div id="sidebar"></div>
+            <div id="sidebar" class="flex col">
+                <div class="top flex justify-center">
+                    <span class="text-accent text-20 text-medium"><%= metaSiteName %></span>
+                </div>
+                <div class="scroll flex col gap-4">
+                    <% for (const item of sidebar) { %>
+                        <% if (item.header) { %>
+                            <div class="header text-14 text-muted text-semibold"><%= item.header %></div>
+                        <% } else { %>
+                            <a href="<%= item.href %>" class="btn <%= item.id == pageId ? '' : 'text secondary' %> justify-start">
+                                <span class="symbol filled"><%= item.symbol %></span>
+                                <span class="label"><%= item.label %></span>
+                            </a>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
             <div id="content">
-                <main><%- body %></main>
+                <main data-page="<%= pageId %>"><%- body %></main>
             </div>
         </div>
     </body>

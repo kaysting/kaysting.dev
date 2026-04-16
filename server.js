@@ -21,12 +21,34 @@ app.use((req, res, next) => {
 
 app.use(layouts);
 
-app.locals.meta = {
-    pageTitle: '',
-    siteName: 'kaysting.dev',
-    title: `Hi, I'm Kayla!`,
-    description: `The personal portfolio website of Kayla Kersting, a full-stack web developer. This site also features a growing suite of useful tools.`
+app.locals.pageId = 'unknown';
+app.locals.pageTitle = 'Home';
+app.locals.metaTitle = 'Welcome to kaysting.dev!';
+app.locals.metaSiteName = 'kaysting.dev';
+app.locals.metaDescription = `The personal website of Kayla Kersting. Explore her portfolio or check out this site's growing suite of useful tools.`;
+app.locals.metaThemeColor = '#ebadc2';
+
+app.locals.tools = {
+    uitest: {
+        symbol: 'palette',
+        name: 'UI Test Page',
+        description: `A UI element debugging and test page containing samples of most elements styled by this site's UI framework.`,
+        href: '/test'
+    }
 };
+
+app.locals.sidebar = [
+    { id: 'home', symbol: 'home', label: 'Home', href: '/' },
+    { id: 'about', symbol: 'person', label: 'About me', href: '/about' },
+    { id: 'tools', symbol: 'apps', label: 'Tools overview', href: '/tools' },
+    { header: 'Tools' },
+    ...Object.entries(app.locals.tools).map(([id, tool]) => ({
+        id,
+        symbol: tool.symbol,
+        label: tool.name,
+        href: tool.href
+    }))
+];
 
 app.use('/ip', require('./routes/ip'));
 app.use('/resume', require('./routes/resume'));
