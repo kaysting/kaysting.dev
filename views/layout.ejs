@@ -17,6 +17,9 @@
         <link rel="stylesheet" href="/assets/css/base.css" />
         <link rel="stylesheet" href="/assets/css/layout.css" />
         <link rel="stylesheet" href="/assets/css/utils.css" />
+
+        <script src="/assets/js/base.js"></script>
+        <script src="/assets/js/layout.js"></script>
     </head>
     <body>
         <div id="layout">
@@ -27,9 +30,9 @@
                 <div class="scroll flex col gap-4">
                     <% for (const item of sidebar) { %>
                         <% if (item.header) { %>
-                            <div class="header text-14 text-muted text-semibold"><%= item.header %></div>
+                            <div class="header text-14 text-muted text-bold"><%= item.header %></div>
                         <% } else { %>
-                            <a href="<%= item.href %>" class="btn <%= item.id == pageId ? '' : 'text secondary' %> justify-start">
+                            <a href="<%= item.href %>" class="btn <%= item.id == pageId ? 'tertiary' : 'text secondary' %> justify-start">
                                 <span class="symbol filled"><%= item.symbol %></span>
                                 <span class="label"><%= item.label %></span>
                             </a>
@@ -38,7 +41,20 @@
                 </div>
             </div>
             <div id="content">
-                <main data-page="<%= pageId %>"><%- body %></main>
+                <div id="topbar" class="flex gap-24 align-center">
+                    <button id="sidebarToggle" class="btn text circle medium">
+                        <span class="symbol">menu</span>
+                    </button>
+                    <div class="flex gap-16 align-center">
+                        <% if (pageSymbol) { %>
+                            <span class="symbol filled text-secondary text-24"><%= pageSymbol %></span>
+                        <% } %>
+                        <% if (pageTitle) { %>
+                            <span class="title text-secondary text-14"><%= pageTitle %></span>
+                        <% } %>
+                    </div>
+                </div>
+                <main id="page-<%= pageId %>"><%- body %></main>
             </div>
         </div>
     </body>

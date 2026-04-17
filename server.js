@@ -22,7 +22,8 @@ app.use((req, res, next) => {
 app.use(layouts);
 
 app.locals.pageId = 'unknown';
-app.locals.pageTitle = 'Home';
+app.locals.pageTitle = '';
+app.locals.pageSymbol = '';
 app.locals.metaTitle = 'Welcome to kaysting.dev!';
 app.locals.metaSiteName = 'kaysting.dev';
 app.locals.metaDescription = `The personal website of Kayla Kersting. Explore her portfolio or check out this site's growing suite of useful tools.`;
