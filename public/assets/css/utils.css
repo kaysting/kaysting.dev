@@ -324,3 +324,11 @@
 .no-padding {
     padding: 0px !important;
 }
+
+.no-select {
+    user-select: none;
+}
+
+.no-events {
+    pointer-events: none;
+}

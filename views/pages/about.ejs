@@ -1,11 +1,10 @@
 <div class="flex col gap-32">
     <div class="top flex gap-24">
-        <img src="/assets/images/kayla-graduation.jpg" alt="Kayla in graduation attire!" />
+        <img class="image" src="/assets/images/kayla-graduation.jpg" alt="Kayla in graduation attire!" />
         <div class="text flex col gap-16">
             <div class="flex col gap-8">
                 <div class="text-accent text-36 text-light">
-                    Hi, I'm
-                    <span class="text-bold">Kayla</span>
+                    Hi, I'm <span class="text-bold">Kayla</span>!
                 </div>
                 <%
                 // TODO: Move this to a dedicated utils file
@@ -25,6 +24,18 @@
                 %>
                 <p class="no-margin"><%= getAge('2003-01-02') %> &bull; she/her/hers</p>
                 <p class="text-monospace text-secondary">I'm a recent computer science graduate from the University of Houston. Outside of my degree, I've spent the past decade teaching myself full-stack web development, Windows and Linux system administration, and business IT operations through my family's business. I have a passion for building tools and apps people love, and have solo-developed several successful online community projects.</p>
+                <div class="socials flex gap-8 flex-wrap">
+                    <% for( const entry of socials ) { %>
+                        <a href="<%= entry.href %>" class="btn small outline tertiary" target="_blank">
+                            <% if (entry.logo) { %>
+                                <img class="icon" src="/assets/images/social-logos/<%= entry.logo %>.svg" alt="<%= entry.logo %>">
+                            <% } else { %>
+                                <span class="symbol"><%= entry.symbol %></span>
+                            <% } %>
+                            <span class="label"><%= entry.label %></span>
+                        </a>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>

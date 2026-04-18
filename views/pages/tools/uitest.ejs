@@ -7,34 +7,46 @@
     </p>
     <p>Oh and this is a paragraph that has <a href="https://google.com">a link to Google</a>!</p>
     <h2 class="text-accent">Buttons</h2>
-    <div class="flex col gap-8">
-        <%
-            const buttonSizes = ['small', 'default', 'medium', 'large']
-            const buttonTypes = [
-                { class: 'primary', icon: 'add', label: 'Create' },
-                { class: 'secondary', icon: 'pause', label: 'Pause' },
-                { class: 'danger', icon: 'delete', label: 'Delete' },
-                { class: 'tertiary', icon: 'close', label: 'Close' },
-                { class: 'text', icon: 'help', label: 'Need help?' },
-                { class: 'text danger', icon: 'flag', label: 'Report' },
-                { class: 'text secondary', icon: 'close', label: 'Clear' },
-            ]
-        %>
-        <% for( const size of buttonSizes ) { %>
-            <div class="flex gap-8 flex-wrap">
-                <% for( const type of buttonTypes ) { %>
-                    <div class="flex col gap-2 align-center text-center">
-                        <div class="flex gap-8">
-                            <button class="btn <%= type.class %> <%= size %>">
-                                <div class="symbol filled"><%= type.icon %></div>
-                                <div class="label"><%= type.label %></div>
-                            </button>
-                        </div>
-                        <small class="text-monospace text-12"><%= type.class %> <%= size %></small>
-                    </div>
+    <%
+        const buttonSizes = ['small', 'default', 'medium', 'large']
+        const buttonTypes = [
+            { class: 'primary', icon: 'add', label: 'Create' },
+            { class: 'secondary', icon: 'pause', label: 'Pause' },
+            { class: 'danger', icon: 'delete', label: 'Delete' },
+            { class: 'tertiary', icon: 'close', label: 'Close' },
+            { class: 'text', icon: 'help', label: 'Need help?' },
+            { class: 'text danger', icon: 'flag', label: 'Report' },
+            { class: 'text secondary', icon: 'close', label: 'Clear' },
+            { class: 'outline', icon: 'help', label: 'Need help?' },
+            { class: 'outline danger', icon: 'error', label: 'Errors' },
+            { class: 'outline secondary', icon: 'refresh', label: 'Refresh' },
+            { class: 'outline tertiary', icon: 'close', label: 'Exit' },
+        ]
+    %>
+    <div class="table-container">
+        <table>
+            <thead>
+                <th></th>
+                <% for( const size of buttonSizes ) { %>
+                    <th class="text-center"><%= size %></th>
                 <% } %>
-            </div>
-        <% } %>
+            </thead>
+            <tbody>
+                <% for( const type of buttonTypes ) { %>
+                    <tr>
+                        <th scope="row"><%= type.class %></th>
+                        <% for( const size of buttonSizes ) { %>
+                            <td class="text-center">
+                                <button class="btn <%= type.class %> <%= size %>">
+                                    <div class="symbol filled"><%= type.icon %></div>
+                                    <div class="label"><%= type.label %></div>
+                                </button>
+                            </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
     </div>
     <h2>Cards</h2>
     <div class="flex col gap-8">

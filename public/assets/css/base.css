@@ -94,6 +94,10 @@
     --c-syntax-keyword: #ff7b72;
     --c-syntax-string: #a5d6ff;
     --c-syntax-variable: #ffa657;
+
+    /* Transition functions */
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 body {
@@ -351,6 +355,79 @@ img {
     user-select: none;
 }
 
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
+    border: 1px solid var(--c-border-default);
+    margin-bottom: 1.5em;
+}
+
+.table-container table {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    /* Force scrolling on small screens */
+    min-width: 500px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+    margin-bottom: 0;
+}
+
+thead {
+    background: var(--c-bg-surface);
+}
+
+th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--c-text-bold);
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--c-border-default);
+    white-space: nowrap;
+}
+
+td,
+tbody th[scope="row"] {
+    padding: 12px 16px;
+    color: var(--c-text-default);
+    border-bottom: 1px solid var(--c-border-subtle);
+    font-size: 15px;
+}
+
+tr:last-child td,
+tr:last-child th[scope="row"] {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--c-base-10);
+}
+
+tbody th[scope="row"] {
+    color: var(--c-text-default);
+    font-weight: 500;
+    text-align: left;
+    vertical-align: middle;
+    padding: 12px 16px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+/* Styling for tables inside cards to avoid double borders */
+.card table {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
 ::selection {
     background: var(--c-accent-80);
     color: black;
@@ -402,15 +479,6 @@ img {
 }
 
 .btn {
-    --bg: var(--c-action-primary);
-    --bgHover: var(--c-action-primary-hover);
-    --fg: var(--c-text-default-inverted);
-    --fgHover: var(--c-text-default-inverted);
-
-    --height: 36px;
-    --textSize: 14px;
-    --padding: 14px;
-
     height: var(--height);
     padding: 0px var(--padding);
     font-family: 'Poppins', sans-serif;
@@ -420,12 +488,12 @@ img {
     background: var(--bg);
     transition: 0.1s ease-in-out;
     color: var(--fg);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: calc(var(--padding) * 0.67);
     user-select: none;
-    border: none;
+    border: 1px solid var(--border);
     cursor: pointer;
     flex-shrink: 0;
     text-align: center;
@@ -455,10 +523,22 @@ img {
     font-size: calc(var(--textSize) * 1.4);
 }
 
+.btn .icon {
+    width: calc(var(--textSize) * 1.4);
+    height: calc(var(--textSize) * 1.4);
+}
+
 .btn.small {
     --height: 28px;
     --textSize: 14px;
     --padding: 12px;
+}
+
+/* default size */
+.btn {
+    --height: 36px;
+    --textSize: 14px;
+    --padding: 14px;
 }
 
 .btn.medium {
@@ -478,6 +558,14 @@ img {
     width: var(--height);
 }
 
+/* default color */
+.btn {
+    --bg: var(--c-action-primary);
+    --bgHover: var(--c-action-primary-hover);
+    --fg: var(--c-text-default-inverted);
+    --fgHover: var(--c-text-default-inverted);
+}
+
 .btn.danger {
     --bg: var(--c-action-danger);
     --bgHover: var(--c-action-danger-hover);
@@ -495,19 +583,37 @@ img {
     --bgHover: var(--c-action-secondary-hover);
 }
 
-.btn.text {
+.btn.outline {
+    --border: var(--fg);
+}
+
+.btn.text,
+.btn.outline {
     --bg: transparent;
     --bgHover: var(--c-action-tertiary);
     --fg: var(--c-action-primary);
     --fgHover: var(--c-action-primary);
 }
 
-.btn.text.secondary {
+.btn.text.secondary,
+.btn.outline.secondary {
     --fg: var(--c-action-secondary);
     --fgHover: var(--c-action-secondary);
 }
 
-.btn.text.danger {
+.btn.text.tertiary {
+    --fg: var(--c-action-secondary);
+    --fgHover: var(--c-action-secondary);
+}
+
+.btn.outline.tertiary {
+    --fg: var(--c-action-secondary);
+    --fgHover: var(--c-action-secondary);
+    --border: var(--c-action-tertiary-hover);
+}
+
+.btn.text.danger,
+.btn.outline.danger {
     --fg: var(--c-action-danger);
     --fgHover: var(--c-action-danger);
 }

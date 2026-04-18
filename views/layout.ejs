@@ -22,8 +22,21 @@
         <script src="/assets/js/layout.js"></script>
     </head>
     <body>
+        
+        <script>
+            // Immediately determine if the sidebar was hidden previously and re-hide it
+            // Do this in a closure to keep global scope clean :)
+            (() => {
+                const isSidebarHidden = window.localStorage.getItem('isSidebarHidden');
+                if (isSidebarHidden === 'true') {
+                    document.body.classList.add('sidebarHidden');
+                }
+            })()
+        </script>
+
+        <div id="sidebarDimming"></div>
         <div id="layout">
-            <div id="sidebar" class="flex col">
+            <div id="sidebar" class="flex col no-select">
                 <div class="top flex justify-center">
                     <span class="text-accent text-20 text-medium"><%= metaSiteName %></span>
                 </div>
@@ -41,7 +54,7 @@
                 </div>
             </div>
             <div id="content">
-                <div id="topbar" class="flex gap-24 align-center">
+                <div id="topbar" class="flex gap-24 align-center no-select">
                     <button id="sidebarToggle" class="btn text circle medium">
                         <span class="symbol">menu</span>
                     </button>
