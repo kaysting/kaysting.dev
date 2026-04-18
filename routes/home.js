@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/home', async (req, res) => {
     res.render('pages/home', { pageId: 'home', pageTitle: 'Home', pageSymbol: 'home' });
 });
 
-router.get('/about', async (req, res) => {
+router.get('/', async (req, res) => {
     res.render('pages/about', {
         pageId: 'about',
         pageTitle: `About me`,

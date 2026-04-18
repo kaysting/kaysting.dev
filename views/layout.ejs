@@ -27,7 +27,8 @@
             // Immediately determine if the sidebar was hidden previously and re-hide it
             // Do this in a closure to keep global scope clean :)
             (() => {
-                const isSidebarHidden = window.localStorage.getItem('isSidebarHidden');
+                // make it hidden by default for now
+                const isSidebarHidden = window.localStorage.getItem('isSidebarHidden') || 'true';
                 if (isSidebarHidden === 'true') {
                     document.body.classList.add('sidebarHidden');
                 }

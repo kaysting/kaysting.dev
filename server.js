@@ -39,7 +39,8 @@ app.locals.tools = {
 };
 
 app.locals.sidebar = [
-    { id: 'home', symbol: 'home', label: 'Home', href: '/' },
+    { id: 'home', symbol: 'home', label: 'Home', href: '/' }
+    /*
     { id: 'about', symbol: 'person', label: 'About me', href: '/about' },
     { id: 'tools', symbol: 'apps', label: 'Tools overview', href: '/tools' },
     { header: 'Tools' },
@@ -49,6 +50,7 @@ app.locals.sidebar = [
         label: tool.name,
         href: tool.href
     }))
+    */
 ];
 
 app.use('/ip', require('./routes/ip'));

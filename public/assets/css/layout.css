@@ -114,7 +114,7 @@ main#page-home {
     transform: rotate(-5deg);
     margin: 16px;
     flex-shrink: 0;
-    align-self: flex-start;
+    align-self: center;
 }
 
 @container (max-width: 750px) {
