@@ -38,7 +38,89 @@ router.get('/about', async (req, res) => {
             }
         ],
 
-        projects: []
+        projects: [
+            {
+                logo: 'osucomplete.png',
+                name: 'osu!complete',
+                desc: `A modern, feature-rich osu! completionist tracker and leaderboard with real-time updates, history tracking, play next algorithm, and more.`,
+                website: 'https://osucomplete.org',
+                github: 'https://github.com/kaysting/osucomplete'
+            },
+            {
+                logo: 'osudl.png',
+                name: 'osu!dl',
+                desc: `The fastest osu! beatmap bulk downloader out there, featuring complex search filtering and unlimited, direct-to-folder bulk downloads.`,
+                website: 'https://osudl.org',
+                github: 'https://github.com/kaysting/osudl'
+            },
+            {
+                symbol: 'cached',
+                name: 'osu-score-cache',
+                desc: `A JSON API and real-time WebSocket providing access to recent passing scores submitted to the osu! servers across all game modes and map statuses.`,
+                website: 'https://osc.kaysting.dev/',
+                github: 'https://github.com/kaysting/osu-score-cache'
+            },
+            {
+                symbol: 'folder_open',
+                name: 'express-file-index',
+                desc: `An Express middleware that serves static files and provides a navigable file index while being lightweight, customizable, and easy to add to existing projects.`,
+                github: 'https://github.com/kaysting/express-file-index'
+            },
+            {
+                symbol: 'robot_2',
+                name: 'discord-chatgpt-v3',
+                desc: `A Discord bot that allows holding natural text conversations with OpenAI models. Uses Discord message history for context, supports file uploads, and more.`,
+                github: 'https://github.com/kaysting/discord-chatgpt-v3'
+            },
+            {
+                logo: 'blahajbot.png',
+                name: 'BlahajBot',
+                desc: `An all-purpose Discord bot created for the TransGamers Discord community, with commands and custom functions for moderation, utility, and fun.`,
+                github: 'https://github.com/kaysting/transgamers/tree/main/leveling-bot'
+            },
+            {
+                symbol: 'speech_to_text',
+                name: 'ai-note-taker',
+                desc: `A simple, client-side webapp that uses OpenAI's whisper and GPT models to transcribe audio and generate notes, summaries, or similar content.`,
+                github: 'https://github.com/kaysting/ai-note-taker'
+            },
+            {
+                symbol: 'network_node',
+                name: 'linux-screen-wrapper',
+                desc: `A wrapper for the Linux screen command that adds friendly, colored command output and the ability to resume sessions with incomplete names.`,
+                github: 'https://github.com/kaysting/linux-screen-wrapper'
+            },
+            {
+                symbol: 'smb_share',
+                name: 'sftp-browser',
+                desc: `A web-based SFTP file browser that makes remote file management easy with its responsive UI and full-featured REST API.`,
+                github: 'https://github.com/kaysting/sftp-browser'
+            },
+            {
+                symbol: 'folder_open',
+                name: 'cyberfiles-lite',
+                desc: `A (not-so) bare-bones file index built to work with Node.js Express and look like GitHub's file browser. Complete with thumbnails, file previewing, and more.`,
+                github: 'https://github.com/kaysting/cyberfiles-lite'
+            },
+            {
+                symbol: 'edit_square',
+                name: 'CyberRename',
+                desc: `A simple plugin for Spigot Minecraft servers that allows players to change the name and lore of their items with commands.`,
+                github: 'https://github.com/kaysting/spigot-rename'
+            },
+            {
+                symbol: 'skull',
+                name: 'CyberDeathMessages',
+                desc: `A Spigot plugin that overrides the default death messages with super customizable ones using the comprehensive config file.`,
+                github: 'https://github.com/kaysting/spigot-deaths'
+            },
+            {
+                symbol: 'edit_location',
+                name: 'CyberTPR',
+                desc: `A simple random teleportation plugin for Spigot Minecraft servers featuring always-safe teleportation and customizeable radius options.`,
+                github: 'https://github.com/kaysting/spigot-tpr'
+            }
+        ]
     });
 });
 

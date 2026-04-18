@@ -3,7 +3,7 @@
         <img class="image" src="/assets/images/kayla-graduation.jpg" alt="Kayla in graduation attire!" />
         <div class="text flex col gap-16">
             <div class="flex col gap-8">
-                <div class="text-accent text-36 text-light">
+                <div class="text-accent text-36 text-light invisible" data-load-animate="0">
                     Hi, I'm <span class="text-bold">Kayla</span>!
                 </div>
                 <%
@@ -22,11 +22,12 @@
                     return age;
                 };
                 %>
-                <p class="no-margin"><%= getAge('2003-01-02') %> &bull; she/her/hers</p>
-                <p class="text-monospace text-secondary">I'm a recent computer science graduate from the University of Houston. Outside of my degree, I've spent the past decade teaching myself full-stack web development, Windows and Linux system administration, and business IT operations through my family's business. I have a passion for building tools and apps people love, and have solo-developed several successful online community projects.</p>
+                <p class="no-margin invisible" data-load-animate="50"><%= getAge('2003-01-02') %> &bull; she/her/hers</p>
+                <p class="text-monospace text-secondary invisible" data-load-animate="100">I'm a recent computer science graduate from the University of Houston. Outside of my degree, I've spent the past decade teaching myself full-stack web development, Windows and Linux system administration, and business IT operations through my family's business. I have a passion for building tools and apps people love, and have solo-developed several successful online community projects.</p>
                 <div class="socials flex gap-8 flex-wrap">
+                    <% let i = 0 %>
                     <% for( const entry of socials ) { %>
-                        <a href="<%= entry.href %>" class="btn small outline tertiary" target="_blank">
+                        <a href="<%= entry.href %>" class="btn small outline tertiary invisible" target="_blank" data-load-animate="<%= 150 + (i * 10) %>">
                             <% if (entry.logo) { %>
                                 <img class="icon" src="/assets/images/social-logos/<%= entry.logo %>.svg" alt="<%= entry.logo %>">
                             <% } else { %>
@@ -34,11 +35,44 @@
                             <% } %>
                             <span class="label"><%= entry.label %></span>
                         </a>
+                        <% i++; %>
                     <% } %>
                 </div>
             </div>
         </div>
     </div>
-    <div class="text-16 text-semibold text-muted">Projects</div>
-    <div class="projects"></div>
+    <div class="flex col gap-16">
+        <div class="text-16 text-semibold text-muted">Projects</div>
+        <div class="projects">
+            <% i = 0 %>
+            <% for( const project of projects ) { %>
+                <div class="card hoverable flex col gap-8 invisible" data-load-animate="<%= 100 + (i * 50) %>">
+                    <div class="flex gap-12 align-center">
+                        <% if (project.logo) { %>
+                            <img class="logo" src="/assets/images/project-logos/<%= project.logo %>" alt="<%= project.logo %>">
+                        <% } else { %>
+                            <span class="symbol text-32 text-accent filled"><%= project.symbol %></span>
+                        <% } %>
+                        <p class="name text-16 text-semibold text-bright"><%= project.name %></p>
+                    </div>
+                    <p class="text-monospace text-14 text-secondary flex-grow no-margin"><%= project.desc %></p>
+                    <div class="flex gap-8 flex-wrap">
+                        <% if (project.website) { %>
+                            <a href="<%= project.website %>" target="_blank" class="btn small">
+                                <span class="symbol">globe</span>
+                                <span class="label">Website</span>
+                            </a>
+                        <% } %>
+                        <% if (project.github) { %>
+                            <a href="<%= project.github %>" target="_blank" class="btn small secondary">
+                                <img src="/assets/images/social-logos/github.svg" class="icon mask">
+                                <span class="label">GitHub</span>
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+                <% i++; %>
+            <% } %>
+        </div>
+    </div>
 </div>

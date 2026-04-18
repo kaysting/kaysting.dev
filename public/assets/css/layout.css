@@ -113,10 +113,8 @@ main#page-home {
     box-shadow: 8px 8px 0px 0px var(--c-accent-80);
     transform: rotate(-5deg);
     margin: 16px;
-}
-
-#page-about .top .text {
-    margin-top: 32px;
+    flex-shrink: 0;
+    align-self: flex-start;
 }
 
 @container (max-width: 750px) {
@@ -133,4 +131,19 @@ main#page-home {
     #page-about .socials {
         justify-content: center;
     }
+}
+
+#page-about .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 8px;
+}
+
+#page-about .projects .logo {
+    width: 32px;
+    height: 32px;
+}
+
+#page-about .projects .card {
+    padding: 12px;
 }
