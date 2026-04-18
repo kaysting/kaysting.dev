@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
             },
             {
                 logo: '16personalities-color',
-                label: 'Kayla (ISFJ-T)',
+                label: 'Kayla (ISTJ-A)',
                 href: 'https://www.16personalities.com/profiles/35b15de7a00c8'
             }
         ],
