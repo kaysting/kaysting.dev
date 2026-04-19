@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
                 github: 'https://github.com/kaysting/osu-score-cache'
             },
             {
-                symbol: 'folder_open',
+                logo: 'express-file-index.png',
                 name: 'express-file-index',
                 desc: `An Express middleware that serves static files and provides a navigable file index while being lightweight, customizable, and easy to add to existing projects.`,
                 github: 'https://github.com/kaysting/express-file-index'
@@ -89,7 +89,8 @@ router.get('/', async (req, res) => {
                 symbol: 'speech_to_text',
                 name: 'ai-note-taker',
                 desc: `A simple, client-side webapp that uses OpenAI's whisper and GPT models to transcribe audio and generate notes, summaries, or similar content.`,
-                github: 'https://github.com/kaysting/ai-note-taker'
+                github: 'https://github.com/kaysting/ai-note-taker',
+                website: 'https://notetaker.cybah.me/'
             },
             {
                 symbol: 'network_node',
@@ -104,7 +105,7 @@ router.get('/', async (req, res) => {
                 github: 'https://github.com/kaysting/sftp-browser'
             },
             {
-                symbol: 'folder_open',
+                symbol: 'folder',
                 name: 'cyberfiles-lite',
                 desc: `A (not-so) bare-bones file index built to work with Node.js Express and look like GitHub's file browser. Complete with thumbnails, file previewing, and more.`,
                 github: 'https://github.com/kaysting/cyberfiles-lite'
