@@ -40,6 +40,13 @@ router.get('/', async (req, res) => {
 
         projects: [
             {
+                logo: 'kaystingdev.png',
+                name: 'kaysting.dev',
+                desc: `This website. My modern, responsive developer portfolio, a growing suite of useful online tools, and a robust, vanilla CSS/JS UI framework.`,
+                website: '/',
+                github: 'https://github.com/kaysting/kaysting.dev'
+            },
+            {
                 logo: 'osucomplete.png',
                 name: 'osu!complete',
                 desc: `A modern, feature-rich osu! completionist tracker and leaderboard with real-time updates, history tracking, play next algorithm, and more.`,
