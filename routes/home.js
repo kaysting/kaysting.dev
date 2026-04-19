@@ -105,6 +105,12 @@ router.get('/', async (req, res) => {
                 github: 'https://github.com/kaysting/sftp-browser'
             },
             {
+                symbol: 'inventory_2',
+                name: 'web-resources',
+                desc: `A collection of several self-built client-side web frameworks and third party libraries and fonts published on GitHub Pages for use in various projects.`,
+                github: 'https://github.com/kaysting/spigot-tpr'
+            },
+            {
                 symbol: 'folder',
                 name: 'cyberfiles-lite',
                 desc: `A (not-so) bare-bones file index built to work with Node.js Express and look like GitHub's file browser. Complete with thumbnails, file previewing, and more.`,
@@ -127,6 +133,60 @@ router.get('/', async (req, res) => {
                 name: 'CyberTPR',
                 desc: `A simple random teleportation plugin for Spigot Minecraft servers featuring always-safe teleportation and customizeable radius options.`,
                 github: 'https://github.com/kaysting/spigot-tpr'
+            },
+            {
+                symbol: 'query_stats',
+                name: 'cyber-system-stats',
+                desc: `An small npm global package that displays system information similar to *fetch utilities.`,
+                github: 'https://github.com/kaysting/system-stats'
+            },
+            {
+                symbol: 'data_alert',
+                name: 'cyber-express-logger',
+                desc: `A simple and colourful request logger middleware for Node.js Express.`,
+                github: 'https://github.com/kaysting/express-logger'
+            },
+            {
+                logo: 'cybertasks.png',
+                name: 'CyberTasks',
+                desc: `A modern and responsive to-do list and task scheduler webapp with centralized server storage and sign-in with Discord.`,
+                github: 'https://github.com/kaysting/CyberTasks'
+            },
+            {
+                symbol: 'movie',
+                name: 'CyberVideoPlayer',
+                desc: `A clean and functional embeddable HTML video player, hosted with Github Pages.`,
+                github: 'https://github.com/kaysting/CyberVideoPlayer'
+            },
+            {
+                symbol: 'folder',
+                name: 'Cyber File Index',
+                desc: `A PHP-based web file index that makes sharing server files easy. This is the first iteration of the several file index sites I go on to develop.`,
+                github: 'https://github.com/kaysting/CyberVideoPlayer'
+            },
+            {
+                logo: 'spotiplayer.png',
+                name: 'SpotiPlayer',
+                desc: `A Rainmeter skin that mimics the appearance and functionality of the Spotify mobile app by connecting to Spotify using Spicetify and WebNowPlaying.`,
+                website: 'https://www.deviantart.com/cybergen49/art/SpotiPlayer-for-Rainmeter-813654412'
+            },
+            {
+                symbol: 'search',
+                name: 'CyberSearch',
+                desc: `An elegant and functional search bar Rainmeter skin, with out-of-box support for Google, Reddit, and YouTube, and the ability to add your own.`,
+                website: 'https://www.deviantart.com/cybergen49/art/CyberSearch-for-Rainmeter-826087442'
+            },
+            {
+                symbol: 'browse_gallery',
+                name: 'CyberCircle Suite',
+                desc: `A suite of soft, circular Rainmeter skins that show time, weather, music, CPU/RAM usage, network usage, and disk capacities.`,
+                website: 'https://www.deviantart.com/cybergen49/art/CyberCircle-Suite-for-Rainmeter-815752935'
+            },
+            {
+                symbol: 'browse_gallery',
+                name: 'CyberPills Suite',
+                desc: `A suite of soft, pill-shaped Rainmeter skins that show time, weather, music, and CPU/RAM usage.`,
+                website: 'https://www.deviantart.com/cybergen49/art/CyberPills-Suite-for-Rainmeter-813857071'
             }
         ]
     });
