@@ -39,9 +39,9 @@ app.locals.tools = {
 };
 
 app.locals.sidebar = [
-    { id: 'home', symbol: 'home', label: 'Home', href: '/' }
+    { id: 'about', symbol: 'person', label: 'About me', href: '/' }
     /*
-    { id: 'about', symbol: 'person', label: 'About me', href: '/about' },
+    { id: 'home', symbol: 'home', label: 'Home', href: '/' }
     { id: 'tools', symbol: 'apps', label: 'Tools overview', href: '/tools' },
     { header: 'Tools' },
     ...Object.entries(app.locals.tools).map(([id, tool]) => ({
