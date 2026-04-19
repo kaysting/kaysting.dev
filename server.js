@@ -28,6 +28,7 @@ app.locals.metaTitle = 'Welcome to kaysting.dev!';
 app.locals.metaSiteName = 'kaysting.dev';
 app.locals.metaDescription = `The personal website of Kayla Kersting. Explore her portfolio or check out this site's growing suite of useful tools.`;
 app.locals.metaThemeColor = '#ebadc2';
+app.locals.metaImage = '';
 
 app.locals.tools = {
     uitest: {
