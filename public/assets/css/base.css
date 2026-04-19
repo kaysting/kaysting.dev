@@ -15,6 +15,8 @@
     --c-success-sat: 60%;
 
     /* Color palettes */
+    --c-base-0: hsl(var(--c-base-hue), var(--c-base-sat), 0%);
+    --c-base-5: hsl(var(--c-base-hue), var(--c-base-sat), 5%);
     --c-base-8: hsl(var(--c-base-hue), var(--c-base-sat), 8%);
     --c-base-10: hsl(var(--c-base-hue), var(--c-base-sat), 10%);
     --c-base-12: hsl(var(--c-base-hue), var(--c-base-sat), 12%);
@@ -67,7 +69,9 @@
     --c-text-default-inverted: var(--c-base-10);
 
     /* Background colors */
+    --c-bg-negative: var(--c-base-5);
     --c-bg-base: var(--c-base-8);
+    --c-bg-subsurface: var(--c-base-10);
     --c-bg-surface: var(--c-base-12);
 
     /* Border colors */
@@ -514,63 +518,6 @@ tbody th[scope="row"] {
     transition: none;
 }
 
-.btn:disabled,
-.btn.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.btn .symbol {
-    font-size: calc(var(--textSize) * 1.4);
-}
-
-.btn .icon {
-    width: calc(var(--textSize) * 1.4);
-    height: calc(var(--textSize) * 1.4);
-}
-
-.btn .icon.mask {
-    font-family: sans-serif;
-    background-color: currentColor;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-position: center;
-    mask-position: center;
-    content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
-}
-
-.btn.small {
-    --height: 28px;
-    --textSize: 14px;
-    --padding: 12px;
-}
-
-/* default size */
-.btn {
-    --height: 36px;
-    --textSize: 14px;
-    --padding: 14px;
-}
-
-.btn.medium {
-    --height: 40px;
-    --textSize: 15px;
-    --padding: 16px;
-}
-
-.btn.large {
-    --height: 48px;
-    --textSize: 16px;
-    --padding: 20px;
-}
-
-.btn.circle {
-    --padding: 0px;
-    width: var(--height);
-}
-
 /* default color */
 .btn {
     --bg: var(--c-action-primary);
@@ -629,6 +576,143 @@ tbody th[scope="row"] {
 .btn.outline.danger {
     --fg: var(--c-action-danger);
     --fgHover: var(--c-action-danger);
+}
+
+/* default size */
+.btn.small,
+.textbox.small {
+    --height: 28px;
+    --textSize: 14px;
+    --padding: 12px;
+}
+
+.btn,
+.textbox {
+    --height: 36px;
+    --textSize: 14px;
+    --padding: 14px;
+}
+
+.btn.medium,
+.textbox.medium {
+    --height: 40px;
+    --textSize: 15px;
+    --padding: 16px;
+}
+
+.btn.large,
+.textbox.large {
+    --height: 48px;
+    --textSize: 16px;
+    --padding: 20px;
+}
+
+.btn.circle {
+    --padding: 0px;
+    width: var(--height);
+}
+
+.btn:disabled,
+.btn.disabled,
+.textbox:disabled,
+.textbox.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn>.symbol,
+.textbox>.symbol {
+    font-size: calc(var(--textSize) * 1.4);
+}
+
+.btn>.icon,
+.textbox>.icon {
+    width: calc(var(--textSize) * 1.4);
+    height: calc(var(--textSize) * 1.4);
+}
+
+.btn>.icon.mask,
+.textbox>.icon.mask {
+    font-family: sans-serif;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+    content: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+}
+
+.textbox {
+    height: var(--height);
+    padding: 0px var(--padding);
+    border-radius: calc(var(--height) / 2);
+    background: var(--c-bg-negative);
+    border: 1px solid var(--c-border-default);
+    color: var(--c-text-secondary);
+    font-size: var(--textSize);
+    transition: 0.1s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    gap: calc(var(--padding) * 0.67);
+    align-items: center;
+}
+
+.textbox:focus-within {
+    border-color: var(--c-action-primary);
+}
+
+.textbox>input,
+.textbox>textarea {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--textSize);
+    line-height: 1.5;
+    color: var(--c-text-default);
+    flex-grow: 1;
+    resize: none;
+}
+
+.textbox>input::placeholder,
+.textbox>textarea::placeholder {
+    color: var(--c-text-muted);
+}
+
+.textbox>input:disabled,
+.textbox>textarea:disabled {
+    cursor: not-allowed;
+}
+
+.textbox.dynamic {
+    height: auto;
+}
+
+.textbox.dynamic>input,
+.textbox.dynamic>textarea {
+    padding: calc(var(--padding) * 0.75) 0px;
+}
+
+.textbox.text {
+    cursor: text;
+}
+
+.textbox.pointer {
+    cursor: pointer;
+}
+
+.textbox>label {
+    font-weight: 500;
+    flex-shrink: 0;
+    font-size: calc(var(--textSize) * 0.8)
 }
 
 .card {
