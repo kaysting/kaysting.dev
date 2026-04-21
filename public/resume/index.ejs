@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Resume</title>
+        <title>Resume (<%= target %>)</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/assets/css/utils.css" />
         <link rel="stylesheet" href="/assets/css/material-symbols.css" />
         <link rel="stylesheet" href="/resume/index.css" />
+        <script src="/assets/js/base.js"></script>
     </head>
     <body>
         <main class="flex col gap-24">
@@ -24,7 +25,7 @@
                     <% for (const chip of data.chips) { %>
                         <div class="chip flex gap-8 align-center">
                             <% if (chip.symbol) { %>
-                                <div class="symbol"><%= chip.symbol %></div>
+                                <img class="img-mask" src="/resume/symbols/<%= chip.symbol %>.svg" aria-hidden="true" />
                             <% } else if (chip.icon) { %>
                                 <img src="<%= chip.icon %>" class="icon">
                             <% } %>
@@ -39,8 +40,9 @@
             </div>
             <div>
                 <div class="header">
-                    <!-- symbol: school -->
-                    <div class="symbol">&#xe80c;</div> 
+                    <div class="icon">
+                        <img class="img-mask" src="/resume/symbols/school.svg" aria-hidden="true" />
+                    </div>
                     <div class="text">Education</div>
                 </div>
                 <div class="section">
@@ -53,8 +55,9 @@
                     <% } %>
                 </div>
                 <div class="header">
-                    <!-- symbol: school -->
-                    <div class="symbol">&#xfff8b;</div> 
+                    <div class="icon">
+                        <img class="img-mask" src="/resume/symbols/code_xml.svg" aria-hidden="true" />
+                    </div>
                     <div class="text">Technical Skills</div>
                 </div>
                 <div class="section">
@@ -68,15 +71,16 @@
                     </div>
                 </div>
                 <div class="header">
-                    <!-- symbol: school -->
-                    <div class="symbol">&#xeb3f;</div> 
+                    <div class="icon">
+                        <img class="img-mask" src="/resume/symbols/business_center.svg" aria-hidden="true" />
+                    </div>
                     <div class="text">Professional Experience</div>
                 </div>
                 <div class="section">
                     <% for (const entry of data.employment) { %>
                         <div class="content">
-                            <div class="accent"><%= entry.start %> - <%= entry.end %> at <%= entry.company %> <%= entry.location ? `in ${entry.location}` : '' %></div>
                             <div class="title"><%= entry.title %></div>
+                            <div class="accent"><%= entry.start %> - <%= entry.end %> at <%= entry.company %> <%= entry.location ? `in ${entry.location}` : '' %></div>
                             <% if (typeof entry.description == 'object') { %>
                                 <ul>
                                     <% for (const item of entry.description) { %>
@@ -90,15 +94,16 @@
                     <% } %>
                 </div>
                 <div class="header">
-                    <!-- symbol: school -->
-                    <div class="symbol">&#xeb9b;</div> 
+                    <div class="icon">
+                        <img class="img-mask" src="/resume/symbols/rocket_launch.svg" aria-hidden="true" />
+                    </div>
                     <div class="text">Key Projects</div>
                 </div>
                 <div class="section">
                     <% for (const entry of data.projects) { %>
                         <div class="content">
-                            <div class="accent"><%= entry.stack %></div>
                             <div class="title"><%= entry.name %></div>
+                            <div class="accent"><%= entry.stack %></div>
                             <% if (typeof entry.description == 'object') { %>
                                 <ul>
                                     <% for (const item of entry.description) { %>

@@ -45,21 +45,14 @@ ul {
 }
 
 ul li {
-    position: relative;
     line-height: 1.2;
-    padding-left: 2em;
     margin-bottom: 0.3em;
+    list-style-type: disc;
+    margin-left: 1.5em;
 }
 
-ul li::before {
-    content: '❯';
-    font-family: 'Material Symbols Rounded';
+ul li::marker {
     color: var(--c-text-secondary);
-    position: absolute;
-    left: 7pt;
-    top: calc(50% - 2pt);
-    transform: translateY(-50%);
-    font-size: 12pt;
 }
 
 #title {
@@ -71,6 +64,7 @@ ul li::before {
 #subtitle {
     font-size: 10pt;
     color: var(--c-text-secondary);
+    white-space: nowrap
 }
 
 #chips .chip {
@@ -80,8 +74,10 @@ ul li::before {
     background: var(--c-chip-bg);
 }
 
-#chips .chip .symbol {
+#chips .chip .img-mask {
     font-size: 12pt;
+    width: 12pt;
+    height: 12pt;
     color: var(--c-text-secondary)
 }
 
@@ -106,16 +102,20 @@ ul li::before {
     align-items: center;
 }
 
-.header .symbol {
+.header .icon {
     width: 30pt;
     height: 30pt;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18pt;
     border-radius: 100px;
     color: var(--c-chip-bg);
     background: var(--c-text-secondary);
+}
+
+.header .icon .img-mask {
+    width: 18pt;
+    height: 18pt;
 }
 
 .header .text {
@@ -137,18 +137,6 @@ ul li::before {
     line-height: 1.4;
     position: relative;
 }
-
-/* .content::before {
-    width: 10pt;
-    height: 10pt;
-    border-radius: 4pt;
-    background: var(--c-text-secondary);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -22pt;
-    content: '';
-} */
 
 .content .title {
     font-weight: bold;

@@ -39,7 +39,6 @@ router.use((req, res, next) => {
         case '.ejs': {
             // Render EJS files
             return res.render(filePath, {
-                data: req.data,
                 query: req.query,
                 body: req.body
             });

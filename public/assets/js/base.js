@@ -1,5 +1,5 @@
 const initSvgIconMasks = () => {
-    document.querySelectorAll('img.icon.mask').forEach(img => {
+    document.querySelectorAll('img.icon.mask, .img-mask').forEach(img => {
         const src = img.getAttribute('src');
         img.style.webkitMaskImage = `url(${src})`;
         img.style.maskImage = `url(${src})`;
