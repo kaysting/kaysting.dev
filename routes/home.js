@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         pageTitle: `About me`,
         pageSymbol: 'person',
         metaTitle: `Hi, I'm Kayla!`,
-        metaDescription: `I'm a recent CS grad who's spent the past decade teaching myself full-stack web development, system administration, and IT operations through my family's business. I have a passion for building things people love, having solo-developed several successful projects. Click to see my full portfolio!`,
+        metaDescription: `I'm a recent CS grad and mostly self-taught full-stack web developer, system administrator, and IT operations specialist. Click to see my full portfolio!`,
         metaImage: '/assets/images/social.png',
 
         socials: [
