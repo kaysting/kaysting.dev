@@ -57,7 +57,7 @@
                         <% if (item.header) { %>
                             <div class="header text-14 text-muted text-bold"><%= item.header %></div>
                         <% } else { %>
-                            <a href="<%= item.href %>" class="btn <%= item.id == pageId ? 'tertiary' : 'text secondary' %> justify-start">
+                            <a href="<%= item.href %>" class="btn <%= item.id == pageId ? '' : 'text secondary' %> justify-start">
                                 <span class="symbol filled"><%= item.symbol %></span>
                                 <span class="label"><%= item.label %></span>
                             </a>

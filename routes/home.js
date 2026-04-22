@@ -45,21 +45,24 @@ router.get('/', async (req, res) => {
                 name: 'kaysting.dev',
                 desc: `This website. My modern, responsive developer portfolio, a growing suite of useful online tools, and a robust, vanilla CSS/JS UI framework.`,
                 website: '/',
-                github: 'https://github.com/kaysting/kaysting.dev'
+                github: 'https://github.com/kaysting/kaysting.dev',
+                active: true
             },
             {
                 logo: 'osucomplete.png',
                 name: 'osu!complete',
                 desc: `A modern, feature-rich osu! completionist tracker and leaderboard with real-time updates, history tracking, play next algorithm, and more.`,
                 website: 'https://osucomplete.org',
-                github: 'https://github.com/kaysting/osucomplete'
+                github: 'https://github.com/kaysting/osucomplete',
+                active: true
             },
             {
                 logo: 'osudl.png',
                 name: 'osu!dl',
                 desc: `The fastest osu! beatmap bulk downloader out there, featuring complex search filtering and unlimited, direct-to-folder bulk downloads.`,
                 website: 'https://osudl.org',
-                github: 'https://github.com/kaysting/osudl'
+                github: 'https://github.com/kaysting/osudl',
+                active: true
             },
             {
                 symbol: 'cached',
@@ -197,8 +200,8 @@ router.get('/tools', async (req, res) => {
     res.render('pages/tools', { pageId: 'tools', pageTitle: 'Tools', pageSymbol: 'apps' });
 });
 
-router.get('/test', async (req, res) => {
-    res.render('pages/tools/uitest', { pageId: 'uitest', pageTitle: 'UI Test Page', pageSymbol: 'palette' });
+router.get('/tools/uitest', async (req, res) => {
+    res.render('pages/tools/uitest');
 });
 
 module.exports = router;
