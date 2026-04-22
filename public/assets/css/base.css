@@ -664,8 +664,8 @@ tbody th[scope="row"] {
     border-color: var(--c-action-primary);
 }
 
-.textbox>input,
-.textbox>textarea {
+.textbox input,
+.textbox textarea {
     height: 100%;
     width: 100%;
     outline: none;
@@ -682,13 +682,13 @@ tbody th[scope="row"] {
     resize: none;
 }
 
-.textbox>input::placeholder,
-.textbox>textarea::placeholder {
+.textbox input::placeholder,
+.textbox textarea::placeholder {
     color: var(--c-text-muted);
 }
 
-.textbox>input:disabled,
-.textbox>textarea:disabled {
+.textbox input:disabled,
+.textbox textarea:disabled {
     cursor: not-allowed;
 }
 
@@ -696,8 +696,8 @@ tbody th[scope="row"] {
     height: auto;
 }
 
-.textbox.dynamic>input,
-.textbox.dynamic>textarea {
+.textbox.dynamic input,
+.textbox.dynamic textarea {
     padding: calc(var(--padding) * 0.75) 0px;
 }
 
@@ -709,10 +709,23 @@ tbody th[scope="row"] {
     cursor: pointer;
 }
 
-.textbox>label {
+.textbox label {
     font-weight: 500;
     flex-shrink: 0;
     font-size: calc(var(--textSize) * 0.8)
+}
+
+.textbox>.vertical {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: calc(var(--padding) * 0.6);
+}
+
+.textbox>.vertical>input,
+.textbox>.vertical>textarea {
+    padding-top: calc(var(--padding) * 0.2);
+    padding-bottom: calc(var(--padding) * 0.5);
 }
 
 .card {
