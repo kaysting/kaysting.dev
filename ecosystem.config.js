@@ -1,3 +1,11 @@
 module.exports = {
-    apps: [{ name: 'kaysting.dev', script: 'node', args: 'server.js', cwd: './', watch: ['server.js', 'routes'] }]
+    apps: [
+        {
+            name: 'kaysting.dev',
+            script: 'node',
+            args: 'server.js',
+            cwd: './',
+            watch: ['server.js', 'routes', 'data/*.js']
+        }
+    ]
 };

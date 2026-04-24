@@ -12,12 +12,15 @@
         const buttonTypes = [
             { class: 'primary', icon: 'add', label: 'Create' },
             { class: 'secondary', icon: 'pause', label: 'Pause' },
+            { class: 'success', icon: 'check', label: 'Confirm' },
             { class: 'danger', icon: 'delete', label: 'Delete' },
             { class: 'tertiary', icon: 'close', label: 'Close' },
             { class: 'text', icon: 'help', label: 'Need help?' },
+            { class: 'text success', icon: 'favorite', label: 'Favorite' },
             { class: 'text danger', icon: 'flag', label: 'Report' },
             { class: 'text secondary', icon: 'close', label: 'Clear' },
             { class: 'outline', icon: 'help', label: 'Need help?' },
+            { class: 'outline success', icon: 'check', label: 'Accept' },
             { class: 'outline danger', icon: 'error', label: 'Errors' },
             { class: 'outline secondary', icon: 'refresh', label: 'Refresh' },
             { class: 'outline tertiary', icon: 'close', label: 'Exit' },
@@ -75,11 +78,11 @@
                 <label>H</label>
                 <input type="number" placeholder="0">
             </div>
-            <div class="textbox" style="width: 100px">
+            <div class="textbox danger" style="width: 100px">
                 <label>S</label>
                 <input type="number" placeholder="0">
             </div>
-            <div class="textbox" style="width: 100px">
+            <div class="textbox success" style="width: 100px">
                 <label>L</label>
                 <input type="number" placeholder="0">
             </div>
@@ -99,15 +102,15 @@
         <div class="textbox dynamic" style="width: 600px">
             <textarea placeholder="Write an essay" rows="3"></textarea>
         </div>
-        <div class="flex row gap-8 flex-wrap">
-            <div class="textbox medium dynamic" style="width: 300px">
+        <div class="grid-dynamic justify-center">
+            <div class="textbox medium dynamic">
                 <span class="symbol">person</span>
                 <div class="vertical">
                     <label for="">Name</label>
                     <input type="text" name="" id="" placeholder="Kayla">
                 </div>
             </div>
-            <div class="textbox medium dynamic" style="width: 300px">
+            <div class="textbox medium dynamic">
                 <div class="vertical">
                     <label for="">User ID</label>
                     <input type="text" name="" id="" placeholder="12345">

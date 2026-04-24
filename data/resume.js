@@ -1,13 +1,5 @@
-const express = require('express');
-
-const router = express.Router();
-
-router.get('/', (req, res, next) => {
-    const target = req.query.target || 'general';
-
-    res.locals.target = target;
-
-    res.locals.data = {
+module.exports = (target = 'generic') => {
+    const data = {
         title: 'Kayla Kersting',
         subtitle: 'Computer Science Graduate | Full-Stack Developer | System Administrator',
         chips: [
@@ -54,8 +46,8 @@ router.get('/', (req, res, next) => {
 
     switch (target) {
         case 'backend': {
-            res.locals.data.subtitle = 'Backend Software Engineer | Node.js Developer | Systems Architecture';
-            res.locals.data.skills = [
+            data.subtitle = 'Backend Software Engineer | Node.js Developer | Systems Architecture';
+            data.skills = [
                 {
                     type: 'Backend & Frameworks',
                     content: `Node.js, Express.js, Socket.io, HTMX, EJS, Discord.js`
@@ -73,7 +65,7 @@ router.get('/', (req, res, next) => {
                     content: `Git, GitHub, REST APIs, WebSockets, JSON/YAML, PM2, Cloudflare R2`
                 }
             ];
-            res.locals.data.employment = [
+            data.employment = [
                 {
                     title: 'Backend Software Engineer',
                     company: 'Independent Contracting',
@@ -87,7 +79,7 @@ router.get('/', (req, res, next) => {
                     ]
                 }
             ];
-            res.locals.data.projects = [
+            data.projects = [
                 {
                     name: 'osu!complete',
                     stack: 'Node.js, Express, SQLite, HTMX, vanilla CSS/JS',
@@ -112,8 +104,8 @@ router.get('/', (req, res, next) => {
             break;
         }
         case 'it': {
-            res.locals.data.subtitle = 'IT Operations Specialist | Systems Administrator | Network Infrastructure';
-            res.locals.data.skills = [
+            data.subtitle = 'IT Operations Specialist | Systems Administrator | Network Infrastructure';
+            data.skills = [
                 {
                     type: 'Infrastructure & Networking',
                     content: `Debian Linux, Cloudflare (DNS, Tunnels, R2 Storage), Tailscale, Samba, Apache, PM2, Docker, Port Forwarding`
@@ -131,7 +123,7 @@ router.get('/', (req, res, next) => {
                     content: `Bash, Windows Batch, Git, Screen, tmux`
                 }
             ];
-            res.locals.data.employment = [
+            data.employment = [
                 jobTHP,
                 {
                     title: 'Systems Administrator',
@@ -145,7 +137,7 @@ router.get('/', (req, res, next) => {
                     ]
                 }
             ];
-            res.locals.data.projects = [
+            data.projects = [
                 {
                     name: 'Sappho & Lesbos Production Servers',
                     stack: 'Ubuntu Server, Cloudflare Tunnel, Tailscale, Samba',
@@ -160,8 +152,8 @@ router.get('/', (req, res, next) => {
             break;
         }
         case 'fullstack': {
-            res.locals.data.subtitle = 'Full-Stack Software Engineer | Product Engineer';
-            res.locals.data.skills = [
+            data.subtitle = 'Full-Stack Software Engineer | Product Engineer';
+            data.skills = [
                 {
                     type: 'Frontend',
                     content: `HTMX, EJS, HTML5/CSS3, Vanilla JavaScript (ES6+), WebSockets`
@@ -179,7 +171,7 @@ router.get('/', (req, res, next) => {
                     content: `Debian Linux, Cloudflare (Tunnels, R2 Storage), Tailscale, PM2, Git`
                 }
             ];
-            res.locals.data.employment = [
+            data.employment = [
                 {
                     title: 'Full-Stack Software Engineer',
                     company: 'Independent Contracting',
@@ -193,7 +185,7 @@ router.get('/', (req, res, next) => {
                 },
                 jobTHP
             ];
-            res.locals.data.projects = [
+            data.projects = [
                 {
                     name: 'osu!complete',
                     stack: 'Node.js, Express, SQLite, HTMX, vanilla CSS/JS',
@@ -202,13 +194,13 @@ router.get('/', (req, res, next) => {
                 {
                     name: 'osu!dl',
                     stack: 'Node.js, Express, SQLite, HTMX, vanilla CSS/JS, Axios',
-                    description: `Engineered a backend mirror and bulk downloader utilizing Node.js, SQLite, Axios, and Cloudflare R2 object storage, successfully handling the distribution of over 15 TB of user-downloaded data.`
+                    description: `Engineered a backend mirror and bulk downloader utilizing Node.js, SQLite, Axios, and Cloudflare R2 object storage, successfully handling the distribution of over 15 TB of user-downloaded data. mneow`
                 }
             ];
             break;
         }
         default: {
-            res.locals.data.employment = [
+            data.employment = [
                 {
                     title: 'Full Stack Developer & System Administrator',
                     company: 'Independent Contracting',
@@ -223,7 +215,7 @@ router.get('/', (req, res, next) => {
                 },
                 jobTHP
             ];
-            res.locals.data.skills = [
+            data.skills = [
                 { type: 'Languages', content: `JavaScript (ES6+), SQL, HTML5, CSS3, Java, PHP, Bash, Python` },
                 { type: 'Backend & Frameworks', content: `Node.js, Express.js, Socket.io, HTMX, EJS, Discord.js` },
                 {
@@ -239,7 +231,7 @@ router.get('/', (req, res, next) => {
                     content: 'Git, GitHub (Version Control), SSH, (S)FTP, REST APIs, WebSockets, JSON/YAML'
                 }
             ];
-            res.locals.data.projects = [
+            data.projects = [
                 {
                     name: 'osu!complete - High-performance leaderboard tracker',
                     stack: 'Node.js, SQLite, Express, Socket.io, EJS, HTMX',
@@ -254,7 +246,5 @@ router.get('/', (req, res, next) => {
         }
     }
 
-    next();
-});
-
-module.exports = router;
+    return data;
+};

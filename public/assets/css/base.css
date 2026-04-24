@@ -40,18 +40,27 @@
     --c-base-90: hsl(var(--c-base-hue), var(--c-base-sat), 90%);
     --c-base-100: hsl(var(--c-base-hue), var(--c-base-sat), 100%);
 
+    --c-accent-20: hsl(var(--c-accent-hue), var(--c-accent-sat), 20%);
+    --c-accent-30: hsl(var(--c-accent-hue), var(--c-accent-sat), 30%);
+    --c-accent-40: hsl(var(--c-accent-hue), var(--c-accent-sat), 40%);
     --c-accent-50: hsl(var(--c-accent-hue), var(--c-accent-sat), 50%);
     --c-accent-60: hsl(var(--c-accent-hue), var(--c-accent-sat), 60%);
     --c-accent-70: hsl(var(--c-accent-hue), var(--c-accent-sat), 70%);
     --c-accent-80: hsl(var(--c-accent-hue), var(--c-accent-sat), 80%);
     --c-accent-90: hsl(var(--c-accent-hue), var(--c-accent-sat), 90%);
 
+    --c-danger-20: hsl(var(--c-danger-hue), var(--c-danger-sat), 20%);
+    --c-danger-30: hsl(var(--c-danger-hue), var(--c-danger-sat), 30%);
+    --c-danger-40: hsl(var(--c-danger-hue), var(--c-danger-sat), 40%);
     --c-danger-50: hsl(var(--c-danger-hue), var(--c-danger-sat), 50%);
     --c-danger-60: hsl(var(--c-danger-hue), var(--c-danger-sat), 60%);
     --c-danger-70: hsl(var(--c-danger-hue), var(--c-danger-sat), 70%);
     --c-danger-80: hsl(var(--c-danger-hue), var(--c-danger-sat), 80%);
     --c-danger-90: hsl(var(--c-danger-hue), var(--c-danger-sat), 90%);
 
+    --c-success-20: hsl(var(--c-success-hue), var(--c-success-sat), 20%);
+    --c-success-30: hsl(var(--c-success-hue), var(--c-success-sat), 30%);
+    --c-success-40: hsl(var(--c-success-hue), var(--c-success-sat), 40%);
     --c-success-50: hsl(var(--c-success-hue), var(--c-success-sat), 50%);
     --c-success-60: hsl(var(--c-success-hue), var(--c-success-sat), 60%);
     --c-success-70: hsl(var(--c-success-hue), var(--c-success-sat), 70%);
@@ -87,6 +96,8 @@
     --c-action-tertiary-hover: var(--c-base-40);
     --c-action-danger: var(--c-danger-70);
     --c-action-danger-hover: var(--c-danger-80);
+    --c-action-success: var(--c-success-60);
+    --c-action-success-hover: var(--c-success-50);
 
     /* Syntax Highlighting */
     --c-syntax-comment: #8b949e;
@@ -426,11 +437,42 @@ tbody th[scope="row"] {
     font-size: 14px;
 }
 
-/* Styling for tables inside cards to avoid double borders */
 .card table {
     border: none;
     border-radius: 0;
     margin-bottom: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator,
+input[type="week"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }
 
 ::selection {
@@ -531,6 +573,11 @@ tbody th[scope="row"] {
     --bgHover: var(--c-action-danger-hover);
 }
 
+.btn.success {
+    --bg: var(--c-action-success);
+    --bgHover: var(--c-action-success-hover);
+}
+
 .btn.tertiary {
     --bg: var(--c-action-tertiary);
     --bgHover: var(--c-action-tertiary-hover);
@@ -576,6 +623,12 @@ tbody th[scope="row"] {
 .btn.outline.danger {
     --fg: var(--c-action-danger);
     --fgHover: var(--c-action-danger);
+}
+
+.btn.text.success,
+.btn.outline.success {
+    --fg: var(--c-action-success);
+    --fgHover: var(--c-action-success);
 }
 
 /* default size */
@@ -645,11 +698,12 @@ tbody th[scope="row"] {
 }
 
 .textbox {
+    --textbox-border: var(--c-border-default);
     height: var(--height);
     padding: 0px var(--padding);
     border-radius: calc(var(--height) / 2);
     background: var(--c-bg-negative);
-    border: 1px solid var(--c-border-default);
+    border: 1px solid var(--textbox-border);
     color: var(--c-text-secondary);
     font-size: var(--textSize);
     transition: 0.1s ease-in-out;
@@ -660,8 +714,25 @@ tbody th[scope="row"] {
     align-items: center;
 }
 
+.textbox.danger {
+    --textbox-border: var(--c-action-danger);
+}
+
+.textbox.success {
+    --textbox-border: var(--c-action-success);
+}
+
 .textbox:focus-within {
-    border-color: var(--c-action-primary);
+    --textbox-border: var(--c-action-primary);
+    box-shadow: 0px 0px 0px 1px var(--textbox-border);
+}
+
+.textbox.danger:focus-within {
+    --textbox-border: var(--c-action-danger);
+}
+
+.textbox.success:focus-within {
+    --textbox-border: var(--c-action-success);
 }
 
 .textbox input,

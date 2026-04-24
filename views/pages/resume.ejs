@@ -11,7 +11,7 @@
             rel="stylesheet" />
         <link rel="stylesheet" href="/assets/css/utils.css" />
         <link rel="stylesheet" href="/assets/css/material-symbols.css" />
-        <link rel="stylesheet" href="/resume/index.css" />
+        <link rel="stylesheet" href="/assets/css/resume.css" />
         <script src="/assets/js/base.js"></script>
     </head>
     <body>
@@ -25,7 +25,7 @@
                     <% for (const chip of data.chips) { %>
                         <div class="chip flex gap-8 align-center">
                             <% if (chip.symbol) { %>
-                                <img class="img-mask" src="/resume/symbols/<%= chip.symbol %>.svg" aria-hidden="true" />
+                                <img class="img-mask" src="/assets/images/material-symbols/<%= chip.symbol %>.svg" aria-hidden="true" />
                             <% } else if (chip.icon) { %>
                                 <img src="<%= chip.icon %>" class="icon">
                             <% } %>
@@ -41,7 +41,7 @@
             <div>
                 <div class="header">
                     <div class="icon">
-                        <img class="img-mask" src="/resume/symbols/school.svg" aria-hidden="true" />
+                        <img class="img-mask" src="/assets/images/material-symbols/school.svg" aria-hidden="true" />
                     </div>
                     <div class="text">Education</div>
                 </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="header">
                     <div class="icon">
-                        <img class="img-mask" src="/resume/symbols/code_xml.svg" aria-hidden="true" />
+                        <img class="img-mask" src="/assets/images/material-symbols/code_xml.svg" aria-hidden="true" />
                     </div>
                     <div class="text">Technical Skills</div>
                 </div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="header">
                     <div class="icon">
-                        <img class="img-mask" src="/resume/symbols/business_center.svg" aria-hidden="true" />
+                        <img class="img-mask" src="/assets/images/material-symbols/business_center.svg" aria-hidden="true" />
                     </div>
                     <div class="text">Professional Experience</div>
                 </div>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="header">
                     <div class="icon">
-                        <img class="img-mask" src="/resume/symbols/rocket_launch.svg" aria-hidden="true" />
+                        <img class="img-mask" src="/assets/images/material-symbols/rocket_launch.svg" aria-hidden="true" />
                     </div>
                     <div class="text">Key Projects</div>
                 </div>

@@ -43,7 +43,7 @@
     </div>
     <div class="flex col gap-16">
         <div class="text-16 text-semibold text-muted">Projects</div>
-        <div class="projects">
+        <div class="projects grid-dynamic" style="--size: 250px">
             <% i = 0 %>
             <% for( const project of projects ) { %>
                 <div class="card hoverable flex col gap-8 invisible" data-load-animate="<%= 100 + (i * 50) %>">
