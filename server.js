@@ -23,7 +23,25 @@ app.use(layouts);
 app.use(express.static('public'));
 
 app.use(require('./routes/generic'));
-app.use(require('./routes/errors'));
+
+app.use((req, res) => {
+    res.render('pages/error', {
+        code: 404,
+        message: `The resource you requested couldn't be found.`,
+        pageSymbol: 'error',
+        pageTitle: 'Error 404'
+    });
+});
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.render('pages/error', {
+        code: 500,
+        message: `An internal server error occurred. Please try again later and report this issue to kayla@kaysting.dev if it continues.`,
+        pageSymbol: 'error',
+        pageTitle: 'Error 500'
+    });
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
