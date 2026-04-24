@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkScroll();
 
     document.querySelector('#sidebarToggle').addEventListener('click', () => {
-        if (window.innerWidth > 1000) {
+        if (window.innerWidth > 1400) {
             const isCurrentlyHidden = document.body.classList.contains('sidebarHidden');
             const newState = !isCurrentlyHidden;
             window.localStorage.setItem('isSidebarHidden', newState.toString());

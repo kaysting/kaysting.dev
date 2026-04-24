@@ -7,6 +7,8 @@ const layouts = require('express-ejs-layouts');
 const app = express();
 app.set('view engine', 'ejs');
 
+Object.assign(app.locals, require('./data/globals'));
+
 app.use((req, res, next) => {
     const forwardHosts = ['simplecyber.org', 'www.simplecyber.org', 'cybah.me', 'www.cybah.me'];
     if (forwardHosts.includes(req.headers.host)) {
@@ -19,8 +21,6 @@ app.use((req, res, next) => {
 
 app.use(layouts);
 app.use(express.static('public'));
-
-Object.assign(app.locals, require('./data/globals'));
 
 app.use(require('./routes/generic'));
 app.use(require('./routes/errors'));
