@@ -118,6 +118,37 @@
             </div>
         </div>
     </div>
+    <h2>Dropdowns</h2>
+    <button id="showDropdown" class="btn medium">
+        <span class="label">Click for a dropdown</span>
+        <span class="symbol">expand_more</span>
+    </button>
+    <button id="showDropdown2" class="btn medium">
+        <span class="label">Click for a long dropdown</span>
+        <span class="symbol">expand_more</span>
+    </button>
+    <script>
+        $('#showDropdown').addEventListener('click', async() => {
+            const clicked = await showDropdown($('#showDropdown'), [
+                { symbol: 'settings', label: 'Item 1' },
+                { symbol: 'settings', label: 'Item 2', selected: true },
+                { separator: true },
+                { label: 'This option has a really long label to demonstrate overflow and other fun things', value: 'overflowTest' },
+            ])
+            console.log(clicked)
+        })
+        
+        let dropdown2selection = 0;
+        $('#showDropdown2').addEventListener('click', async() => {
+            const items = [];
+            for (let i = 0; i < 100; i++) {
+                items.push({ label: `Item ${i}`, value: i, selected: i == dropdown2selection })
+            }
+            const clicked = await showDropdown($('#showDropdown2'), items, {selectable: true}) ?? dropdown2selection
+            dropdown2selection = clicked;
+            console.log(clicked)
+        })
+    </script>
     <h2>Cards</h2>
     <div class="flex col gap-8">
         <div class="card">
