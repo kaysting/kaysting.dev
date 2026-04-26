@@ -837,11 +837,12 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .dropdown .separator {
     height: 1px;
     margin: 4px 16px;
-    border: 1px solid var(--c-border-subtle);
+    border-bottom: 1px solid var(--c-border-subtle);
 }
 
 .dropdown .btn:not(.text):focus-visible {
     outline: none;
+    transition: none;
 }
 
 .card {

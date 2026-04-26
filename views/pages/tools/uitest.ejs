@@ -119,14 +119,19 @@
         </div>
     </div>
     <h2>Dropdowns</h2>
-    <button id="showDropdown" class="btn medium">
-        <span class="label">Click for a dropdown</span>
-        <span class="symbol">expand_more</span>
-    </button>
-    <button id="showDropdown2" class="btn medium">
-        <span class="label">Click for a long dropdown</span>
-        <span class="symbol">expand_more</span>
-    </button>
+    <div class="flex row gap-8 flex-wrap">
+        <button id="showDropdown" class="btn medium">
+            <span class="label">Click for a dropdown</span>
+            <span class="symbol">expand_more</span>
+        </button>
+        <button id="showDropdown2" class="btn medium">
+            <span class="label">Click for a long dropdown</span>
+            <span class="symbol">expand_more</span>
+        </button>
+        <button id="showDropdown3" class="btn large circle">
+            <span class="symbol">mouse</span>
+        </button>
+    </div>
     <script>
         $('#showDropdown').addEventListener('click', async() => {
             const clicked = await showDropdown($('#showDropdown'), [
@@ -137,7 +142,7 @@
             ])
             console.log(clicked)
         })
-        
+
         let dropdown2selection = 0;
         $('#showDropdown2').addEventListener('click', async() => {
             const items = [];
@@ -146,6 +151,16 @@
             }
             const clicked = await showDropdown($('#showDropdown2'), items, {selectable: true}) ?? dropdown2selection
             dropdown2selection = clicked;
+            console.log(clicked)
+        })
+
+        $('#showDropdown3').addEventListener('click', async() => {
+            const clicked = await showDropdown(null, [
+                { symbol: 'settings', label: 'Item 1' },
+                { symbol: 'settings', label: 'Item 2' },
+                { separator: true },
+                { label: 'Meow meow no icon' },
+            ])
             console.log(clicked)
         })
     </script>

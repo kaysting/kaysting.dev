@@ -378,8 +378,6 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
                         break;
                 }
             });
-        } else {
-            dropdown.querySelector('.btn:not(:disabled)')?.focus();
         }
     });
 
