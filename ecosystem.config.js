@@ -5,7 +5,7 @@ module.exports = {
             script: 'node',
             args: 'server.js',
             cwd: './',
-            watch: ['server.js', 'routes', 'data/*.js']
+            watch: ['server.js', 'routes', 'data/*.js', 'utils']
         }
     ]
 };

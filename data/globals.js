@@ -1,3 +1,5 @@
+const utils = require('../utils');
+
 const data = {
     pageId: 'unknown',
     pageTitle: '',
@@ -42,5 +44,8 @@ data.js = ['base', 'layout'];
 // Additional route-specific CSS and JS to link after the global files
 data.cssLocal = [];
 data.jsLocal = [];
+
+// Expose all utils functions
+data.utils = utils;
 
 module.exports = data;

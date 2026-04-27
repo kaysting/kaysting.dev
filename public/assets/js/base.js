@@ -395,6 +395,20 @@ const initSvgIconMasks = () => {
     });
 };
 
+const initExpandableTextareas = () => {
+    $$('textarea[data-expandable]:not([data-expandable-init])').forEach(el => {
+        const resize = () => {
+            el.style.height = `auto`;
+            requestAnimationFrame(() => {
+                el.style.height = `${el.scrollHeight + 1}px`;
+            });
+        };
+        el.addEventListener('input', resize);
+        resize();
+        el.dataset.expandableInit = true;
+    });
+};
+
 const initLoadAnimations = () => {
     document.querySelectorAll('[data-load-animate]').forEach(el => {
         const ms = el.dataset.loadAnimate;
@@ -411,11 +425,13 @@ const mouse = { x: 0, y: 0 };
 document.addEventListener('DOMContentLoaded', () => {
     initSvgIconMasks();
     initLoadAnimations();
+    initExpandableTextareas();
 
     // Re-initialize on page update
     document.body.addEventListener('htmx:afterSettle', e => {
         initSvgIconMasks();
         initLoadAnimations();
+        initExpandableTextareas();
     });
 
     // Listen for clicks that bubble down to body

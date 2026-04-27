@@ -6,23 +6,7 @@
                 <div class="text-accent text-36 text-light invisible" data-load-animate="0">
                     Hi, I'm <span class="text-bold">Kayla</span>!
                 </div>
-                <%
-                // TODO: Move this to a dedicated utils file
-                const getAge = birthDate => {
-                    const today = new Date();
-                    const birth = new Date(birthDate);
-                    
-                    let age = today.getFullYear() - birth.getFullYear();
-                    const monthDiff = today.getMonth() - birth.getMonth();
-
-                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-                        age--;
-                    }
-
-                    return age;
-                };
-                %>
-                <p class="no-margin invisible" data-load-animate="50"><%= getAge('2003-01-02') %> &bull; she/her/hers</p>
+                <p class="no-margin invisible" data-load-animate="50"><%= utils.getAge('2003-01-02') %> &bull; she/her/hers</p>
                 <p class="text-monospace text-secondary invisible" data-load-animate="100">I'm a recent computer science graduate from the University of Houston. Outside of my degree, I've spent the past decade teaching myself full-stack web development, Windows and Linux system administration, and business IT operations through my family's business. I have a passion for building tools and apps people love, and have solo-developed several successful online community projects.</p>
                 <div class="socials flex gap-8 flex-wrap">
                     <% let i = 0 %>

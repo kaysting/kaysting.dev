@@ -53,26 +53,24 @@
     </div>
     <h2>Inputs</h2>
     <div class="flex col gap-8">
-        <div class="textbox small" style="width: 300px">
-            <span class="symbol">search</span>
-            <input type="text" name="" id="" placeholder="Type something...">
-        </div>
-        <div class="textbox" style="width: 300px">
-            <span class="symbol">search</span>
-            <input type="text" name="" id="" placeholder="Type something...">
-        </div>
-        <div class="textbox medium" style="width: 300px">
-            <span class="symbol">search</span>
-            <input type="text" name="" id="" placeholder="Type something...">
-        </div>
-        <div class="textbox large" style="width: 300px">
-            <span class="symbol">search</span>
-            <input type="text" name="" id="" placeholder="Type something...">
-        </div>
-        <div class="textbox" style="width: 300px">
-            <label for="">Search</label>
-            <input type="text" name="" id="" placeholder="Type something...">
-        </div>
+        <%- include('../../components/textbox', {
+            symbol: 'search', placeholder: 'Type something...', size: 'small', width: 300
+        }) %>
+        <%- include('../../components/textbox', {
+            symbol: 'search', placeholder: 'Type something...', size: '', width: 300
+        }) %>
+        <%- include('../../components/textbox', {
+            symbol: 'search', placeholder: 'Type something...', size: 'medium', width: 300
+        }) %>
+        <%- include('../../components/textbox', {
+            symbol: 'search', placeholder: 'Type something...', size: 'large', width: 300
+        }) %>
+        <%- include('../../components/textbox', {
+            label: 'Search', placeholder: 'Type something...', size: '', width: 300, vertical: false
+        }) %>
+        <%- include('../../components/textbox', {
+            label: 'Search', placeholder: 'Type something...', size: '', width: 300
+        }) %>
         <div class="flex gap-8">
             <div class="textbox" style="width: 100px">
                 <label>H</label>
@@ -99,23 +97,22 @@
                 <span class="symbol">content_copy</span>
             </button>
         </div>
-        <div class="textbox dynamic" style="width: 600px">
-            <textarea placeholder="Write an essay" rows="3"></textarea>
-        </div>
+        <%- include('../../components/textbox', {
+            placeholder: 'Write an essay...',
+            multiline: true, width: 600
+        }) %>
+        <%- include('../../components/textbox', {
+            symbol: 'text_fields', label: 'Write a story',
+            placeholder: 'Once upon a time...',
+            multiline: true, width: 600
+        }) %>
         <div class="grid-dynamic justify-center">
-            <div class="textbox medium dynamic">
-                <span class="symbol">person</span>
-                <div class="vertical">
-                    <label for="">Name</label>
-                    <input type="text" name="" id="" placeholder="Kayla">
-                </div>
-            </div>
-            <div class="textbox medium dynamic">
-                <div class="vertical">
-                    <label for="">User ID</label>
-                    <input type="text" name="" id="" placeholder="12345">
-                </div>
-            </div>
+            <%- include('../../components/textbox', {
+                symbol: 'person', label: 'Name', placeholder: 'Kayla'
+            }) %>
+            <%- include('../../components/textbox', {
+                symbol: 'tag', label: 'User ID', placeholder: '12345', type: 'number'
+            }) %>
         </div>
     </div>
     <h2>Dropdowns</h2>
