@@ -12,14 +12,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const copyText = async text => {
     try {
         await navigator.clipboard.writeText(text);
-        showPopup('Text copied!', `<pre><code>${text}</code></pre>`, [{ label: 'Okay' }]);
     } catch (err) {
-        showPopup(
-            'Clipboard copy failed',
-            `<p>We couldn't copy the text for you, so you'll have to do it yourself:</p>
-                <pre><code>${text}</code></pre>`,
-            [{ label: 'Close' }]
-        );
         console.error('Error copying to clipboard:', err);
     }
 };
@@ -68,18 +61,29 @@ const activePopoverHiders = [];
 const createPopover = (onHide = () => {}) => {
     const el = createElement('div.popover');
     let currentTriggerElement;
+    let currentRefocusElement;
 
     const hide = (remove = true) => {
+        // Remove from global array
+        const index = activePopoverHiders.indexOf(hide);
+        if (index > -1) {
+            activePopoverHiders.splice(index, 1);
+        }
+        // Run provided onHide function
         try {
             onHide();
         } catch (error) {}
+
+        // Refocus and update attributes on triggering elements
         try {
+            if (currentRefocusElement) currentRefocusElement.focus();
             if (currentTriggerElement) {
-                currentTriggerElement.focus();
                 currentTriggerElement.setAttribute('aria-expanded', 'false');
                 currentTriggerElement.setAttribute('aria-haspopup', 'false');
             }
         } catch (error) {}
+
+        // Hide and remove
         el.classList.remove('visible');
         if (remove)
             setTimeout(() => {
@@ -88,14 +92,17 @@ const createPopover = (onHide = () => {}) => {
     };
 
     const show = (triggerElement, options = {}) => {
-        currentTriggerElement = triggerElement;
         const opts = {
             position: 'bottom',
             centered: false,
             setMinWidth: true,
             padding: 4,
+            refocusElement: triggerElement,
             ...options
         };
+
+        currentTriggerElement = triggerElement;
+        currentRefocusElement = opts.refocusElement;
 
         if (triggerElement) {
             triggerElement.setAttribute('aria-expanded', 'true');
@@ -241,6 +248,7 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
         const opts = {
             searchable: false,
             selectable: false,
+            refocusElement: triggerElement,
             ...options
         };
 
@@ -270,7 +278,7 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
 
             // Change item color and state
             if (item.selected) {
-                btn.classList.remove('text');
+                if (!item.disabled) btn.classList.remove('text');
                 opts.selectable = true;
             }
             if (item.danger) {
@@ -313,7 +321,9 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
             dropdown.appendChild(btn);
         }
 
-        popover.show(triggerElement);
+        popover.show(triggerElement, {
+            refocusElement: opts.refocusElement
+        });
         dropdown.focus();
 
         if (opts.selectable) {
@@ -381,6 +391,27 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
         }
     });
 
+const hijackNativeDropdown = async selectElement => {
+    const textbox = selectElement.closest('.textbox');
+    const options = selectElement.querySelectorAll('option');
+    const items = [];
+    options.forEach(opt => {
+        items.push({
+            label: opt.innerText,
+            value: opt.value || opt.innerText,
+            selected: opt.selected,
+            disabled: opt.disabled
+        });
+    });
+    const selection = await showDropdown(textbox, items, {
+        refocusElement: selectElement
+    });
+    if (selection) {
+        selectElement.value = selection;
+        selectElement.dispatchEvent(new Event('change'));
+    }
+};
+
 const hideAllPopovers = () => {
     while (activePopoverHiders.length > 0) {
         activePopoverHiders.shift()();
@@ -443,15 +474,27 @@ document.addEventListener('DOMContentLoaded', () => {
         // If the click happened inside a textbox but not on a clickable element,
         // focus the adjacent text input
         if (textbox && !clickedInteractive) {
-            const input = textbox.querySelector('input, textarea');
+            const input = textbox.querySelector('input, select, textarea');
             if (input && document.activeElement !== input) {
+                e.preventDefault();
                 const length = input.value.length;
                 input.focus();
 
-                if (input.type === 'text' || input.type === 'search' || input.tagName.toLowerCase() === 'textarea') {
+                if (
+                    ['text', 'password', 'number', 'search', 'tel', 'email'].includes(input.type) ||
+                    input.tagName.toLowerCase() === 'textarea'
+                ) {
                     input.setSelectionRange(length, length);
+                } else if (input.tagName.toLowerCase() == 'select') {
+                    hijackNativeDropdown(input);
                 }
             }
+        }
+
+        // If the click was on a select input, hijack it
+        if (e.target.tagName.toLowerCase() == 'select') {
+            e.preventDefault();
+            hijackNativeDropdown(e.target);
         }
 
         // If clicked outside a popover, hide all popovers
@@ -472,10 +515,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Do things on global keypresses
-    document.addEventListener('keyup', e => {
+    document.addEventListener('keydown', e => {
         switch (e.key) {
             case 'Escape': {
                 hideAllPopovers();
+                break;
+            }
+            case ' ':
+            case 'Enter': {
+                if (e.target.tagName.toLowerCase() == 'select') {
+                    e.preventDefault();
+                    hijackNativeDropdown(e.target);
+                }
                 break;
             }
         }

@@ -111,7 +111,25 @@
                 symbol: 'person', label: 'Name', placeholder: 'Kayla'
             }) %>
             <%- include('../../components/textbox', {
-                symbol: 'tag', label: 'User ID', placeholder: '12345', type: 'number'
+                symbol: 'tag', label: 'User ID', placeholder: '12345', value: 12345, type: 'number', copyTextButton: true
+            }) %>
+            <%- include('../../components/textbox', {
+                symbol: 'key', label: 'Password', placeholder: 'super-secure-password', value: 'password', type: 'password'
+            }) %>
+            <%- include('../../components/textbox', {
+                symbol: 'nutrition', label: 'Select a fruit', type: 'select',
+                options: [
+                    { label: 'Pick an option...', disabled: true, selected: true },
+                    { label: 'Apple' },
+                    { label: 'Banana' },
+                    { label: 'Orange' },
+                    { label: 'Grape' },
+                    { label: 'Lemon' },
+                    { label: 'Lime' },
+                    { label: 'Pear' },
+                    { label: 'Raspberry' },
+                    { label: 'Blueberry' }
+                ]
             }) %>
         </div>
     </div>

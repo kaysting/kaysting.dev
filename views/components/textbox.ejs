@@ -8,6 +8,13 @@
     const placeholder = locals.placeholder ?? '';
     const value = locals.value ?? '';
     const name = locals.name ?? '';
+    // Options when type is select (dropdown menu)
+    const options = (locals.options ?? []).map(opt => ({
+        label: opt.label ?? '',
+        value: opt.value ?? opt.label ?? '',
+        selected: opt.selected ?? false,
+        disabled: opt.disabled ?? false
+    }));
     // If a label is present, default to vertical layout
     const vertical = locals.vertical ?? !!label;
     const multiline = locals.multiline ?? false;
@@ -27,11 +34,14 @@
     // Default validity to null
     // true makes the outline green, false makes it red
     const valid = locals.valid ?? null;
+    const copyTextButton = locals.copyTextButton ?? false;
 %>
 
 <div
     class="textbox
-        <%= size %> <%= dynamic ? 'dynamic' : '' %>
+        <%= size %>
+        <%= dynamic ? 'dynamic' : '' %>
+        <%= type == 'select' ? 'pointer' : '' %>
         <%= attrs.disabled ? 'disabled' : '' %>
         <%= valid === false ? 'danger' : valid === true ? 'success' : '' %>"
     style="width: <%= width ? `${width}px` : 'auto' %>"
@@ -49,6 +59,7 @@
             <% } %>
 
             <% if (multiline) { %>
+
                 <textarea
                     name="<%= name %>"
                     id="<%= id %>"
@@ -57,7 +68,21 @@
                     data-expandable="<%= expandable %>"
                     <%- attrsStr %>
                 ><%= value %></textarea>
+
+            <% } else if (type == 'select') { %>
+
+                <select name="<%= name %>" id="<%= id %>">
+                    <% for( const opt of options ) { %>
+                        <option
+                            value="<%= opt.value %>"
+                            <%= opt.selected ? 'selected' : '' %>
+                            <%= opt.disabled ? 'disabled' : '' %>
+                        ><%= opt.label %></option>
+                    <% } %>
+                </select>
+
             <% } else { %>
+
                 <input
                     type="<%= type %>"
                     id="<%= id %>"
@@ -66,9 +91,47 @@
                     value="<%= value %>"
                     <%- attrsStr %>
                 />
+                
             <% } %>
 
     <% if (vertical) { %>
         </div>
+    <% } %>
+
+    <% if (type == 'select') { %>
+        <span class="symbol">keyboard_arrow_down</span>
+    <% } %>
+
+    <% if (type == 'password') { %>
+        <button id="<%= id %>-btnTogglePassVisibility" class="btn small tertiary circle" title="Show password">
+            <span class="symbol filled">visibility</span>
+        </button>
+        <script>
+            document.querySelector('#<%= id %>-btnTogglePassVisibility').addEventListener('click', () => {
+                const input = document.querySelector(`#<%= id %>`);
+                const btn = document.querySelector(`#<%= id %>-btnTogglePassVisibility`);
+                const symbol = btn.querySelector('.symbol');
+                if (input.type == 'password') {
+                    input.type = 'text';
+                    btn.title = 'Hide password';
+                    symbol.innerText = 'visibility_off';
+                } else {
+                    input.type = 'password';
+                    btn.title = 'Show password';
+                    symbol.innerText = 'visibility';
+                }
+            })
+        </script>
+    <% } %>
+
+    <% if (copyTextButton) { %>
+        <button id="<%= id %>-btnCopyText" class="btn small text circle" title="Copy text">
+            <span class="symbol">content_copy</span>
+        </button>
+        <script>
+            document.querySelector('#<%= id %>-btnCopyText').addEventListener('click', () => {
+                copyText(document.querySelector('#<%= id %>').value);
+            })
+        </script>
     <% } %>
 </div>

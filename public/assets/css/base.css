@@ -723,6 +723,17 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     cursor: text;
 }
 
+.textbox.pointer,
+.textbox.pointer select,
+.textbox.pointer label {
+    cursor: pointer;
+}
+
+.textbox select {
+    /* Disable pointer events on select menu so the textbox can trigger the custom menu */
+    pointer-events: none;
+}
+
 .textbox.danger {
     --textbox-border: var(--c-action-danger);
 }
@@ -745,6 +756,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 .textbox input,
+.textbox select,
 .textbox textarea {
     height: 100%;
     width: 100%;
@@ -763,11 +775,13 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 .textbox input::placeholder,
+.textbox select::placeholder,
 .textbox textarea::placeholder {
     color: var(--c-text-muted);
 }
 
 .textbox input:disabled,
+.textbox select:disabled,
 .textbox textarea:disabled {
     cursor: not-allowed;
 }
@@ -777,16 +791,9 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 .textbox.dynamic input,
+.textbox.dynamic select,
 .textbox.dynamic textarea {
     padding: calc(var(--padding) * 0.75) 0px;
-}
-
-.textbox.text {
-    cursor: text;
-}
-
-.textbox.pointer {
-    cursor: pointer;
 }
 
 .textbox label {
@@ -804,6 +811,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 .textbox>.vertical>input,
+.textbox>.vertical>select,
 .textbox>.vertical>textarea {
     padding-top: calc(var(--padding) * 0.2);
     padding-bottom: calc(var(--padding) * 0.5);
