@@ -1,4 +1,6 @@
 const utils = require('../utils');
+const path = require('path');
+const fs = require('fs');
 
 const data = {
     pageId: 'unknown',
@@ -47,5 +49,17 @@ data.jsLocal = [];
 
 // Expose all utils functions
 data.utils = utils;
+
+// Expose dynamic asset function
+data.asset = pathRel => {
+    const fullPath = path.join(__dirname, '../public', pathRel);
+    try {
+        const stats = fs.statSync(fullPath);
+        const mtime = stats.mtime.getTime();
+        return `${pathRel}?v=${mtime}`;
+    } catch (error) {
+        return pathRel;
+    }
+};
 
 module.exports = data;

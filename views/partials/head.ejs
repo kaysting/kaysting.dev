@@ -22,9 +22,9 @@
 <link rel="icon" href="/assets/images/logo.png">
 
 <% for( const fileName of [...css, ...cssLocal] ) { %>
-    <link rel="stylesheet" href="/assets/css/<%= fileName %>.css" />
+    <link rel="stylesheet" href="<%= asset(`/assets/css/${fileName}.css`) %>" />
 <% } %>
 
 <% for( const fileName of [...js, ...jsLocal] ) { %>
-    <script src="/assets/js/<%= fileName %>.js"></script>
+    <script src="<%= asset(`/assets/js/${fileName}.js`) %>"></script>
 <% } %>
