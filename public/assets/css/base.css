@@ -853,7 +853,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 
 @media (pointer: coarse) {
     .dropdown .btn {
-        --height: 44px;
+        --height: 40px;
     }
 }
 
