@@ -262,7 +262,7 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
         const dropdown = popover.el;
         dropdown.role = 'menu';
         dropdown.tabIndex = -1;
-        dropdown.classList.add('dropdown', 'flex', 'col', 'gap-2');
+        dropdown.classList.add('dropdown', 'flex', 'col');
 
         const hasIcons = items.find(i => i.symbol || i.icon);
         for (const item of items) {

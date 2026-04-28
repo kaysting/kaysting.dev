@@ -672,7 +672,11 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .btn:disabled,
 .btn.disabled,
 .textbox:disabled,
-.textbox.disabled {
+.textbox.disabled,
+.btn:disabled *,
+.btn.disabled *,
+.textbox:disabled *,
+.textbox.disabled * {
     opacity: 0.5;
     cursor: not-allowed;
 }
@@ -840,11 +844,22 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .dropdown {
     border-radius: 22px;
     padding: 4px;
+    gap: 4px;
+}
+
+.dropdown .btn {
+    --height: 32px;
+}
+
+@media (pointer: coarse) {
+    .dropdown .btn {
+        --height: 44px;
+    }
 }
 
 .dropdown .separator {
     height: 1px;
-    margin: 4px 16px;
+    margin: 0px 16px;
     border-bottom: 1px solid var(--c-border-subtle);
 }
 

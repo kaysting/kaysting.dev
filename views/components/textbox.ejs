@@ -34,6 +34,7 @@
     // Default validity to null
     // true makes the outline green, false makes it red
     const valid = locals.valid ?? null;
+    const readonly = locals.readonly ?? false;
     const copyTextButton = locals.copyTextButton ?? false;
 %>
 
@@ -66,12 +67,17 @@
                     placeholder="<%= placeholder %>"
                     rows="<%= rows %>"
                     data-expandable="<%= expandable %>"
+                    <%= readonly ? 'disabled' : '' %>
                     <%- attrsStr %>
                 ><%= value %></textarea>
 
             <% } else if (type == 'select') { %>
 
-                <select name="<%= name %>" id="<%= id %>">
+                <select
+                    name="<%= name %>"
+                    id="<%= id %>"
+                    <%= readonly ? 'disabled' : '' %>
+                >
                     <% for( const opt of options ) { %>
                         <option
                             value="<%= opt.value %>"
@@ -89,6 +95,7 @@
                     name="<%= name %>"
                     placeholder="<%= placeholder %>"
                     value="<%= value %>"
+                    <%= readonly ? 'disabled' : '' %>
                     <%- attrsStr %>
                 />
                 
