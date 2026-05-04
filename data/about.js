@@ -8,23 +8,24 @@ module.exports = {
 
     socials: [
         { symbol: 'email', label: 'kayla@kaysting.dev', href: 'mailto:kayla@kaysting.dev' },
-        { logo: 'discord-color', label: 'kaysting', href: 'https://discord.com/app' },
-        { logo: 'github', label: 'kaysting', href: 'https://github.com/kaysting' },
-        { logo: 'npm-color', label: 'cybergen49', href: 'https://www.npmjs.com/~cybergen49' },
-        { logo: 'reddit-color', label: 'cybergen49', href: 'https://discord.com/app' },
-        { logo: 'youtube-color', label: 'kaystingdev', href: 'https://youtube.com/@kaystingdev' },
-        { logo: 'instagram-color', label: 'kaystingdev', href: 'https://www.instagram.com/kaystingdev' },
-        { logo: 'spotify-color', label: 'Kayla', href: 'https://open.spotify.com/user/dbqectp3dtptpcbdjm5nz9jaa' },
-        { logo: 'osu-color', label: 'kaysting', href: 'https://osu.ppy.sh/users/22737645' },
-        { logo: 'steam-color', label: 'kaysting', href: 'https://steamcommunity.com/id/kaysting/' },
-        { logo: 'monkeytype-color', label: 'kaysting', href: 'https://monkeytype.com/profile/kaysting' },
+        { logo: 'linkedin.png', color: '#0a66c2', label: 'kaysting', href: 'https://www.linkedin.com/in/kaysting' },
+        { logo: 'discord-color.svg', label: 'kaysting', href: 'https://discord.com/app' },
+        { logo: 'github.svg', label: 'kaysting', href: 'https://github.com/kaysting' },
+        { logo: 'npm-color.svg', label: 'cybergen49', href: 'https://www.npmjs.com/~cybergen49' },
+        { logo: 'reddit-color.svg', label: 'cybergen49', href: 'https://discord.com/app' },
+        { logo: 'youtube-color.svg', label: 'kaystingdev', href: 'https://youtube.com/@kaystingdev' },
+        { logo: 'instagram-color.svg', label: 'kaystingdev', href: 'https://www.instagram.com/kaystingdev' },
+        { logo: 'spotify-color.svg', label: 'Kayla', href: 'https://open.spotify.com/user/dbqectp3dtptpcbdjm5nz9jaa' },
+        { logo: 'osu-color.svg', label: 'kaysting', href: 'https://osu.ppy.sh/users/22737645' },
+        { logo: 'steam-color.svg', label: 'kaysting', href: 'https://steamcommunity.com/id/kaysting/' },
+        { logo: 'monkeytype-color.svg', label: 'kaysting', href: 'https://monkeytype.com/profile/kaysting' },
         {
-            logo: 'googlemaps-color',
+            logo: 'googlemaps-color.svg',
             label: 'Kayla',
             href: 'https://www.google.com/maps/contrib/103985333402100090631'
         },
         {
-            logo: '16personalities-color',
+            logo: '16personalities-color.svg',
             label: 'Kayla (ISTJ-A)',
             href: 'https://www.16personalities.com/profiles/35b15de7a00c8'
         }

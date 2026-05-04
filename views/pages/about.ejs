@@ -13,7 +13,12 @@
                     <% for( const entry of socials ) { %>
                         <a href="<%= entry.href %>" class="btn small outline tertiary invisible" target="_blank" data-load-animate="<%= 150 + (i * 10) %>">
                             <% if (entry.logo) { %>
-                                <img class="icon" src="/assets/images/social-logos/<%= entry.logo %>.svg" alt="<%= entry.logo %>">
+                                <img
+                                    class="icon <%= entry.color ? 'img-mask' : '' %>"
+                                    style="<%= entry.color ? `color: ${entry.color}` : '' %>"
+                                    src="/assets/images/social-logos/<%= entry.logo %>"
+                                    alt="<%= entry.logo.split('.')[0].split('-')[0] %>"
+                                >
                             <% } else { %>
                                 <span class="symbol"><%= entry.symbol %></span>
                             <% } %>
