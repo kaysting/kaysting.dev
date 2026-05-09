@@ -218,6 +218,7 @@ code:not(pre code) {
     border-radius: 4px;
     font-size: 0.9em;
     color: var(--c-text-default);
+    border: 1px solid var(--c-border-default);
 }
 
 pre code {
