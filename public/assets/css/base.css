@@ -152,7 +152,7 @@ h3:not(:first-child),
 h4:not(:first-child),
 h5:not(:first-child),
 h6:not(:first-child) {
-    margin-top: 1.2em;
+    margin-top: 2rem;
 }
 
 h1:not(:last-child),
@@ -165,46 +165,147 @@ h6:not(:last-child) {
 }
 
 h1 {
-    font-size: 28px;
+    font-size: 2.25rem;
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 1.75rem;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 h4 {
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 h5 {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 h6 {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 p,
 li {
-    font-size: 1em;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--c-text-default);
 }
 
 b,
 strong {
-    font-weight: bold;
+    font-weight: 700;
     color: var(--c-text-bright);
 }
 
+ul,
+ol {
+    margin-left: 2em;
+}
+
+p:not(:last-child),
+ul:not(:last-child):not(li > ul),
+ol:not(:last-child):not(li > ol) {
+    margin-bottom: 0.8em;
+}
+
+a {
+    color: var(--c-action-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--c-action-primary-hover);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+small {
+    display: block;
+    font-size: 14px;
+    color: var(--c-text-muted);
+    line-height: 1.4;
+}
+
+label {
+    font-size: 14px;
+    color: var(--c-text-secondary);
+}
+
+img {
+    user-select: none;
+    object-fit: cover;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
+    border: 1px solid var(--c-border-default);
+    margin-bottom: 1.5em;
+}
+
+.table-container table {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    /* Force scrolling on small screens */
+    min-width: 500px;
+}
+
 table {
-    border-collapse: collapse;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
     overflow: auto;
     margin-bottom: 1em;
+}
+
+thead {
+    background: var(--c-bg-surface);
+}
+
+th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--c-text-bright);
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--c-border-default);
+    white-space: nowrap;
+}
+
+td,
+tbody th[scope="row"] {
+    padding: 12px 16px;
+    color: var(--c-text-default);
+    border-bottom: 1px solid var(--c-border-subtle);
+    font-size: 15px;
+}
+
+tr:last-child td,
+tr:last-child th[scope="row"] {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--c-base-10);
+}
+
+tbody th[scope="row"] {
+    color: var(--c-text-default);
+    font-weight: 500;
+    text-align: left;
+    vertical-align: middle;
+    padding: 12px 16px;
+    white-space: nowrap;
+    font-size: 14px;
 }
 
 .text-monospace,
@@ -330,112 +431,6 @@ code .token.italic {
 
 code .token.namespace {
     color: var(--c-syntax-namespace) !important;
-}
-
-ul,
-ol {
-    margin-left: 2em;
-}
-
-p:not(:last-child),
-ul:not(:last-child):not(li > ul),
-ol:not(:last-child):not(li > ol) {
-    margin-bottom: 0.8em;
-}
-
-a {
-    color: var(--c-action-primary);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-a:hover {
-    color: var(--c-action-primary-hover);
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-small {
-    display: block;
-    font-size: 14px;
-    color: var(--c-text-muted);
-    line-height: 1.4;
-}
-
-label {
-    font-size: 14px;
-    color: var(--c-text-secondary);
-}
-
-img {
-    user-select: none;
-    object-fit: cover;
-}
-
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 16px;
-    border: 1px solid var(--c-border-default);
-    margin-bottom: 1.5em;
-}
-
-.table-container table {
-    margin-bottom: 0;
-    border: none;
-    border-radius: 0;
-    /* Force scrolling on small screens */
-    min-width: 500px;
-}
-
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: none;
-    margin-bottom: 0;
-}
-
-thead {
-    background: var(--c-bg-surface);
-}
-
-th {
-    text-align: left;
-    font-weight: 600;
-    color: var(--c-text-bright);
-    padding: 12px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--c-border-default);
-    white-space: nowrap;
-}
-
-td,
-tbody th[scope="row"] {
-    padding: 12px 16px;
-    color: var(--c-text-default);
-    border-bottom: 1px solid var(--c-border-subtle);
-    font-size: 15px;
-}
-
-tr:last-child td,
-tr:last-child th[scope="row"] {
-    border-bottom: none;
-}
-
-tbody tr:hover {
-    background: var(--c-base-10);
-}
-
-tbody th[scope="row"] {
-    color: var(--c-text-default);
-    font-weight: 500;
-    text-align: left;
-    vertical-align: middle;
-    padding: 12px 16px;
-    white-space: nowrap;
-    font-size: 14px;
 }
 
 .card table {
