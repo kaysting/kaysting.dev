@@ -33,6 +33,14 @@ module.exports = {
 
     projects: [
         {
+            symbol: 'cached',
+            name: 'osu-score-cache',
+            desc: `A JSON API and real-time WebSocket providing access to osu!'s recently submitted passing scores. Caches millions of datapoints using a highly optimized SQLite database.`,
+            website: 'https://osc.kaysting.dev/',
+            github: 'https://github.com/kaysting/osu-score-cache',
+            active: true
+        },
+        {
             logo: 'kaystingdev.png',
             name: 'kaysting.dev',
             desc: `This website. My modern, responsive developer portfolio, a growing suite of useful online tools, and a robust, vanilla CSS/JS UI framework.`,
@@ -55,13 +63,6 @@ module.exports = {
             website: 'https://osudl.org',
             github: 'https://github.com/kaysting/osudl',
             active: true
-        },
-        {
-            symbol: 'cached',
-            name: 'osu-score-cache',
-            desc: `A JSON API and real-time WebSocket providing access to recent passing scores submitted to the osu! servers across all game modes and map statuses.`,
-            website: 'https://osc.kaysting.dev/',
-            github: 'https://github.com/kaysting/osu-score-cache'
         },
         {
             logo: 'express-file-index.png',
