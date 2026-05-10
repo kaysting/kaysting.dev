@@ -347,6 +347,14 @@ code .token.cdata {
     color: var(--c-syntax-comment) !important;
 }
 
+.cm-tag,
+code .token.class-name,
+code .token.selector,
+code .token.property,
+code .token.tag {
+    color: var(--c-syntax-entity-tag) !important;
+}
+
 .cm-header,
 .cm-def,
 .cm-variable,
@@ -378,14 +386,6 @@ code .token.function,
 code .token.symbol,
 code .token.entity {
     color: var(--c-syntax-entity) !important;
-}
-
-.cm-tag,
-code .token.class-name,
-code .token.selector,
-code .token.property,
-code .token.tag {
-    color: var(--c-syntax-entity-tag) !important;
 }
 
 .cm-keyword,
