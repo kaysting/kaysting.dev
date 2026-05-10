@@ -377,6 +377,7 @@ code .token.constant {
 .cm-variable-2,
 .cm-type,
 code .token.color,
+code .token.parameter,
 code .token.variable {
     color: var(--c-syntax-variable) !important;
 }
