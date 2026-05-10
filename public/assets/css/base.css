@@ -332,7 +332,7 @@ pre code {
     color: var(--c-text-default);
     display: block;
     overflow: auto;
-    margin-bottom: 1em;
+    margin: 1em 0;
     line-height: 1.4;
 }
 
