@@ -358,7 +358,7 @@ code .token.cdata {
 .cm-attribute,
 code .token.class,
 code .token.builtin,
-code .token.property,
+code .token.literal-property,
 code .token.attr-name,
 code .token.boolean,
 code .token.number,
@@ -383,6 +383,7 @@ code .token.entity {
 .cm-tag,
 code .token.class-name,
 code .token.selector,
+code .token.property,
 code .token.tag {
     color: var(--c-syntax-entity-tag) !important;
 }
