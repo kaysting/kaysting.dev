@@ -426,6 +426,20 @@ const initSvgIconMasks = () => {
     });
 };
 
+const initImageLoadStates = (parent = document) => {
+    const images = parent.querySelectorAll('img');
+    images.forEach(img => {
+        if (!img.complete) {
+            img.classList.add('loading');
+            const onLoad = () => {
+                img.classList.add('loaded');
+                img.removeEventListener('click', onLoad);
+            };
+            img.addEventListener('load', onLoad);
+        }
+    });
+};
+
 const initExpandableTextareas = () => {
     $$('textarea[data-expandable]:not([data-expandable-init])').forEach(el => {
         const resize = () => {
@@ -450,20 +464,21 @@ const initLoadAnimations = () => {
     });
 };
 
+const init = isInitial => {
+    initSvgIconMasks();
+    initLoadAnimations();
+    initImageLoadStates();
+    initExpandableTextareas();
+};
+
 const mouse = { x: 0, y: 0 };
 
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    initSvgIconMasks();
-    initLoadAnimations();
-    initExpandableTextareas();
+    init(true);
 
     // Re-initialize on page update
-    document.body.addEventListener('htmx:afterSettle', e => {
-        initSvgIconMasks();
-        initLoadAnimations();
-        initExpandableTextareas();
-    });
+    document.body.addEventListener('htmx:afterSettle', e => init());
 
     // Listen for clicks that bubble down to body
     document.addEventListener('click', e => {
