@@ -915,6 +915,12 @@ a.card {
     text-decoration: none;
 }
 
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
 .invisible {
     opacity: 0;
 }
