@@ -58,11 +58,22 @@ function createElement(selector) {
 
 const activePopoverHiders = [];
 
+/**
+ * Create a versatile popover element that can be positioned relative to another element or the mouse cursor and contain any content.
+ * @param {Function} onHide A callback function to be invoked when the popover is hidden.
+ * @returns {Object}
+ */
 const createPopover = (onHide = () => {}) => {
     const el = createElement('div.popover');
     let currentTriggerElement;
     let currentRefocusElement;
 
+    /**
+     * Hide the popover.
+     * @param {boolean} remove Whether or not to remove the popover from the DOM.
+     *
+     * Defaults to `true`.
+     */
     const hide = (remove = true) => {
         // Remove from global array
         const index = activePopoverHiders.indexOf(hide);
@@ -91,6 +102,22 @@ const createPopover = (onHide = () => {}) => {
             }, 300);
     };
 
+    /**
+     * Show the popover.
+     * @param {HTMLElement} [triggerElement] The element that triggered this popover.
+     *
+     * The popover will be positioned relatively to this element. If a falsy value is supplied, the popover will attempt to position itself relative to the mouse cursor.
+     *
+     * Focus will also be returned to this element when the popover closes.
+     * @param {Object} options Additional options.
+     * @param {'bottom'|'top'|'left'|'right'} [options.position] Where to position the popup relative to the trigger element/cursor.
+     *
+     * Defaults to `bottom`.
+     * @param {boolean} [options.centered] Whether or not the popover should be centered relative to the trigger.
+     * @param {boolean} [options.setMinWidth] Whether or not the popover should be made at least as wide as the trigger element.
+     * @param {boolean} [options.padding] The amount of padding in pixels to place between the popover, the edge of the trigger element, and the edges of the screen.
+     * @param {HTMLElement} [options.refocusElement] An element to return focus to when the popover closes, if different than `triggerElement`.
+     */
     const show = (triggerElement, options = {}) => {
         const opts = {
             position: 'bottom',
@@ -243,10 +270,54 @@ const createPopover = (onHide = () => {}) => {
     };
 };
 
+/**
+ * Show a dropdown menu popover with a list of choosable items.
+ * @param {HTMLElement} [triggerElement] The HTML element that triggered showing the dropdown. Will attempt to default to the mouse cursor position if not provided.
+ * @param {Object[]} items A list of dropdown item objects.
+ * @param {boolean} [items[].separator] If `true`, this item will represent a separator in the list.
+ *
+ * All other properties will be ignored.
+ * @param {string} items[].label The label for this item.
+ *
+ * This value is returned by the promise if `value` and `onClick` aren't set.
+ * @param {any} [items[].value] The value of this item to be returned when selected.
+ *
+ * Defaults to the value of `label`.
+ * @param {Function} [items[].onClick] A callback function to be invoked when this item is selected.
+ *
+ * The value returned by this callback will be returned from the promise instead of the item's `value` or `label`.
+ * @param {boolean} [items[].disabled] Whether or not this item should be disabled.
+ * @param {boolean} [items[].success] Whether or not this item should be implied as successful/positive (colored green).
+ *
+ * Defaults to `false`.
+ * @param {boolean} [items[].danger] Whether or not this item should be implied as dangerous (colored red).
+ *
+ * Defaults to `false`.
+ * @param {boolean} [items[].selected] Whether or not this item should be highlighted as selected.
+ *
+ * Setting this to `true` on any item will enable `options.selectable`.
+ *
+ * Defaults to `false`.
+ * @param {string} [items[].symbol] The ID of a Material Symbol to use as the icon for this item.
+ * @param {boolean} [items[].symbolOutlined] Whether or not the Material Symbol supplied by `symbol` should be outlined instead of filled.
+ *
+ * Defaults to `false`.
+ * @param {string} [items[].icon] The URL of an image to use as the icon for this item.
+ * @param {boolean} [items[].maskIcon] Whether or not the image supplied by `icon` should be used as a mask, its opaque regions drawn with the text color.
+ *
+ * Defaults to `false`.
+ * @param {Object} [options] Additional options
+ * @param {boolean} [options.selectable] Whether or not options should be navigable with common `<select>` menu keypresses and display a selection highlight.
+ *
+ * Defaults to `false`.
+ * @param {HTMLElement} [options.refocusElement] An HTML element to pass focus to when the dropdown closes, if different than `triggerElement`.
+ *
+ * Defaults to the value of `triggerElement`.
+ * @returns
+ */
 const showDropdown = (triggerElement, items = [], options = {}) =>
     new Promise(resolve => {
         const opts = {
-            searchable: false,
             selectable: false,
             refocusElement: triggerElement,
             ...options
@@ -391,6 +462,10 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
         }
     });
 
+/**
+ * Hijack the OS-native dropdown menu created by `<select>` elements and replace it with a custom one.
+ * @param {HTMLSelectElement} selectElement A native HTML form `<select>` element.
+ */
 const hijackNativeDropdown = async selectElement => {
     const textbox = selectElement.closest('.textbox');
     const options = selectElement.querySelectorAll('option');
@@ -412,11 +487,176 @@ const hijackNativeDropdown = async selectElement => {
     }
 };
 
+/**
+ * Hide all visible popover elements.
+ */
 const hideAllPopovers = () => {
     while (activePopoverHiders.length > 0) {
         activePopoverHiders.shift()();
     }
 };
+
+/**
+ * Show a popup modal.
+ * @param {string} title Text to use for the title of the modal.
+ * @param {string|HTMLElement} [body] An HTML string or HTML element to use as the body of the modal.
+ * @param {Object[]} actions An array of action objects representing the row of buttons at the bottom of the modal.
+ * @param {string} [actions[].href] A URL to open when this action is clicked.
+ * @param {boolean} [actions[].newTab] Whether or not to open the URL supplied by `href` in a new tab.
+ * @param {string} actions[].label The label to display on the action button.
+ * @param {boolean} [actions[].noClose] Whether or not the modal should stay open after this action is clicked.
+ * @param {Function} [actions[].onClick] A callback function to be invoked when this action is clicked.
+ * @param {string} [actions[].class] Additional space-separated classes to apply to the action button.
+ *
+ * By default, buttons use the primary filled accent color style. Non-primary options should pass `text`, `outline`, or `secondary` here.
+ * @param {Object} [options] Additional options for the modal.
+ * @param {string} [options.width] A number of pixels to override the modal's max width to.
+ * @param {string} [options.height] A number of pixels to override the modal's max height to.
+ * @param {Function} [options.onClose] A callback function to be invoked when the modal is closed, regardless of cause.
+ * @param {Function} [options.onCancel] A callback function to be invoked when the modal is closed without an action button being clicked.
+ * @param {Function} [options.onBeforeShow] A callback function to be invoked after the modal has been added to the DOM but before it is made visible.
+ *
+ * This callback receives the dialog `HTMLDialogElement` as an argument.
+ * @param {string} [options.closedby] What should be allowed to close this modal?
+ *
+ * - `any`: Clicking an action, hitting `Esc`, clicking outside the modal, or using the device back button will close the modal.
+ * - `closerequest`: Clicking an action or using the device back button will close the modal.
+ * - `none`: Clicking an action is the only way to close the modal.
+ *
+ * Defaults to `any`.
+ * @returns {HTMLDialogElement}
+ */
+const showModal = (title, body, actions = [], options = {}) => {
+    const {
+        closedby = 'any',
+        width = '',
+        height = '',
+        onBeforeShow = () => {},
+        onClose = () => {},
+        onCancel = () => {}
+    } = options;
+
+    // Build base dialog element
+    const dialog = document.createElement('dialog');
+    if (width) dialog.style.setProperty(`--width`, `${width}px`);
+    if (height) dialog.style.setProperty(`--height`, `${height}px`);
+    dialog.innerHTML = /*html*/ `
+        <h2 class="title"></h2>
+        ${body ? `<section class="body"></section>` : ''}
+        <section class="actions"></section>
+    `;
+    dialog.setAttribute('closedby', closedby);
+    dialog.classList.add('modal');
+
+    // Function to close with animation
+    const close = async (viaAction = false) => {
+        try {
+            if (!viaAction) await onCancel();
+            await onClose();
+        } catch (error) {
+            console.error(error);
+        }
+        dialog.classList.remove('visible');
+        setTimeout(() => {
+            dialog.close();
+            document.body.removeChild(dialog);
+        }, 200);
+    };
+    dialog.closeWithAnimation = close;
+
+    // Populate dialog
+    dialog.querySelector('.title').innerText = title;
+
+    // Populate body
+    if (body) {
+        if (typeof body === 'string') {
+            dialog.querySelector('.body').innerHTML = body;
+        } else {
+            dialog.querySelector('.body').appendChild(body);
+        }
+    }
+
+    // Populate actions
+    if (actions?.length) {
+        const actionsContainer = dialog.querySelector('.actions');
+        for (const action of actions) {
+            const btn = document.createElement(action.href ? 'a' : 'button');
+            btn.classList = `btn medium ${action.class || ''}`;
+            if (!action.class) btn.autofocus = true;
+            btn.innerText = action.label;
+            if (action.href) {
+                btn.href = action.href;
+                if (action.newTab) {
+                    btn.target = '_blank';
+                }
+            }
+            btn.addEventListener('click', event => {
+                if (action.onClick) action.onClick(dialog);
+                if (action.noClose) return;
+                close();
+            });
+            actionsContainer.appendChild(btn);
+        }
+    }
+
+    // Show dialog
+    document.body.appendChild(dialog);
+    dialog.showModal();
+    dialog.addEventListener('toggle', async e => {
+        if (!dialog.open) return; // return if closed
+        if (onBeforeShow) {
+            try {
+                const success = await onBeforeShow(dialog);
+                if (success === false) throw new Error(`Dialog's onBeforeShow function returned false, aborting`);
+            } catch (error) {
+                console.error(error);
+                dialog.remove();
+                return;
+            }
+        }
+        setTimeout(() => {
+            dialog.classList.add('visible');
+        }, 10);
+    });
+
+    // Handle cancelling
+    dialog.addEventListener('cancel', e => {
+        e.preventDefault();
+        close();
+    });
+
+    return dialog;
+};
+
+/**
+ * Prompt the user with a yes/no dialog modal.
+ * @param {string} [title] The title of the modal.
+ * @param {Object} [opts] Additional options.
+ * @param {string} [opts.body] The modal body HTML string or element.
+ * @param {string} [opts.yesLabel] The label for the confirm option.
+ * @param {string} [opts.noLabel] The label for the deny option.
+ * @returns {boolean|null}
+ */
+const showConfirmationDialog = (title = 'Are you sure?', opts = {}) =>
+    new Promise(resolve => {
+        const { body = '', yesLabel = 'Yes', noLabel = 'No' } = opts;
+        showModal(
+            title,
+            body,
+            [
+                {
+                    label: noLabel,
+                    class: 'text',
+                    onClick: () => resolve(false)
+                },
+                {
+                    label: yesLabel,
+                    onClick: () => resolve(true)
+                }
+            ],
+            { closedby: 'none', onCancel: () => resolve(null) }
+        );
+    });
 
 const initSvgIconMasks = () => {
     document.querySelectorAll('img.icon.mask, .img-mask').forEach(img => {

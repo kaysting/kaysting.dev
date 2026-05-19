@@ -933,6 +933,71 @@ a.card {
     text-decoration: none;
 }
 
+.modal:not([open]) {
+    display: none;
+}
+
+.modal::backdrop {
+    background: transparent;
+    transition: 0.1s ease-in-out;
+}
+
+.modal {
+    --width: 600px;
+    --height: 800px;
+    display: flex;
+    margin: auto;
+    border: 1px solid var(--c-border-subtle);
+    background: var(--c-bg-subsurface);
+    border-radius: 24px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    max-width: min(var(--width), calc(100% - 16px));
+    max-height: min(var(--height), calc(100% - 16px));
+    transform: scale(0.95);
+    opacity: 0;
+    transition: 0.2s ease-in-out;
+}
+
+.modal.visible::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.modal>.title {
+    padding: 24px 24px 12px 24px;
+    margin: 0px;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--c-text-bright);
+    line-height: 1.2;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.modal>.body {
+    padding: 12px 24px;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal>.actions {
+    padding: 12px 24px 24px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
 .container {
     max-width: 1000px;
     margin: 0 auto;

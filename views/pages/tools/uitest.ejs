@@ -147,6 +147,17 @@
             <span class="symbol">mouse</span>
         </button>
     </div>
+    <h2>Modals</h2>
+    <div class="flex row gap-8 flex-wrap">
+        <button id="showModal" class="btn medium">
+            <span class="label">Click for a modal</span>
+            <span class="symbol">open_in_new</span>
+        </button>
+        <button id="showModal2" class="btn medium">
+            <span class="label">Click for a confirmation</span>
+            <span class="symbol">open_in_new</span>
+        </button>
+    </div>
     <script>
         $('#showDropdown').addEventListener('click', async() => {
             const clicked = await showDropdown($('#showDropdown'), [
@@ -177,6 +188,23 @@
                 { label: 'Meow meow no icon' },
             ])
             console.log(clicked)
+        })
+
+        $('#showModal').addEventListener('click', async() => {
+            const modal = showModal('Test modal', `Hi here's a test modal, this is proof it works!`, [
+                {
+                    label: 'Cancel',
+                    class: 'text'
+                }, {
+                    label: 'Okay',
+                    onClick: () => console.log(`Okay clicked`)
+                }
+            ])
+        })
+
+        $('#showModal2').addEventListener('click', async() => {
+            const result = await showConfirmationDialog('Are you a cutie patootie?');
+            console.log(`Result was`, result)
         })
     </script>
     <h2>Cards</h2>
