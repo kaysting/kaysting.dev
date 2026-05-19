@@ -654,7 +654,7 @@ const showConfirmationDialog = (title = 'Are you sure?', opts = {}) =>
                     onClick: () => resolve(true)
                 }
             ],
-            { closedby: 'none', onCancel: () => resolve(null) }
+            { onCancel: () => resolve(null) }
         );
     });
 
