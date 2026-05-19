@@ -384,7 +384,7 @@ const showDropdown = (triggerElement, items = [], options = {}) =>
             // Handle selection
             btn.addEventListener('click', async () => {
                 let res = null;
-                if (item.onClick) res = await btn.onClick();
+                if (item.onClick) res = await item.onClick();
                 resolve(res ?? item.value ?? item.label);
                 popover.hide();
             });
