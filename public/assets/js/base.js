@@ -511,7 +511,9 @@ const hideAllPopovers = () => {
  * By default, buttons use the primary filled accent color style. Non-primary options should pass `text`, `outline`, or `secondary` here.
  * @param {Object} [options] Additional options for the modal.
  * @param {string} [options.width] A number of pixels to override the modal's max width to.
+ * @param {string} [options.expandWidth] Whether or not the modal should expand to the set width regardless of content.
  * @param {string} [options.height] A number of pixels to override the modal's max height to.
+ * @param {string} [options.expandHeight] Whether or not the modal should expand to the set height regardless of content.
  * @param {Function} [options.onClose] A callback function to be invoked when the modal is closed, regardless of cause.
  * @param {Function} [options.onCancel] A callback function to be invoked when the modal is closed without an action button being clicked.
  * @param {Function} [options.onBeforeShow] A callback function to be invoked after the modal has been added to the DOM but before it is made visible.
@@ -531,6 +533,8 @@ const showModal = (title, body, actions = [], options = {}) => {
         closedby = 'any',
         width = '',
         height = '',
+        expandWidth = false,
+        expandHeight = false,
         onBeforeShow = () => {},
         onClose = () => {},
         onCancel = () => {}
@@ -539,7 +543,9 @@ const showModal = (title, body, actions = [], options = {}) => {
     // Build base dialog element
     const dialog = document.createElement('dialog');
     if (width) dialog.style.setProperty(`--width`, `${width}px`);
+    if (expandWidth) dialog.style.width = `${width}px`;
     if (height) dialog.style.setProperty(`--height`, `${height}px`);
+    if (expandHeight) dialog.style.height = `${height}px`;
     dialog.innerHTML = /*html*/ `
         <h2 class="title"></h2>
         ${body ? `<section class="body"></section>` : ''}
