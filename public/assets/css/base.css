@@ -233,8 +233,8 @@ small {
 }
 
 label {
-    font-size: 14px;
-    color: var(--c-text-secondary);
+    font-size: 16px;
+    color: var(--c-text-bright);
 }
 
 img {
@@ -507,7 +507,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .symbol {
     --size: 20px;
     font-family: 'Material Symbols Rounded';
-    font-variation-settings: 'FILL' 0;
+    font-variation-settings: 'FILL' 1;
     font-weight: 400;
     font-size: var(--size);
     line-height: 1;
@@ -515,10 +515,11 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     user-select: none;
     white-space: nowrap;
     flex-shrink: 0;
+    font-display: block;
 }
 
-.symbol.filled {
-    font-variation-settings: 'FILL' 1;
+.symbol.outlined {
+    font-variation-settings: 'FILL' 0;
 }
 
 .text-secondary {
@@ -817,6 +818,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 .textbox label {
+    color: var(--c-text-secondary);
     font-weight: 500;
     flex-shrink: 0;
     font-size: calc(var(--textSize) * 0.8);
@@ -835,6 +837,66 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .textbox>.vertical>textarea {
     padding-top: calc(var(--padding) * 0.2);
     padding-bottom: calc(var(--padding) * 0.5);
+}
+
+label.control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    padding: 4px;
+}
+
+input[type='checkbox'],
+input[type="radio"] {
+    appearance: none;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+input[type='checkbox']::before,
+input[type="radio"]::before {
+    font-family: 'Material Symbols Rounded';
+    font-variation-settings: 'FILL' 1;
+    font-size: 2em;
+    line-height: 1;
+    transition: color 0.1s ease;
+    color: var(--c-text-muted);
+}
+
+input[type='checkbox']:checked::before,
+input[type="radio"]:checked::before {
+    color: var(--c-action-primary);
+}
+
+input[type="checkbox"]::before {
+    content: 'check_box_outline_blank';
+}
+
+input[type="checkbox"]:checked::before {
+    content: 'check_box';
+}
+
+input[type="radio"] {
+    border-radius: 50%;
+}
+
+input[type="radio"]::before {
+    content: 'radio_button_unchecked';
+}
+
+input[type="radio"]:checked::before {
+    content: 'radio_button_checked';
+}
+
+input[type='checkbox']:disabled::before,
+input[type="radio"]:disabled::before {
+    opacity: 0.5;
 }
 
 .popover {

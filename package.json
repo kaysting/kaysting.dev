@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/CyberGen49/cybah.me.git"
   },
-  "license": "ISC",
-  "author": "kaysting",
+  "license": "Apache-2.0",
+  "author": "Kayla Kersting",
   "type": "commonjs",
   "main": "server.js",
   "scripts": {

@@ -40,7 +40,7 @@ data.sidebar = [
 ];
 
 // Global CSS and JS to link in head
-data.css = ['material-symbols', 'base', 'layout', 'utils'];
+data.css = ['base', 'layout', 'utils'];
 data.js = ['base', 'layout'];
 
 // Additional route-specific CSS and JS to link after the global files
