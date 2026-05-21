@@ -853,7 +853,7 @@ label.control {
 }
 
 label.control.contained {
-    background: var(--c-bg-base);
+    background: var(--c-bg-negative);
     padding: 8px 12px;
     border-radius: 20px;
     color: var(--c-text-default);
