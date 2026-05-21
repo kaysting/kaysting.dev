@@ -235,6 +235,7 @@ small {
 label {
     font-size: 16px;
     color: var(--c-text-bright);
+    line-height: 1.2;
 }
 
 img {
@@ -823,6 +824,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     flex-shrink: 0;
     font-size: calc(var(--textSize) * 0.8);
     user-select: none;
+    line-height: 1;
 }
 
 .textbox>.vertical {
@@ -842,10 +844,28 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 label.control {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    font-size: 15px;
     cursor: pointer;
     user-select: none;
     padding: 4px;
+    line-height: 1.4;
+}
+
+label.control.contained {
+    background: var(--c-bg-base);
+    padding: 8px 12px;
+    border-radius: 20px;
+    color: var(--c-text-default);
+    border: 1px solid var(--c-border-default);
+    transition: 0.1s ease-in-out;
+}
+
+label.control.contained:has(input:checked) {
+    background: var(--c-action-tertiary);
+    color: var(--c-text-bright);
+    border-color: var(--c-action-primary);
+    box-shadow: 0px 0px 0px 1px var(--c-action-primary);
 }
 
 input[type='checkbox'],
@@ -863,14 +883,13 @@ input[type='checkbox']::before,
 input[type="radio"]::before {
     font-family: 'Material Symbols Rounded';
     font-variation-settings: 'FILL' 1;
-    font-size: 2em;
+    font-size: 25px;
     line-height: 1;
     transition: color 0.1s ease;
     color: var(--c-text-muted);
 }
 
-input[type='checkbox']:checked::before,
-input[type="radio"]:checked::before {
+input:checked::before {
     color: var(--c-action-primary);
 }
 
@@ -891,7 +910,7 @@ input[type="radio"]::before {
 }
 
 input[type="radio"]:checked::before {
-    content: 'radio_button_checked';
+    content: 'check_circle';
 }
 
 input[type='checkbox']:disabled::before,
