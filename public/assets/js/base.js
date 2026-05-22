@@ -573,13 +573,29 @@ const showModal = (title, body, actions = [], options = {}) => {
     // Populate dialog
     dialog.querySelector('.title').innerText = title;
 
+    // Function to add borders to body based on scroll
+    const handleScroll = () => {
+        const elBody = dialog.querySelector('.body');
+        const height = elBody.clientHeight;
+        const scrollTop = elBody.scrollTop;
+        const scrollHeight = elBody.scrollHeight;
+
+        const isTopVisible = scrollTop < 8;
+        const isBottomVisible = Math.ceil(scrollTop + height) >= scrollHeight - 8;
+
+        elBody.classList.toggle('scrolledTop', !isTopVisible);
+        elBody.classList.toggle('scrolledBottom', !isBottomVisible);
+    };
+
     // Populate body
     if (body) {
+        const elBody = dialog.querySelector('.body');
         if (typeof body === 'string') {
             dialog.querySelector('.body').innerHTML = body;
         } else {
             dialog.querySelector('.body').appendChild(body);
         }
+        elBody.addEventListener('scroll', handleScroll);
     }
 
     // Populate actions
@@ -622,6 +638,7 @@ const showModal = (title, body, actions = [], options = {}) => {
         }
         setTimeout(() => {
             dialog.classList.add('visible');
+            handleScroll();
         }, 10);
     });
 

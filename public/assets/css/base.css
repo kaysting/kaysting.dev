@@ -1071,6 +1071,14 @@ a.card {
     overflow-x: hidden;
 }
 
+.modal>.body.scrolledBottom {
+    border-bottom: 1px solid var(--c-border-subtle);
+}
+
+.modal>.body.scrolledTop {
+    border-top: 1px solid var(--c-border-subtle);
+}
+
 .modal>.actions {
     padding: 12px 24px 24px 24px;
     display: flex;
