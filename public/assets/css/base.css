@@ -730,7 +730,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     border-radius: calc(var(--height) / 2);
     background: var(--c-bg-negative);
     border: 1px solid var(--textbox-border);
-    color: var(--c-text-secondary);
+    color: var(--c-text-default);
     font-size: var(--textSize);
     transition: 0.1s ease-in-out;
     position: relative;
