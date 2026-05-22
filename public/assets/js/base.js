@@ -512,8 +512,15 @@ const hideAllPopovers = () => {
  * @param {Object} [options] Additional options for the modal.
  * @param {string} [options.width] A number of pixels to override the modal's max width to.
  * @param {string} [options.expandWidth] Whether or not the modal should expand to the set width regardless of content.
+ *
+ * Defaults to false.
  * @param {string} [options.height] A number of pixels to override the modal's max height to.
  * @param {string} [options.expandHeight] Whether or not the modal should expand to the set height regardless of content.
+ *
+ * Defaults to false.
+ * @param {string} [options.fullscreenable] Whether or not the modal should expand to fill the entire screen on smaller screened devices.
+ *
+ * Defaults to false.
  * @param {Function} [options.onClose] A callback function to be invoked when the modal is closed, regardless of cause.
  * @param {Function} [options.onCancel] A callback function to be invoked when the modal is closed without an action button being clicked.
  * @param {Function} [options.onBeforeShow] A callback function to be invoked after the modal has been added to the DOM but before it is made visible.
@@ -537,22 +544,26 @@ const showModal = (title, body, actions = [], options = {}) => {
         expandHeight = false,
         onBeforeShow = () => {},
         onClose = () => {},
-        onCancel = () => {}
+        onCancel = () => {},
+        fullscreenable = false
     } = options;
 
     // Build base dialog element
     const dialog = document.createElement('dialog');
-    if (width) dialog.style.setProperty(`--width`, `${width}px`);
-    if (expandWidth) dialog.style.width = `${width}px`;
-    if (height) dialog.style.setProperty(`--height`, `${height}px`);
-    if (expandHeight) dialog.style.height = `${height}px`;
+
     dialog.innerHTML = /*html*/ `
         <h2 class="title"></h2>
         ${body ? `<section class="body"></section>` : ''}
         <section class="actions"></section>
     `;
-    dialog.setAttribute('closedby', closedby);
+
     dialog.classList.add('modal');
+    dialog.setAttribute('closedby', closedby);
+    if (width) dialog.style.setProperty(`--width`, `${width}px`);
+    if (expandWidth) dialog.style.width = `${width}px`;
+    if (height) dialog.style.setProperty(`--height`, `${height}px`);
+    if (expandHeight) dialog.style.height = `${height}px`;
+    if (fullscreenable) dialog.classList.add('fullscreenable');
 
     // Function to close with animation
     const close = async (viaAction = false) => {
@@ -567,6 +578,7 @@ const showModal = (title, body, actions = [], options = {}) => {
             dialog.close();
             document.body.removeChild(dialog);
         }, 200);
+        window.removeEventListener('resize', handleScroll);
     };
     dialog.closeWithAnimation = close;
 
@@ -596,6 +608,7 @@ const showModal = (title, body, actions = [], options = {}) => {
             dialog.querySelector('.body').appendChild(body);
         }
         elBody.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
     }
 
     // Populate actions
