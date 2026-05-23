@@ -34,7 +34,7 @@ module.exports = {
     projects: [
         {
             logo: 'osufeed.png',
-            name: '!osu!feed',
+            name: 'osu!feed',
             desc: `A live feed of newly submitted osu! scores with tons of ways to filter what you see. This builds a user-friendly UI on top of osu-score-feed.`,
             website: 'https://osufeed.kaysting.dev/',
             github: 'https://github.com/kaysting/osu-score-feed',
