@@ -315,6 +315,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(var(--size, 300px), 100%), 1fr));
     gap: var(--gap, 8px);
+    align-items: start;
 }
 
 .no-margin {
