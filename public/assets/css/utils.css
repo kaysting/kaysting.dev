@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.grid {
+    display: grid;
+}
+
 .row {
     flex-direction: row;
 }
@@ -117,6 +121,13 @@
 
 .flex-no-shrink {
     flex-shrink: 0;
+}
+
+.grid-dynamic {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--size, 300px), 100%), 1fr));
+    gap: var(--gap, 8px);
+    align-items: start;
 }
 
 /* Position utilities */
@@ -309,13 +320,6 @@
 
 .ease-200 {
     transition: 0.2s ease-in-out;
-}
-
-.grid-dynamic {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(var(--size, 300px), 100%), 1fr));
-    gap: var(--gap, 8px);
-    align-items: start;
 }
 
 .no-margin {
