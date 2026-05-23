@@ -854,7 +854,7 @@ label.control {
 
 label.control.contained {
     background: var(--c-bg-negative);
-    padding: 8px 12px;
+    padding: 6px 12px;
     border-radius: 20px;
     color: var(--c-text-default);
     border: 1px solid var(--c-border-default);
@@ -883,7 +883,7 @@ input[type='checkbox']::before,
 input[type="radio"]::before {
     font-family: 'Material Symbols Rounded';
     font-variation-settings: 'FILL' 1;
-    font-size: 25px;
+    font-size: 24px;
     line-height: 1;
     transition: color 0.1s ease;
     color: var(--c-text-muted);
@@ -894,11 +894,11 @@ input:checked::before {
 }
 
 input[type="checkbox"]::before {
-    content: 'check_box_outline_blank';
+    content: '\e835';
 }
 
 input[type="checkbox"]:checked::before {
-    content: 'check_box';
+    content: '\e834';
 }
 
 input[type="radio"] {
@@ -906,16 +906,53 @@ input[type="radio"] {
 }
 
 input[type="radio"]::before {
-    content: 'radio_button_unchecked';
+    content: '\e836';
 }
 
 input[type="radio"]:checked::before {
-    content: 'check_circle';
+    content: '\e86c';
 }
 
 input[type='checkbox']:disabled::before,
 input[type="radio"]:disabled::before {
     opacity: 0.5;
+}
+
+/* Checkbox toggle switch style */
+input[type='checkbox'].toggle {
+    --size: 34px;
+    position: relative;
+    height: var(--size);
+    width: calc(var(--size) * 1.6);
+    border-radius: var(--size);
+    background: var(--c-bg-negative);
+    border: 1px solid var(--c-border-default);
+    transition: 0.1s ease-in-out;
+    padding: 0px;
+}
+
+input[type='checkbox'].toggle::before {
+    --gap: 4px;
+    position: absolute;
+    top: calc(var(--gap));
+    left: var(--gap);
+    content: '\e644';
+    font-size: calc(var(--size) - calc(var(--gap) * 2));
+    border-radius: 50%;
+    color: var(--c-text-muted);
+    transition: 0.1s ease-in-out;
+}
+
+input[type='checkbox'].toggle:checked {
+    background: var(--c-action-tertiary);
+    border-color: var(--c-action-primary);
+    box-shadow: 0px 0px 0px 1px var(--c-action-primary);
+}
+
+input[type='checkbox'].toggle:checked::before {
+    content: '\e86c';
+    color: var(--c-action-primary);
+    transform: translateX(calc(var(--size) * 0.6));
 }
 
 .popover {
