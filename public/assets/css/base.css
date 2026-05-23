@@ -854,11 +854,12 @@ label.control {
 
 label.control.contained {
     background: var(--c-bg-negative);
-    padding: 6px 12px;
+    padding: 8px 12px;
     border-radius: 20px;
     color: var(--c-text-default);
     border: 1px solid var(--c-border-default);
     transition: 0.1s ease-in-out;
+    min-height: 36px;
 }
 
 label.control.contained:has(input:checked) {
@@ -920,7 +921,7 @@ input[type="radio"]:disabled::before {
 
 /* Checkbox toggle switch style */
 input[type='checkbox'].toggle {
-    --size: 34px;
+    --size: 36px;
     position: relative;
     height: var(--size);
     width: calc(var(--size) * 1.6);
@@ -929,12 +930,13 @@ input[type='checkbox'].toggle {
     border: 1px solid var(--c-border-default);
     transition: 0.1s ease-in-out;
     padding: 0px;
+    display: flex;
+    align-items: center;
 }
 
 input[type='checkbox'].toggle::before {
     --gap: 4px;
     position: absolute;
-    top: calc(var(--gap));
     left: var(--gap);
     content: '\e644';
     font-size: calc(var(--size) - calc(var(--gap) * 2));
