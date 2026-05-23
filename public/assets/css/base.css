@@ -1043,9 +1043,9 @@ a.card {
     transition: 0.2s ease-in-out;
 }
 
-/* Expand fullscreenable modals if screen is less than 600x1000 OR 1000x600 */
-@media (max-width: 600px) and (max-height: 1000px),
-(max-width: 1000px) and (max-height: 600px) {
+/* Expand fullscreenable modals when screen is smaller than 600px on either axis */
+@media (max-width: 600px),
+(max-height: 600px) {
     .modal.fullscreenable {
         max-height: 100% !important;
         max-width: 100% !important;
