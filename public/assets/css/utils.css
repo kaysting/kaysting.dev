@@ -6,19 +6,19 @@
     display: grid;
 }
 
-.row {
+.flex.row {
     flex-direction: row;
 }
 
-.row-rev {
+.flex.row-rev {
     flex-direction: row-reverse;
 }
 
-.col {
+.flex.col {
     flex-direction: column;
 }
 
-.col-rev {
+.flex.col-rev {
     flex-direction: column-reverse;
 }
 
