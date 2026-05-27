@@ -672,14 +672,14 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .btn.medium,
 .textbox.medium {
     --height: 40px;
-    --textSize: 15px;
+    --textSize: 14px;
     --padding: 16px;
 }
 
 .btn.large,
 .textbox.large {
     --height: 48px;
-    --textSize: 16px;
+    --textSize: 15px;
     --padding: 20px;
 }
 
@@ -832,6 +832,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    width: 100%;
     padding-top: calc(var(--padding) * 0.6);
 }
 

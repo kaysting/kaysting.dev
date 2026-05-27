@@ -22,12 +22,22 @@
     flex-direction: column-reverse;
 }
 
-.align-center {
+.align-center,
+.align-items-center {
     align-items: center;
 }
 
-.justify-center {
+.align-content-center {
+    align-content: center;
+}
+
+.justify-center,
+.justify-content-center {
     justify-content: center;
+}
+
+.justify-items-center {
+    justify-items: center;
 }
 
 .align-start {
