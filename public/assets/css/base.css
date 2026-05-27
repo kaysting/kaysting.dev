@@ -76,7 +76,7 @@
     --c-text-accent: var(--c-accent-80);
     --c-text-danger: var(--c-danger-80);
     --c-text-success: var(--c-success-80);
-    --c-text-default-inverted: var(--c-base-20);
+    --c-text-default-inverted: var(--c-base-10);
     --c-text-bright-inverted: var(--c-base-0);
 
     /* Background colors */
