@@ -76,7 +76,8 @@
     --c-text-accent: var(--c-accent-80);
     --c-text-danger: var(--c-danger-80);
     --c-text-success: var(--c-success-80);
-    --c-text-default-inverted: var(--c-base-10);
+    --c-text-default-inverted: var(--c-base-20);
+    --c-text-bright-inverted: var(--c-base-0);
 
     /* Background colors */
     --c-bg-negative: var(--c-base-5);
@@ -91,6 +92,8 @@
     /* Action colors (links, buttons) */
     --c-action-primary: var(--c-accent-80);
     --c-action-primary-hover: var(--c-accent-70);
+    --c-action-primary-alt: var(--c-accent-20);
+    --c-action-primary-alt-hover: var(--c-accent-30);
     --c-action-secondary: var(--c-base-80);
     --c-action-secondary-hover: var(--c-base-70);
     --c-action-tertiary: var(--c-base-25);
@@ -101,15 +104,16 @@
     --c-action-success-hover: var(--c-success-50);
 
     /* Syntax Highlighting */
-    --c-syntax-comment: #8b949e;
-    --c-syntax-namespace: #8b949e;
-    --c-syntax-constant: #79c0ff;
-    --c-syntax-entity: #d2a8ff;
-    --c-syntax-storage-modifier-import: #c9d1d9;
-    --c-syntax-entity-tag: #7ee787;
-    --c-syntax-keyword: #ff7b72;
-    --c-syntax-string: #a5d6ff;
-    --c-syntax-variable: #ffa657;
+    --c-syntax-lum: 80%;
+    --c-syntax-comment: hsl(0, 0%, var(--c-syntax-lum));
+    --c-syntax-namespace: hsl(0, 0%, var(--c-syntax-lum));
+    --c-syntax-storage-modifier-import: hsl(0, 0%, var(--c-syntax-lum));
+    --c-syntax-constant: hsl(208, 100%, var(--c-syntax-lum));
+    --c-syntax-entity: hsl(270, 100%, var(--c-syntax-lum));
+    --c-syntax-entity-tag: hsl(125, 70%, var(--c-syntax-lum));
+    --c-syntax-keyword: hsl(5, 100%, var(--c-syntax-lum));
+    --c-syntax-string: hsl(200, 100%, var(--c-syntax-lum));
+    --c-syntax-variable: hsl(30, 100%, var(--c-syntax-lum));
 
     /* Transition functions */
     --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
@@ -588,7 +592,14 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     --bg: var(--c-action-primary);
     --bgHover: var(--c-action-primary-hover);
     --fg: var(--c-text-default-inverted);
-    --fgHover: var(--c-text-default-inverted);
+    --fgHover: var(--c-text-bright-inverted);
+}
+
+.btn.alt {
+    --bg: var(--c-action-primary-alt);
+    --bgHover: var(--c-action-primary-alt-hover);
+    --fg: var(--c-text-default);
+    --fgHover: var(--c-text-bright);
 }
 
 .btn.danger {
@@ -611,10 +622,6 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .btn.secondary {
     --bg: var(--c-action-secondary);
     --bgHover: var(--c-action-secondary-hover);
-}
-
-.btn.outline {
-    --border: var(--fg);
 }
 
 .btn.text,
@@ -652,6 +659,10 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .btn.outline.success {
     --fg: var(--c-action-success);
     --fgHover: var(--c-action-success);
+}
+
+.btn.outline {
+    --border: var(--fg);
 }
 
 /* default size */
