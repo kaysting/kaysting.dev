@@ -169,9 +169,9 @@
     --c-action-primary-alt: var(--c-accent-80);
     --c-action-primary-alt-hover: var(--c-accent-70);
     --c-action-secondary: var(--c-base-30);
-    --c-action-secondary-hover: var(--c-base-40);
+    --c-action-secondary-hover: var(--c-base-50);
     --c-action-tertiary: var(--c-base-85);
-    --c-action-tertiary-hover: var(--c-base-80);
+    --c-action-tertiary-hover: var(--c-base-75);
     --c-action-danger: var(--c-danger-40);
     --c-action-danger-hover: var(--c-danger-30);
     --c-action-success: var(--c-success-40);
