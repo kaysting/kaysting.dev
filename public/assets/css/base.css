@@ -129,6 +129,14 @@
     /* Transition functions */
     --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
     --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
+
+    /* Fonts */
+    --font-default: 'Poppins';
+    --font-monospace: 'Fira Code';
+
+    /* Appearance settings */
+    --roundness-multiplier: 1;
+    --border-thickness: 1px;
 }
 
 :root[data-theme="light"] {
@@ -160,10 +168,10 @@
     --c-action-primary-hover: var(--c-accent-70);
     --c-action-primary-alt: var(--c-accent-80);
     --c-action-primary-alt-hover: var(--c-accent-70);
-    --c-action-secondary: var(--c-base-20);
+    --c-action-secondary: var(--c-base-30);
     --c-action-secondary-hover: var(--c-base-40);
-    --c-action-tertiary: var(--c-base-80);
-    --c-action-tertiary-hover: var(--c-base-85);
+    --c-action-tertiary: var(--c-base-85);
+    --c-action-tertiary-hover: var(--c-base-80);
     --c-action-danger: var(--c-danger-40);
     --c-action-danger-hover: var(--c-danger-30);
     --c-action-success: var(--c-success-40);
@@ -177,7 +185,7 @@
 body {
     background: var(--c-bg-base);
     font-size: 16px;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-default), sans-serif;
     color: var(--c-text-default);
     padding: 0;
     margin: 0;
@@ -305,8 +313,8 @@ img {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: 16px;
-    border: 1px solid var(--c-border-default);
+    border-radius: calc(16px * var(--roundness-multiplier));
+    border: var(--border-thickness) solid var(--c-border-default);
     margin-bottom: 1.5em;
 }
 
@@ -337,7 +345,7 @@ th {
     color: var(--c-text-bright);
     padding: 12px 16px;
     font-size: 14px;
-    border-bottom: 1px solid var(--c-border-default);
+    border-bottom: var(--border-thickness) solid var(--c-border-default);
     white-space: nowrap;
 }
 
@@ -345,7 +353,7 @@ td,
 tbody th[scope="row"] {
     padding: 12px 16px;
     color: var(--c-text-default);
-    border-bottom: 1px solid var(--c-border-subtle);
+    border-bottom: var(--border-thickness) solid var(--c-border-subtle);
     font-size: 15px;
 }
 
@@ -370,24 +378,24 @@ tbody th[scope="row"] {
 
 .text-monospace,
 code {
-    font-family: 'Fira Code', monospace;
+    font-family: var(--font-monospace), monospace;
 }
 
 code:not(pre code) {
     background: var(--c-bg-surface);
     padding: 2px 4px;
-    border-radius: 4px;
+    border-radius: calc(4px * var(--roundness-multiplier));
     font-size: 0.9em;
     color: var(--c-text-default);
-    border: 1px solid var(--c-border-default);
+    border: var(--border-thickness) solid var(--c-border-default);
 }
 
 pre code {
     width: fit-content;
     background: var(--c-bg-surface);
-    border: 1px solid var(--c-border-default);
+    border: var(--border-thickness) solid var(--c-border-default);
     padding: 8px 12px;
-    border-radius: 8px;
+    border-radius: calc(8px * var(--roundness-multiplier));
     font-size: 1em;
     color: var(--c-text-default);
     display: block;
@@ -542,7 +550,6 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 *:focus-visible {
     outline: 2px solid var(--c-selection-primary);
     outline-offset: 2px;
-    border-radius: 2px;
 }
 
 ::-webkit-scrollbar {
@@ -554,14 +561,14 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--c-action-tertiary);
+    background-color: var(--c-action-primary);
     border-radius: 6px;
     border: 4px solid transparent;
     background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--c-action-tertiary);
+    background-color: var(--c-action-primary-hover);
 }
 
 .symbol {
@@ -605,10 +612,10 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .btn {
     height: var(--height);
     padding: 0px var(--padding);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-default), sans-serif;
     font-size: var(--textSize);
     font-weight: 500;
-    border-radius: calc(var(--height) / 2);
+    border-radius: calc(calc(var(--height) / 2) * var(--roundness-multiplier));
     background: var(--bg);
     transition: 0.1s ease-in-out;
     color: var(--fg);
@@ -617,7 +624,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     gap: calc(var(--padding) * 0.67);
     user-select: none;
-    border: 1px solid var(--border);
+    border: var(--border-thickness) solid var(--border);
     flex-shrink: 0;
     text-align: center;
     overflow: hidden;
@@ -700,7 +707,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 .btn.outline.tertiary {
     --fg: var(--c-action-secondary);
     --fgHover: var(--c-action-secondary);
-    --border: var(--c-action-tertiary-hover);
+    --border: var(--c-border-default);
 }
 
 .btn.text.danger,
@@ -793,9 +800,9 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     --textbox-border: var(--c-border-default);
     height: var(--height);
     padding: 0px var(--padding);
-    border-radius: calc(var(--height) / 2);
+    border-radius: calc(calc(var(--height) / 2) * var(--roundness-multiplier));
     background: var(--c-bg-negative);
-    border: 1px solid var(--textbox-border);
+    border: var(--border-thickness) solid var(--textbox-border);
     color: var(--c-text-default);
     font-size: var(--textSize);
     transition: 0.1s ease-in-out;
@@ -854,7 +861,7 @@ input[type="week"]::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
     -moz-appearance: none;
     background: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-default), sans-serif;
     font-size: var(--textSize);
     line-height: 1.5;
     color: var(--c-text-default);
@@ -922,9 +929,9 @@ label.control {
 label.control.contained {
     background: var(--c-bg-negative);
     padding: 8px 12px;
-    border-radius: 20px;
+    border-radius: calc(20px * var(--roundness-multiplier));
     color: var(--c-text-default);
-    border: 1px solid var(--c-border-default);
+    border: var(--border-thickness) solid var(--c-border-default);
     transition: 0.1s ease-in-out;
     min-height: 36px;
 }
@@ -994,7 +1001,7 @@ input[type='checkbox'].toggle {
     width: calc(var(--size) * 1.6);
     border-radius: var(--size);
     background: var(--c-bg-negative);
-    border: 1px solid var(--c-border-default);
+    border: var(--border-thickness) solid var(--c-border-default);
     transition: 0.1s ease-in-out;
     padding: 0px;
     display: flex;
@@ -1029,7 +1036,7 @@ input[type='checkbox'].toggle:checked::before {
     top: 0px;
     left: 0px;
     background: var(--c-bg-negative);
-    border: 1px solid var(--c-border-default);
+    border: var(--border-thickness) solid var(--c-border-default);
     opacity: 0;
     z-index: 99;
     overflow: auto;
@@ -1045,7 +1052,7 @@ input[type='checkbox'].toggle:checked::before {
 }
 
 .dropdown {
-    border-radius: 22px;
+    border-radius: calc(22px * var(--roundness-multiplier));
     padding: 4px;
     gap: 4px;
 }
@@ -1063,7 +1070,7 @@ input[type='checkbox'].toggle:checked::before {
 .dropdown .separator {
     height: 1px;
     margin: 0px 16px;
-    border-bottom: 1px solid var(--c-border-subtle);
+    border-bottom: var(--border-thickness) solid var(--c-border-subtle);
 }
 
 .dropdown .btn:not(.text):focus-visible {
@@ -1072,9 +1079,9 @@ input[type='checkbox'].toggle:checked::before {
 }
 
 .card {
-    border-radius: 16px;
+    border-radius: calc(16px * var(--roundness-multiplier));
     padding: 8px 12px;
-    border: 1px solid var(--c-border-default);
+    border: var(--border-thickness) solid var(--c-border-default);
     overflow: hidden;
 }
 
@@ -1093,7 +1100,7 @@ input[type='checkbox'].toggle:checked::before {
 }
 
 .card.sectional>.section:not(:last-child) {
-    border-bottom: 1px solid var(--c-border-default);
+    border-bottom: var(--border-thickness) solid var(--c-border-default);
 }
 
 .card.hoverable {
@@ -1132,9 +1139,9 @@ a.card {
     --height: 800px;
     display: flex;
     margin: auto;
-    border: 1px solid var(--c-border-subtle);
+    border: var(--border-thickness) solid var(--c-border-subtle);
     background: var(--c-bg-subsurface);
-    border-radius: 24px;
+    border-radius: calc(24px * var(--roundness-multiplier));
     flex-direction: column;
     color: inherit;
     font-size: inherit;
@@ -1190,11 +1197,11 @@ a.card {
 }
 
 .modal>.body.scrolledBottom {
-    border-bottom: 1px solid var(--c-border-subtle);
+    border-bottom: var(--border-thickness) solid var(--c-border-subtle);
 }
 
 .modal>.body.scrolledTop {
-    border-top: 1px solid var(--c-border-subtle);
+    border-top: var(--border-thickness) solid var(--c-border-subtle);
 }
 
 .modal>.actions {
