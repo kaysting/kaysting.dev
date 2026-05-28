@@ -15,6 +15,8 @@
     --c-success-hue: 150;
     --c-success-sat: 60%;
 
+    --c-syntax-lum: 80%;
+
     /* Color palettes */
     --c-base-0: hsl(var(--c-base-hue), var(--c-base-sat), 0%);
     --c-base-5: hsl(var(--c-base-hue), var(--c-base-sat), 5%);
@@ -38,7 +40,13 @@
     --c-base-70: hsl(var(--c-base-hue), var(--c-base-sat), 70%);
     --c-base-75: hsl(var(--c-base-hue), var(--c-base-sat), 75%);
     --c-base-80: hsl(var(--c-base-hue), var(--c-base-sat), 80%);
+    --c-base-82: hsl(var(--c-base-hue), var(--c-base-sat), 82%);
+    --c-base-85: hsl(var(--c-base-hue), var(--c-base-sat), 85%);
+    --c-base-87: hsl(var(--c-base-hue), var(--c-base-sat), 87%);
     --c-base-90: hsl(var(--c-base-hue), var(--c-base-sat), 90%);
+    --c-base-92: hsl(var(--c-base-hue), var(--c-base-sat), 92%);
+    --c-base-95: hsl(var(--c-base-hue), var(--c-base-sat), 95%);
+    --c-base-97: hsl(var(--c-base-hue), var(--c-base-sat), 97%);
     --c-base-100: hsl(var(--c-base-hue), var(--c-base-sat), 100%);
 
     --c-accent-20: hsl(var(--c-accent-hue), var(--c-accent-sat), 20%);
@@ -103,8 +111,11 @@
     --c-action-success: var(--c-success-60);
     --c-action-success-hover: var(--c-success-50);
 
+    /* Selection colors */
+    --c-selection-primary: var(--c-accent-50);
+    --c-selection-secondary: var(--c-base-20);
+
     /* Syntax Highlighting */
-    --c-syntax-lum: 80%;
     --c-syntax-comment: hsl(0, 0%, var(--c-syntax-lum));
     --c-syntax-namespace: hsl(0, 0%, var(--c-syntax-lum));
     --c-syntax-storage-modifier-import: hsl(0, 0%, var(--c-syntax-lum));
@@ -118,6 +129,49 @@
     /* Transition functions */
     --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
     --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+:root[data-theme="light"] {
+    --c-syntax-lum: 40%;
+
+    /* Text colors */
+    --c-text-default: var(--c-base-15);
+    --c-text-bright: var(--c-base-0);
+    --c-text-secondary: var(--c-base-30);
+    --c-text-muted: var(--c-base-50);
+    --c-text-accent: var(--c-accent-40);
+    --c-text-danger: var(--c-danger-40);
+    --c-text-success: var(--c-success-40);
+    --c-text-default-inverted: var(--c-base-95);
+    --c-text-bright-inverted: var(--c-base-100);
+
+    /* Background colors */
+    --c-bg-negative: var(--c-base-100);
+    --c-bg-base: var(--c-base-95);
+    --c-bg-subsurface: var(--c-base-92);
+    --c-bg-surface: var(--c-base-90);
+
+    /* Border colors */
+    --c-border-default: var(--c-base-75);
+    --c-border-subtle: var(--c-base-85);
+
+    /* Action colors (links, buttons) */
+    --c-action-primary: var(--c-accent-50);
+    --c-action-primary-hover: var(--c-accent-70);
+    --c-action-primary-alt: var(--c-accent-80);
+    --c-action-primary-alt-hover: var(--c-accent-70);
+    --c-action-secondary: var(--c-base-20);
+    --c-action-secondary-hover: var(--c-base-40);
+    --c-action-tertiary: var(--c-base-80);
+    --c-action-tertiary-hover: var(--c-base-85);
+    --c-action-danger: var(--c-danger-40);
+    --c-action-danger-hover: var(--c-danger-30);
+    --c-action-success: var(--c-success-40);
+    --c-action-success-hover: var(--c-success-30);
+
+    /* Selection colors */
+    --c-selection-primary: var(--c-accent-80);
+    --c-selection-secondary: var(--c-accent-90);
 }
 
 body {
@@ -481,12 +535,12 @@ input[type="week"]::-webkit-calendar-picker-indicator {
 }
 
 ::selection {
-    background: var(--c-accent-80);
-    color: black;
+    background: var(--c-selection-primary);
+    color: var(--c-text-bright);
 }
 
 *:focus-visible {
-    outline: 2px solid var(--c-accent-80);
+    outline: 2px solid var(--c-selection-primary);
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -876,7 +930,7 @@ label.control.contained {
 }
 
 label.control.contained:has(input:checked) {
-    background: var(--c-action-tertiary);
+    background: var(--c-selection-secondary);
     color: var(--c-text-bright);
     border-color: var(--c-action-primary);
     box-shadow: 0px 0px 0px 1px var(--c-action-primary);
@@ -959,7 +1013,7 @@ input[type='checkbox'].toggle::before {
 }
 
 input[type='checkbox'].toggle:checked {
-    background: var(--c-action-tertiary);
+    background: var(--c-selection-secondary);
     border-color: var(--c-action-primary);
     box-shadow: 0px 0px 0px 1px var(--c-action-primary);
 }
@@ -1081,7 +1135,6 @@ a.card {
     border: 1px solid var(--c-border-subtle);
     background: var(--c-bg-subsurface);
     border-radius: 24px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
     flex-direction: column;
     color: inherit;
     font-size: inherit;
