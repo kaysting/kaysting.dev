@@ -88,13 +88,13 @@ $palletteNames: ('base', 'accent', 'success', 'danger');
     --c-action-primary-alt: var(--c-accent-30);
     --c-action-primary-alt-hover: var(--c-accent-40);
     --c-action-secondary: var(--c-base-80);
-    --c-action-secondary-hover: var(--c-base-70);
+    --c-action-secondary-hover: var(--c-base-65);
     --c-action-tertiary: var(--c-base-25);
     --c-action-tertiary-hover: var(--c-base-40);
     --c-action-danger: var(--c-danger-70);
     --c-action-danger-hover: var(--c-danger-80);
     --c-action-success: var(--c-success-60);
-    --c-action-success-hover: var(--c-success-50);
+    --c-action-success-hover: var(--c-success-70);
 
     /* Selection colors */
     --c-selection-primary: var(--c-accent-50);
@@ -153,12 +153,12 @@ $palletteNames: ('base', 'accent', 'success', 'danger');
     /* Action colors (links, buttons) */
     --c-action-primary: var(--c-accent-50);
     --c-action-primary-hover: var(--c-accent-70);
-    --c-action-primary-alt: var(--c-accent-80);
-    --c-action-primary-alt-hover: var(--c-accent-70);
+    --c-action-primary-alt: var(--c-accent-85);
+    --c-action-primary-alt-hover: var(--c-accent-75);
     --c-action-secondary: var(--c-base-30);
     --c-action-secondary-hover: var(--c-base-50);
-    --c-action-tertiary: var(--c-base-85);
-    --c-action-tertiary-hover: var(--c-base-75);
+    --c-action-tertiary: var(--c-base-80);
+    --c-action-tertiary-hover: var(--c-base-70);
     --c-action-danger: var(--c-danger-40);
     --c-action-danger-hover: var(--c-danger-30);
     --c-action-success: var(--c-success-40);
@@ -549,14 +549,14 @@ input[type='week']::-webkit-calendar-picker-indicator {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--c-action-primary);
+    background-color: var(--c-action-tertiary);
     border-radius: 6px;
     border: 4px solid transparent;
     background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--c-action-primary-hover);
+    background-color: var(--c-action-tertiary-hover);
 }
 
 .symbol {
