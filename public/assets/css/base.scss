@@ -52,7 +52,7 @@ $palletteNames: ('base', 'accent', 'success', 'danger');
     --c-success-hue: 150;
     --c-success-sat: 60%;
 
-    --c-syntax-lum: 80%;
+    --c-syntax-lum: 70%;
 
     /* Color palettes */
     @each $name in $palletteNames {
