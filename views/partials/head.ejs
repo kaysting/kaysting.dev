@@ -21,6 +21,10 @@
 
 <link rel="icon" href="/assets/images/logo.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://src.kaysting.dev" crossorigin />
+
 <link rel="stylesheet" href="https://src.kaysting.dev/v4/css/base.css" />
 <% for( const fileName of [...css, ...cssLocal] ) { %>
     <link rel="stylesheet" href="<%= asset(`/assets/css/${fileName}.css`) %>" />
