@@ -2,11 +2,11 @@
     <h1>UI Testing</h1>
     <p>This page tests various UI elements.</p>
     <p><b>Here's some bold text</b></p>
-    <p class="text-secondary text-monospace text-15">
+    <p class="color-secondary font-monospace text-size-15">
         This is another paragraph but a little dimmer and smaller and monospace :3
     </p>
     <p>Oh and this is a paragraph that has <a href="https://google.com">a link to Google</a>!</p>
-    <h2 class="text-accent">Buttons</h2>
+    <h2 class="color-accent">Buttons</h2>
 
     <%
         const buttonSizes = ['small', 'default', 'medium', 'large']
@@ -210,8 +210,8 @@
         </button>
     </div>
     <script>
-        $('#showDropdown').addEventListener('click', async() => {
-            const clicked = await showDropdown($('#showDropdown'), [
+        document.querySelector('#showDropdown').addEventListener('click', async() => {
+            const clicked = await showDropdown(document.querySelector('#showDropdown'), [
                 { symbol: 'settings', label: 'Item 1' },
                 { symbol: 'settings', label: 'Item 2', selected: true },
                 { separator: true },
@@ -221,17 +221,17 @@
         })
 
         let dropdown2selection = 0;
-        $('#showDropdown2').addEventListener('click', async() => {
+        document.querySelector('#showDropdown2').addEventListener('click', async() => {
             const items = [];
             for (let i = 0; i < 100; i++) {
                 items.push({ label: `Item ${i}`, value: i, selected: i == dropdown2selection })
             }
-            const clicked = await showDropdown($('#showDropdown2'), items, {selectable: true}) ?? dropdown2selection
+            const clicked = await showDropdown(document.querySelector('#showDropdown2'), items, {selectable: true}) ?? dropdown2selection
             dropdown2selection = clicked;
             console.log(clicked)
         })
 
-        $('#showDropdown3').addEventListener('click', async() => {
+        document.querySelector('#showDropdown3').addEventListener('click', async() => {
             const clicked = await showDropdown(null, [
                 { symbol: 'settings', label: 'Item 1' },
                 { symbol: 'settings', label: 'Item 2' },
@@ -241,7 +241,7 @@
             console.log(clicked)
         })
 
-        $('#showModal').addEventListener('click', async() => {
+        document.querySelector('#showModal').addEventListener('click', async() => {
             const modal = showModal('Test modal', `Hi here's a test modal, this is proof it works!`, [
                 {
                     label: 'Cancel',
@@ -253,12 +253,12 @@
             ])
         })
 
-        $('#showModal2').addEventListener('click', async() => {
+        document.querySelector('#showModal2').addEventListener('click', async() => {
             const result = await showConfirmationDialog('Are you a cutie patootie?');
             console.log(`Result was`, result)
         })
 
-        $('#showModal3').addEventListener('click', async() => {
+        document.querySelector('#showModal3').addEventListener('click', async() => {
             showModal('Scrollable modal', `
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
                 <p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>

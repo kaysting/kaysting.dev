@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="">
+<html lang="en">
     <head>
         <%- include('partials/head') %>
     </head>
@@ -21,12 +21,12 @@
         <div id="layout">
             <div id="sidebar" class="flex col no-select">
                 <div class="top flex justify-center">
-                    <span class="text-accent text-20 text-medium"><%= metaSiteName %></span>
+                    <span class="color-accent text-size-20 text-weight-500"><%= metaSiteName %></span>
                 </div>
                 <div class="scroll flex col gap-4">
                     <% for (const item of sidebar) { %>
                         <% if (item.header) { %>
-                            <div class="header text-14 text-muted text-bold"><%= item.header %></div>
+                            <div class="header text-size-14 color-muted text-weight-700"><%= item.header %></div>
                         <% } else { %>
                             <a href="<%= item.href %>" class="btn <%= item.id == pageId ? '' : 'text secondary' %> justify-start">
                                 <span class="symbol filled"><%= item.symbol %></span>
@@ -43,10 +43,10 @@
                     </button>
                     <div class="flex gap-16 align-center">
                         <% if (pageSymbol) { %>
-                            <span class="symbol filled text-secondary text-24"><%= pageSymbol %></span>
+                            <span class="symbol filled color-secondary text-size-24"><%= pageSymbol %></span>
                         <% } %>
                         <% if (pageTitle) { %>
-                            <span class="title text-secondary text-14"><%= pageTitle %></span>
+                            <span class="title color-secondary text-size-14"><%= pageTitle %></span>
                         <% } %>
                     </div>
                 </div>

@@ -40,8 +40,8 @@ data.sidebar = [
 ];
 
 // Global CSS and JS to link in head
-data.css = ['base', 'layout', 'utils'];
-data.js = ['base', 'layout'];
+data.css = ['layout'];
+data.js = ['layout'];
 
 // Additional route-specific CSS and JS to link after the global files
 data.cssLocal = [];

@@ -3,11 +3,11 @@
         <img class="image" src="/assets/images/kayla-graduation.jpg" alt="Kayla in graduation attire!" loading="lazy" />
         <div class="text flex col gap-16">
             <div class="flex col gap-8">
-                <div class="text-accent text-36 text-light invisible" data-load-animate="0">
-                    Hi, I'm <span class="text-bold">Kayla</span>!
+                <div class="color-accent text-size-36 text-weight-300 invisible" data-load-animate="0">
+                    Hi, I'm <span class="text-weight-700">Kayla</span>!
                 </div>
                 <p class="no-margin invisible" data-load-animate="50"><%= utils.getAge('2003-01-02') %> &bull; she/her/hers</p>
-                <p class="text-monospace text-secondary invisible" data-load-animate="100">I'm a recent computer science graduate from the University of Houston. Outside of my degree, I've spent the past decade teaching myself full-stack web development, Windows and Linux system administration, and business IT operations through my family's business. I have a passion for building tools and apps people love, and have solo-developed several successful online community projects.</p>
+                <p class="font-monospace color-secondary invisible" data-load-animate="100">I'm a recent computer science graduate from the University of Houston. Outside of my degree, I've spent the past decade teaching myself full-stack web development, Windows and Linux system administration, and business IT operations through my family's business. I have a passion for building tools and apps people love, and have solo-developed several successful online community projects.</p>
                 <div class="socials flex gap-8 flex-wrap">
                     <% let i = 0 %>
                     <% for( const entry of socials ) { %>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="flex col gap-16">
-        <div class="text-16 text-semibold text-muted">Projects</div>
+        <div class="text-size-16 text-weight-600 color-muted">Projects</div>
         <div class="projects grid-dynamic" style="--size: 250px">
             <% i = 0 %>
             <% for( const project of projects ) { %>
@@ -41,11 +41,11 @@
                         <% if (project.logo) { %>
                             <img class="logo" src="/assets/images/project-logos/<%= project.logo %>" alt="<%= project.logo %>" loading="lazy">
                         <% } else { %>
-                            <span class="symbol text-32 text-accent filled"><%= project.symbol %></span>
+                            <span class="symbol text-size-32 color-accent filled"><%= project.symbol %></span>
                         <% } %>
-                        <p class="name text-16 text-semibold text-bright"><%= project.name %></p>
+                        <p class="name text-size-16 text-weight-600 color-bright"><%= project.name %></p>
                     </div>
-                    <p class="text-monospace text-14 text-secondary flex-grow no-margin"><%= project.desc %></p>
+                    <p class="font-monospace text-size-14 color-secondary flex-grow no-margin"><%= project.desc %></p>
                     <div class="flex gap-8 flex-wrap">
                         <% if (project.website) { %>
                             <a href="<%= project.website %>" target="_blank" class="btn small">
