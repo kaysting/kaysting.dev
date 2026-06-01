@@ -18,12 +18,6 @@ const data = {
             name: 'Weather Clock',
             description: `A fullscreen clock and weather webapp meant for use on a secondary screen, featuring automatic location detection, device sleep prevention, and a soft, time/weather-based colorful design.`,
             href: '/test/weatherclock'
-        },
-        uitest: {
-            symbol: 'palette',
-            name: 'UI Test Page (Debug)',
-            description: `A UI element debugging and test page containing samples of most elements styled by this site's UI framework.`,
-            href: '/tools/uitest'
         }
     }
 };
