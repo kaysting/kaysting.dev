@@ -21,18 +21,15 @@
 
 <link rel="icon" href="/assets/images/logo.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://src.kaysting.dev" crossorigin />
-
 <link rel="stylesheet" href="https://src.kaysting.dev/v4/css/base.css" />
+
+<!-- Load app styles before utils -->
 <% for( const fileName of [...css, ...cssLocal] ) { %>
     <link rel="stylesheet" href="<%= asset(`/assets/css/${fileName}.css`) %>" />
 <% } %>
-<link rel="stylesheet" href="https://src.kaysting.dev/v4/css/utils.css" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://src.kaysting.dev/v4/css/utils.css" />
 
 <script src="https://src.kaysting.dev/v4/js/base.js" defer></script>
 <% for( const fileName of [...js, ...jsLocal] ) { %>
