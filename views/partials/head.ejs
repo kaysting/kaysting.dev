@@ -21,9 +21,15 @@
 
 <link rel="icon" href="/assets/images/logo.png">
 
+<!-- List two preconnects for src.kaysting.dev to properly optimize fonts and css loading -->
 <link rel="preconnect" href="https://src.kaysting.dev" />
 <link rel="preconnect" href="https://src.kaysting.dev" crossorigin />
+
 <link rel="stylesheet" href="https://src.kaysting.dev/v4/css/base.css" />
+
+<link rel="stylesheet" href="https://src.kaysting.dev/fonts/poppins.css" />
+<link rel="stylesheet" href="https://src.kaysting.dev/fonts/fira-code.css" />
+<link rel="stylesheet" href="https://src.kaysting.dev/fonts/material-symbols.css" />
 
 <!-- Load app styles before utils -->
 <% for( const fileName of [...css, ...cssLocal] ) { %>
