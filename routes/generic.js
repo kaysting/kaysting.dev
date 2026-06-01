@@ -21,7 +21,6 @@ for (const [id, tool] of Object.entries(globals.tools)) {
 router.get('/home', renderPage('pages/home', { pageId: 'home', pageTitle: 'Home', pageSymbol: 'home' }));
 router.get('/', renderPage('pages/about', require('../data/about')));
 router.get('/tools', renderPage('pages/tools', { pageId: 'tools', pageTitle: 'Tools', pageSymbol: 'apps' }));
-router.get('/tools/uitest', renderPage('pages/tools/uitest'));
 
 // Dynamic targeted resume page
 router.get('/resume', (req, res) => {
