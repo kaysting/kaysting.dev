@@ -33,9 +33,16 @@ module.exports = {
 
     projects: [
         {
+            logo: 'thp.webp',
+            name: 'TONER Home Performance Website',
+            desc: `The marketing and educational website of TONER Home Performance, built from the ground up highly optimized and with SEO and GEO at the forefront using a vanilla stack and my v4 UI framework.`,
+            website: 'https://tonerhp.com/',
+            active: true
+        },
+        {
             logo: 'osufeed.png',
             name: 'osu!feed',
-            desc: `A live feed of newly submitted osu! scores with tons of ways to filter what you see. This builds a user-friendly UI on top of osu-score-cache.`,
+            desc: `A live feed of newly submitted osu! scores with tons of ways to filter what you see. This builds a user-friendly UI on top of osu-score-cache using my v4 UI framework.`,
             website: 'https://osufeed.kaysting.dev/',
             github: 'https://github.com/kaysting/osu-score-feed',
             active: true
@@ -49,9 +56,17 @@ module.exports = {
             active: true
         },
         {
+            symbol: 'palette',
+            name: 'v4 UI Framework',
+            desc: `A robust, vanilla CSS/JS UI framework inspired by the Material You style and packed with versatile components.`,
+            website: 'https://src.kaysting.dev/v4',
+            github: 'https://github.com/kaysting/web-resources/tree/main/v4',
+            active: true
+        },
+        {
             logo: 'kaystingdev.png',
             name: 'kaysting.dev',
-            desc: `This website. My modern, responsive developer portfolio, a growing suite of useful online tools, and a robust, vanilla CSS/JS UI framework.`,
+            desc: `This website. My modern, responsive developer portfolio and a growing suite of useful online tools.`,
             website: '/',
             github: 'https://github.com/kaysting/kaysting.dev',
             active: true
