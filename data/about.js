@@ -12,7 +12,7 @@ module.exports = {
         { logo: 'discord-color.svg', label: 'kaysting', href: 'https://discord.com/app' },
         { logo: 'github.svg', label: 'kaysting', href: 'https://github.com/kaysting' },
         { logo: 'npm-color.svg', label: 'cybergen49', href: 'https://www.npmjs.com/~cybergen49' },
-        { logo: 'reddit-color.svg', label: 'cybergen49', href: 'https://discord.com/app' },
+        { logo: 'reddit-color.svg', label: 'cybergen49', href: 'https://reddit.com/u/cybergen49' },
         { logo: 'youtube-color.svg', label: 'kaystingdev', href: 'https://youtube.com/@kaystingdev' },
         { logo: 'instagram-color.svg', label: 'kaystingdev', href: 'https://www.instagram.com/kaystingdev' },
         { logo: 'spotify-color.svg', label: 'Kayla', href: 'https://open.spotify.com/user/dbqectp3dtptpcbdjm5nz9jaa' },
