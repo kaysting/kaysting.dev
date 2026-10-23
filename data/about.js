@@ -33,6 +33,13 @@ module.exports = {
 
     projects: [
         {
+            logo: 'hateshouses.webp',
+            name: 'HatesHouses',
+            desc: `A growing knowledge base built in collaboration with TONER Home Performance that documents how the environment and climate migration deteriorate homes in the southern US.`,
+            website: 'https://hateshouses.com/',
+            active: true
+        },
+        {
             logo: 'thp.webp',
             name: 'TONER Home Performance Website',
             desc: `The marketing and educational website of TONER Home Performance, built from the ground up highly optimized and with SEO and GEO at the forefront using a vanilla stack and my v4 UI framework.`,
