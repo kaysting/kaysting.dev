@@ -33,7 +33,7 @@ module.exports = {
 
     projects: [
         {
-            logo: 'hateshouses.webp',
+            logo: 'hateshouses.png',
             name: 'HatesHouses',
             desc: `A growing knowledge base built in collaboration with TONER Home Performance that documents how the environment and climate migration deteriorate homes in the southern US.`,
             website: 'https://hateshouses.com/',
